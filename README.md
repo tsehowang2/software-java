@@ -3,7 +3,7 @@ Super Team T-05
 
 
 1. Tong Hong Lun Alan
-| email: hlatong@connect.ust.hk and alanhltong@gmail.com | github: AlanHLTong | dev branch: Alan
+| email: hlatong@connect.ust.hk | github: AlanHLTong | dev branch: Alan
 | task: A1, A2
 
 
