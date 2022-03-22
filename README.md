@@ -4,13 +4,13 @@ Super Team T-05
 
 1. Tong Hong Lun Alan
 | email: hlatong@connect.ust.hk and alanhltong@gmail.com | github: AlanHLTong | dev branch: Alan
-| task:A1,A2
+| task: A1, A2
 
-|
 
-2.
-|
+2. Tse Ho Wang
+| email: hwtseaa@connect.ust.hk | github tsehowang2 | dev brach Terry
+| task: B1, B2
 
 3. Leung Chun Hei
 | email: chleungba@connect.ust.hk | github: chleungba | dev branch: Hayden
-| task:C1,C2
+| task: C1, C2
