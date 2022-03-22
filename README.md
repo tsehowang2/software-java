@@ -8,7 +8,7 @@ Super Team T-05
 
 
 2. Tse Ho Wang
-| email: hwtseaa@connect.ust.hk | github tsehowang2 | dev brach Terry
+| email: hwtseaa@connect.ust.hk | githubS tsehowang2 | dev brachS Terry
 | task: B1, B2
 
 3. Leung Chun Hei
