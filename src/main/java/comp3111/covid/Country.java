@@ -35,4 +35,8 @@ public class Country {
 	int total_cases_per_million;
 	int total_deaths;
 	int total_deaths_per_million;
+	
+	public String getIsoCode() {
+		return iso_code;
+	}
 }
