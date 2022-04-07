@@ -27,4 +27,8 @@ public class Case {
 	int weekly_hosp_admissions;
 	int weekly_hosp_admissions_per_million;
 	int hospital_beds_per_thousand;
+	
+	public String getIsoCode() {
+		return iso_code;
+	}
 }
