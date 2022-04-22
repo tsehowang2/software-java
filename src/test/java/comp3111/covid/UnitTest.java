@@ -1,32 +1,26 @@
 package comp3111.covid;
 
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+
 public class UnitTest {
 
-	//static Case a = new Case();
-	public static void main(String arg[]) {
-		System.out.println("Hello, UnitTest!");	
-	}
-	
-	public static int computeOne() {
-		return 1;
-	}
-	
-	public static boolean isItTrue() {
-		return true;
-	}
-	
-	public static boolean isEvenNumber(int num) {
-		if ((num % 2) == 0)
-			return true;
-		else
-			return false;
-	}
-	
-	public static int[] sort(int[] anyArray) {
-		return new int[] {1, 2, 3, 4, 5};
-	}
-	
-	/*public static String getIsoCode() {
-		return a.getIsoCode();
-	}*/
+//	int age;
+//	Case c1;
+//	
+//	@Before
+//	public void setUp() throws Exception {
+//		age = 30;
+//	}
+//
+//	@Test
+//	public void getIsoCodeWithValidInput() {
+//		assertEquals("AFG", c1.getIso_code("AFG"));
+//	}
+//	@Test
+//	public void getMedianAgeWithValidInput() {
+//		assertEquals(age, Country.getMedianAge());
+//	}
+
 }
