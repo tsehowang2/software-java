@@ -2,7 +2,6 @@ package comp3111.covid;
 
 import org.apache.commons.csv.*;
 import edu.duke.*;
-
 /**
  * 
  * Data Explorer on COVID-19
@@ -15,7 +14,7 @@ public class DataAnalysis {
 	public static CSVParser getFileParser(String dataset) {
 	     FileResource fr = new FileResource("dataset/" + dataset);
 	     return fr.getCSVParser(true);
-		}
+	     }
 	
 
 	public static String getConfirmedCases(String dataset, String iso_code) {
@@ -104,6 +103,18 @@ public class DataAnalysis {
 			oReport += String.format("Number of Days Reported: %,d\n", numRecord);
 			
 			return oReport;
+	 }
+	 
+	 public static void setClass(String dataset) {
+		 for (CSVRecord rec : getFileParser(dataset)) {
+			 Case cases = new Case(rec.get("iso_code"), Integer.parseInt(rec.get("new_cases")), Integer.parseInt(rec.get("new_cases_per_million")), Float.parseFloat(rec.get("new_cases_smoothed")), Float.parseFloat(rec.get("new_cases_smoothed_per_million")),
+					 Integer.parseInt(rec.get("new_deaths")), Integer.parseInt(rec.get("new_deaths_per_million")),Float.parseFloat(rec.get("new_deaths_smoothed")), Float.parseFloat(rec.get("new_deaths_smoothed_per_million")), Integer.parseInt(rec.get("tests_per_case")),
+							 Integer.parseInt(rec.get("new_tests")), Integer.parseInt(rec.get("new_tests_per_thousand")), Integer.parseInt(rec.get("new_tests_smoothed")), Integer.parseInt(rec.get("new_tests_smoothed_per_thousand")),Integer.parseInt(rec.get("new_vaccinations")), Integer.parseInt(rec.get("new_vaccinations_smoothed")),
+									 Integer.parseInt(rec.get("new_vaccinations_smoothed_per_million")), Integer.parseInt(rec.get("icu_patients")), Integer.parseInt(rec.get("icu_patients_per_million")), Integer.parseInt(rec.get("weekly_icu_admissions")), Integer.parseInt(rec.get("weekly_icu_admissions_per_million")),
+											 Integer.parseInt(rec.get("hosp_patients")) , Integer.parseInt(rec.get("hosp_patients_per_million")), Integer.parseInt(rec.get("weekly_hosp_admissions")) , Integer.parseInt(rec.get("weekly_hosp_admissions_per_million")) , Integer.parseInt(rec.get("hospital_beds_per_thousand")));
+			 System.out.print(cases);
+		 }
+
 	 }
  
 }
