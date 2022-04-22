@@ -4,12 +4,12 @@ public class Case {
 	private String iso_code;
 	private int new_cases;
 	private int new_cases_per_million;
-	private int new_cases_smoothed;
-	private int new_cases_smoothed_per_million;
+	private float new_cases_smoothed;
+	private float new_cases_smoothed_per_million;
 	private int new_deaths;
 	private int new_deaths_per_million;
-	private int new_deaths_smoothed;
-	private int new_deaths_smoothed_per_million;
+	private float new_deaths_smoothed;
+	private float new_deaths_smoothed_per_million;
 	private int tests_per_case;
 	private int new_tests;
 	private int new_tests_per_thousand;
@@ -28,8 +28,8 @@ public class Case {
 	private int weekly_hosp_admissions_per_million;
 	private int hospital_beds_per_thousand;
 	
-	public Case(String iso_code, int new_cases, int new_cases_per_million, int new_cases_smoothed, int new_cases_smoothed_per_million, int new_deaths, int new_deaths_per_million,
-			int new_deaths_smoothed, int new_deaths_smoothed_per_million, int tests_per_case, int new_tests, int new_tests_per_thousand, int new_tests_smoothed, int new_tests_smoothed_per_thousand,
+	public Case(String iso_code, int new_cases, int new_cases_per_million, float new_cases_smoothed, float new_cases_smoothed_per_million, int new_deaths, int new_deaths_per_million,
+			float new_deaths_smoothed, float new_deaths_smoothed_per_million, int tests_per_case, int new_tests, int new_tests_per_thousand, int new_tests_smoothed, int new_tests_smoothed_per_thousand,
 			int new_vaccinations, int new_vaccinations_smoothed, int new_vaccinations_smoothed_per_million, int icu_patients, int icu_patients_per_million, int weekly_icu_admissions, int weekly_icu_admissions_per_million,
 			int hosp_patients, int hosp_patients_per_million, int weekly_hosp_admissions, int weekly_hosp_admissions_per_million, int hospital_beds_per_thousand)
 	{
@@ -85,7 +85,7 @@ public class Case {
 		this.new_cases_per_million = new_cases_per_million;
 	}
 
-	public int getNew_cases_smoothed() {
+	public float getNew_cases_smoothed() {
 		return new_cases_smoothed;
 	}
 
@@ -93,7 +93,7 @@ public class Case {
 		this.new_cases_smoothed = new_cases_smoothed;
 	}
 
-	public int getNew_cases_smoothed_per_million() {
+	public float getNew_cases_smoothed_per_million() {
 		return new_cases_smoothed_per_million;
 	}
 
@@ -117,7 +117,7 @@ public class Case {
 		this.new_deaths_per_million = new_deaths_per_million;
 	}
 
-	public int getNew_deaths_smoothed() {
+	public float getNew_deaths_smoothed() {
 		return new_deaths_smoothed;
 	}
 
@@ -125,7 +125,7 @@ public class Case {
 		this.new_deaths_smoothed = new_deaths_smoothed;
 	}
 
-	public int getNew_deaths_smoothed_per_million() {
+	public float getNew_deaths_smoothed_per_million() {
 		return new_deaths_smoothed_per_million;
 	}
 
