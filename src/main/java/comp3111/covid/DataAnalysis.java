@@ -1,6 +1,7 @@
 package comp3111.covid;
 
 import org.apache.commons.csv.*;
+import java.util.stream.Collectors;
 import java.util.*;
 import edu.duke.*;
 /**
@@ -109,6 +110,14 @@ public class DataAnalysis {
 			return oReport;
 	 }
 	 
+	 public static List<String> getUniqueLocations() {
+		 ArrayList<String> location = new ArrayList<String>();
+		 for(Country row : countries) {
+			 location.add(row.getLocation());
+		 }
+		 List<String> uniqueLocation = location.stream().distinct().collect(Collectors.toList());
+		 return uniqueLocation;
+	 }
 	 
 	 public static void setClass(String dataset) {
 
@@ -181,12 +190,16 @@ public class DataAnalysis {
 			 countries.add(_country);
 		 }
 		 
-		 for (Case _case : cases) {
-			 System.out.println(_case.getNew_deaths());
+//		 for (Case _case : cases) {
+//			 System.out.println(_case.getNew_deaths());
+//		 }
+//		 for (Country _country : countries) {
+//			 System.out.println(_country.getMedian_age());
+//		 }
+		 
+		 List<String>uniqueLocation = getUniqueLocations();
+		 for (int i = 0; i < uniqueLocation.size(); ++i) {
+			 System.out.println(uniqueLocation.get(i));
+			 }
 		 }
-		 for (Country _country : countries) {
-			 System.out.println(_country.getMedian_age());
-		 }
-	 }
- 
 }
