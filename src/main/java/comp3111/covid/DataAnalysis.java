@@ -107,12 +107,16 @@ public class DataAnalysis {
 	 
 	 public static void setClass(String dataset) {
 		 for (CSVRecord rec : getFileParser(dataset)) {
-			 Case cases = new Case(rec.get("iso_code"), Integer.parseInt(rec.get("new_cases")), Integer.parseInt(rec.get("new_cases_per_million")), Float.parseFloat(rec.get("new_cases_smoothed")), Float.parseFloat(rec.get("new_cases_smoothed_per_million")),
-					 Integer.parseInt(rec.get("new_deaths")), Integer.parseInt(rec.get("new_deaths_per_million")),Float.parseFloat(rec.get("new_deaths_smoothed")), Float.parseFloat(rec.get("new_deaths_smoothed_per_million")), Integer.parseInt(rec.get("tests_per_case")),
-							 Integer.parseInt(rec.get("new_tests")), Integer.parseInt(rec.get("new_tests_per_thousand")), Integer.parseInt(rec.get("new_tests_smoothed")), Integer.parseInt(rec.get("new_tests_smoothed_per_thousand")),Integer.parseInt(rec.get("new_vaccinations")), Integer.parseInt(rec.get("new_vaccinations_smoothed")),
-									 Integer.parseInt(rec.get("new_vaccinations_smoothed_per_million")), Integer.parseInt(rec.get("icu_patients")), Integer.parseInt(rec.get("icu_patients_per_million")), Integer.parseInt(rec.get("weekly_icu_admissions")), Integer.parseInt(rec.get("weekly_icu_admissions_per_million")),
-											 Integer.parseInt(rec.get("hosp_patients")) , Integer.parseInt(rec.get("hosp_patients_per_million")), Integer.parseInt(rec.get("weekly_hosp_admissions")) , Integer.parseInt(rec.get("weekly_hosp_admissions_per_million")) , Integer.parseInt(rec.get("hospital_beds_per_thousand")));
-			 System.out.print(cases);
+			 Case cases = new Case(rec.get("iso_code"), Integer.parseInt(rec.get("new_cases").isEmpty()?"0":rec.get("new_cases")), Float.parseFloat(rec.get("new_cases_per_million").isEmpty()?"0":rec.get("new_cases_per_million")),
+					 Float.parseFloat(rec.get("new_cases_smoothed").isEmpty()?"0":rec.get("new_cases_smoothed")),Float.parseFloat(rec.get("new_cases_smoothed_per_million").isEmpty()?"0":rec.get("new_cases_smoothed_per_million")),
+					 Integer.parseInt(rec.get("new_deaths").isEmpty()?"0":rec.get("new_deaths")), Float.parseFloat(rec.get("new_deaths_per_million").isEmpty()?"0":rec.get("new_deaths_per_million")), Float.parseFloat(rec.get("new_deaths_smoothed").isEmpty()?"0":rec.get("new_deaths_smoothed")),
+					 Float.parseFloat(rec.get("new_deaths_smoothed_per_million").isEmpty()?"0":rec.get("new_deaths_smoothed_per_million")), Float.parseFloat(rec.get("tests_per_case").isEmpty()?"0":rec.get("tests_per_case")), Integer.parseInt(rec.get("new_tests").isEmpty()?"0":rec.get("new_tests")),
+					 Float.parseFloat(rec.get("new_tests_per_thousand").isEmpty()?"0":rec.get("new_tests_per_thousand")), Float.parseFloat(rec.get("new_tests_smoothed").isEmpty()?"0":rec.get("new_tests_smoothed")), Float.parseFloat(rec.get("new_tests_smoothed_per_thousand").isEmpty()?"0":rec.get("new_tests_smoothed_per_thousand")),
+					 Integer.parseInt(rec.get("new_vaccinations").isEmpty()?"0":rec.get("new_vaccinations")), Float.parseFloat(rec.get("new_vaccinations_smoothed").isEmpty()?"0":rec.get("new_vaccinations_smoothed")),Float.parseFloat(rec.get("new_vaccinations_smoothed_per_million").isEmpty()?"0":rec.get("new_vaccinations_smoothed_per_million")),
+					 Integer.parseInt(rec.get("icu_patients").isEmpty()?"0":rec.get("icu_patients")), Float.parseFloat(rec.get("icu_patients_per_million").isEmpty()?"0":rec.get("icu_patients_per_million")), Float.parseFloat(rec.get("weekly_icu_admissions").isEmpty()?"0":rec.get("weekly_icu_admissions")),
+					 Float.parseFloat(rec.get("weekly_icu_admissions_per_million").isEmpty()?"0":rec.get("weekly_icu_admissions_per_million")),Integer.parseInt(rec.get("hosp_patients").isEmpty()?"0":rec.get("hosp_patients")) , Float.parseFloat(rec.get("hosp_patients_per_million").isEmpty()?"0":rec.get("hosp_patients_per_million")),
+					 Float.parseFloat(rec.get("weekly_hosp_admissions").isEmpty()?"0":rec.get("weekly_hosp_admissions")),Float.parseFloat(rec.get("weekly_hosp_admissions_per_million").isEmpty()?"0":rec.get("weekly_hosp_admissions_per_million")) , Float.parseFloat(rec.get("hospital_beds_per_thousand").isEmpty()?"0":rec.get("hospital_beds_per_thousand")));
+			 System.out.println(cases.getNew_deaths());
 		 }
 
 	 }
