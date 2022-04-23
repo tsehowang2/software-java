@@ -20,14 +20,14 @@ public class Country {
 	private float handwashing_facilities;
 	private float human_development_index;
 	private float excess_mortality;
-	private int population;
+	private long population;
 	private float stringency_index;
 	private float positive_rate;
 	private int people_fully_vaccinated;
 	private float people_fully_vaccinated_per_hundred;
 	private int people_vaccinated;
 	private float people_vaccinated_per_hundred;
-	private int total_vaccinations;
+	private long total_vaccinations;
 	private float total_vaccinations_per_hundred;
 	private int total_tests;
 	private float total_tests_per_thousand;
@@ -38,7 +38,7 @@ public class Country {
 	
 	public Country(String iso_code,String continent,String location,float reproduction_rate,String tests_units,float population_density,float median_age,float aged_65_older,float aged_70_older,float gdp_per_capita,
 			float extreme_poverty,float cardiovasc_death_rate,float diabetes_prevalence,float female_smokers,float male_smokers,float life_expectancy,float handwashing_facilities,float human_development_index,float excess_mortality,
-			int population,float stringency_index,float positive_rate,int people_fully_vaccinated,float people_fully_vaccinated_per_hundred,int people_vaccinated,float people_vaccinated_per_hundred,int total_vaccinations, 
+			long population,float stringency_index,float positive_rate,int people_fully_vaccinated,float people_fully_vaccinated_per_hundred,int people_vaccinated,float people_vaccinated_per_hundred,long total_vaccinations, 
 			float total_vaccinations_per_hundred,int total_tests,float total_tests_per_thousand,int total_cases,float total_cases_per_million,int total_deaths,float total_deaths_per_million)
 	{
 		this.setIso_code(iso_code);
@@ -229,11 +229,11 @@ public class Country {
 		this.excess_mortality = excess_mortality;
 	}
 
-	public int getPopulation() {
+	public long getPopulation() {
 		return population;
 	}
 
-	public void setPopulation(int population) {
+	public void setPopulation(long population) {
 		this.population = population;
 	}
 
@@ -285,11 +285,11 @@ public class Country {
 		this.people_vaccinated_per_hundred = people_vaccinated_per_hundred;
 	}
 
-	public int getTotal_vaccinations() {
+	public long getTotal_vaccinations() {
 		return total_vaccinations;
 	}
 
-	public void setTotal_vaccinations(int total_vaccinations) {
+	public void setTotal_vaccinations(long total_vaccinations) {
 		this.total_vaccinations = total_vaccinations;
 	}
 
