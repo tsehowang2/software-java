@@ -1,7 +1,7 @@
 package comp3111.covid;
 
 public class Case {
-	String iso_code;
+	static String iso_code;
 	int new_cases;
 	int new_cases_per_million;
 	int new_cases_smoothed;
@@ -28,7 +28,8 @@ public class Case {
 	int weekly_hosp_admissions_per_million;
 	int hospital_beds_per_thousand;
 	
-	public String getIsoCode() {
+	public static String getIsoCode() {
+		iso_code = "AFG";
 		return iso_code;
 	}
 }

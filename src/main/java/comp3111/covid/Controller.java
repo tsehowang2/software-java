@@ -66,7 +66,6 @@ public class Controller {
     	String oReport = DataAnalysis.getConfirmedCases(iDataset, iISO);
     	textAreaConsole.setText(oReport);
     }
-
   
     /**
      *  Task Zero
@@ -81,7 +80,7 @@ public class Controller {
     	textAreaConsole.setText(oReport);
     }
 
-  
+ 
     /**
      *  Task Zero
      *  To be triggered by the "Rate of Vaccination" button on the Task Zero Tab

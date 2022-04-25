@@ -1,7 +1,7 @@
 package comp3111.covid;
 
 public class Country {
-	String iso_code;
+	static String iso_code;
 	String continent;
 	String location;
 	float reproduction_rate;
@@ -36,7 +36,8 @@ public class Country {
 	int total_deaths;
 	int total_deaths_per_million;
 	
-	public String getIsoCode() {
+	public static String getIsoCode() {
+		iso_code = "AFG";
 		return iso_code;
 	}
 }
