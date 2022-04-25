@@ -26,6 +26,9 @@ import java.util.List;
 public class Controller {
 
     @FXML
+    private Button importCSV;
+    
+    @FXML
     private Button buttonConfirmedCases;
 
     @FXML
@@ -75,6 +78,11 @@ public class Controller {
     @FXML
     private TextField textfieldISO;
 
+    @FXML
+    void doImportCSV(ActionEvent event) {
+    	String iDataset = textfieldDataset.getText();
+    	DataAnalysis.setClass(iDataset);
+    }
     
     private 
     /**
