@@ -6,6 +6,21 @@ import org.junit.Test;
 
 public class UnitTest {
 	
+//	@Before
+//	public void setUp() throws Exception {
+//		
+//	}
+//
+//	@Test
+//	public void getIsoCodeCaseWithValidInput() {
+//		assertEquals("AFG", Case.getIsoCode());
+//	}
+//	
+//	@Test
+//	public void getIsoCodeCountryWithValidInput() {
+//		assertEquals("AFG",Country.getIsoCode());
+//	}
+	
 //	int age;
 //	Case c1;
 //	
@@ -24,3 +39,5 @@ public class UnitTest {
 //	}
 
 }
+
+

@@ -1,6 +1,7 @@
 package comp3111.covid;
 
 public class Case {
+
 	private String iso_code;
 	private int new_cases;
 	private float new_cases_per_million;
