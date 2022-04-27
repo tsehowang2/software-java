@@ -15,6 +15,9 @@ public class Controller {
 
     @FXML
     private Tab tabTaskZero;
+    
+    @FXML
+    private Button importCSV;
 
     @FXML
     private TextField textfieldISO;
@@ -53,6 +56,11 @@ public class Controller {
     private TextArea textAreaConsole;
 
   
+    @FXML
+    void doImportCSV(ActionEvent event) {
+    	String iDataset = textfieldDataset.getText();
+    	DataAnalysis.setClass(iDataset);
+    }
 
     /**
      *  Task Zero

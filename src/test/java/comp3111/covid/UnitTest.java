@@ -6,22 +6,38 @@ import org.junit.Test;
 
 public class UnitTest {
 	
+//	@Before
+//	public void setUp() throws Exception {
+//		
+//	}
+//
+//	@Test
+//	public void getIsoCodeCaseWithValidInput() {
+//		assertEquals("AFG", Case.getIsoCode());
+//	}
+//	
+//	@Test
+//	public void getIsoCodeCountryWithValidInput() {
+//		assertEquals("AFG",Country.getIsoCode());
+//	}
 	
-	@Before
-	public void setUp() throws Exception {
-		
-	}
+//	int age;
+//	Case c1;
+//	
+//	@Before
+//	public void setUp() throws Exception {
+//		age = 30;
+//	}
+//
+//	@Test
+//	public void getIsoCodeWithValidInput() {
+//		assertEquals("AFG", c1.getIso_code("AFG"));
+//	}
+//	@Test
+//	public void getMedianAgeWithValidInput() {
+//		assertEquals(age, Country.getMedianAge());
+//	}
 
-	@Test
-	public void getIsoCodeCaseWithValidInput() {
-		assertEquals("AFG", Case.getIsoCode());
-	}
-	
-	@Test
-	public void getIsoCodeCountryWithValidInput() {
-		assertEquals("AFG",Country.getIsoCode());
-	}
-	
 }
 
 
