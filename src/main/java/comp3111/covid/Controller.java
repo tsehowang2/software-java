@@ -17,6 +17,8 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,10 +39,17 @@ public class Controller {
     @FXML
     private Button buttonRateOfVaccination;
 
+    
+    
     @FXML
     private ListView<String> countryEntry;
-    private String[] countries = {"Hong Kong0","Hong Kong1","Hong Kong2","Hong Kong3","Hong Kong4"};
-    private ObservableList<String> countryList = FXCollections.observableArrayList(countries);
+    //private String[] countries = {"Hong Kong0","Hong Kong1","Hong Kong2","Hong Kong3","Hong Kong4"};
+    private List<String> countries2 = DataAnalysis.getUniqueLocations();
+    private ObservableList<String> countryList = FXCollections.observableArrayList(countries2);
+    
+
+    
+    
     
     @FXML
     private TextField dateEntry;
@@ -82,6 +91,14 @@ public class Controller {
     void doImportCSV(ActionEvent event) {
     	String iDataset = textfieldDataset.getText();
     	DataAnalysis.setClass(iDataset);
+    	
+    	System.out.print( "Test End" + "\n");
+
+    	countries2 = DataAnalysis.getUniqueLocations();
+    	countryList = FXCollections.observableArrayList(countries2);
+    	
+
+    	initialize();
     }
     
     private 
@@ -127,7 +144,7 @@ public class Controller {
     }
     
     @FXML
-    void generateTable(ActionEvent event) {
+    void generateTableA(ActionEvent event) {
     	textAreaConsole.clear();
 
     	String date;
@@ -146,7 +163,11 @@ public class Controller {
     	}
     	
     	textAreaConsole.appendText( "\nDate:\n" + date + "\n");
-    }
+    	textAreaConsole.appendText( "Generating Table for task A"+ "\n");
+    	
+    	// private void generateTable(List<String> countries, String){}
+    	//{"Hong Kong", "India"}, "6/20/2021"
+    } 
     
     @FXML 
     private void generate() {
@@ -156,8 +177,7 @@ public class Controller {
     @FXML
     public void initialize() {
     	countryEntry.setItems(countryList);
-
-    	
+  
     	countryEntry.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);    	
     }
 }
