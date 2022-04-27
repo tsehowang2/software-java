@@ -1,6 +1,7 @@
 package comp3111.covid;
 
 public class Case {
+
 	private String iso_code;
 	private String date;
 	private int new_cases;
