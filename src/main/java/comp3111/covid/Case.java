@@ -2,6 +2,7 @@ package comp3111.covid;
 
 public class Case {
 	private String iso_code;
+	private String date;
 	private int new_cases;
 	private float new_cases_per_million;
 	private float new_cases_smoothed;
@@ -28,12 +29,13 @@ public class Case {
 	private float weekly_hosp_admissions_per_million;
 	private float hospital_beds_per_thousand;
 	
-	public Case(String iso_code, int new_cases, float new_cases_per_million, float new_cases_smoothed, float new_cases_smoothed_per_million, int new_deaths, float new_deaths_per_million,
+	public Case(String iso_code, String date, int new_cases, float new_cases_per_million, float new_cases_smoothed, float new_cases_smoothed_per_million, int new_deaths, float new_deaths_per_million,
 			float new_deaths_smoothed, float new_deaths_smoothed_per_million, float tests_per_case, int new_tests, float new_tests_per_thousand, float new_tests_smoothed, float new_tests_smoothed_per_thousand,
 			int new_vaccinations, float new_vaccinations_smoothed, float new_vaccinations_smoothed_per_million, int icu_patients, float icu_patients_per_million, float weekly_icu_admissions, float weekly_icu_admissions_per_million,
 			int hosp_patients, float hosp_patients_per_million, float weekly_hosp_admissions, float weekly_hosp_admissions_per_million, float hospital_beds_per_thousand)
 	{
 		this.setIso_code(iso_code);
+		this.setDate(date);
 		this.setNew_cases(new_cases);
 		this.setNew_cases_per_million(new_cases_per_million);
 		this.setNew_cases_smoothed(new_cases_smoothed);
@@ -67,6 +69,14 @@ public class Case {
 
 	public void setIso_code(String iso_code) {
 		this.iso_code = iso_code;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public int getNew_cases() {

@@ -2,6 +2,7 @@ package comp3111.covid;
 
 public class Country {
 	private String iso_code;
+	private String date;
 	private String continent;
 	private String location;
 	private float reproduction_rate;
@@ -36,12 +37,13 @@ public class Country {
 	private int total_deaths;
 	private float total_deaths_per_million;
 	
-	public Country(String iso_code,String continent,String location,float reproduction_rate,String tests_units,float population_density,float median_age,float aged_65_older,float aged_70_older,float gdp_per_capita,
+	public Country(String iso_code,String date,String continent,String location,float reproduction_rate,String tests_units,float population_density,float median_age,float aged_65_older,float aged_70_older,float gdp_per_capita,
 			float extreme_poverty,float cardiovasc_death_rate,float diabetes_prevalence,float female_smokers,float male_smokers,float life_expectancy,float handwashing_facilities,float human_development_index,float excess_mortality,
 			long population,float stringency_index,float positive_rate,int people_fully_vaccinated,float people_fully_vaccinated_per_hundred,int people_vaccinated,float people_vaccinated_per_hundred,long total_vaccinations, 
 			float total_vaccinations_per_hundred,int total_tests,float total_tests_per_thousand,int total_cases,float total_cases_per_million,int total_deaths,float total_deaths_per_million)
 	{
 		this.setIso_code(iso_code);
+		this.setDate(date);
 		this.setContinent(continent);
 		this.setLocation(location);
 		this.setReproduction_rate(reproduction_rate);
@@ -83,6 +85,14 @@ public class Country {
 
 	public void setIso_code(String iso_code) {
 		this.iso_code = iso_code;
+	}	
+	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public String getContinent() {
