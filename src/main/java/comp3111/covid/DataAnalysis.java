@@ -21,7 +21,6 @@ public class DataAnalysis {
 	     return fr.getCSVParser(true);
 	     }
 	
-
 	public static String getConfirmedCases(String dataset, String iso_code) {
 		String oReport = "";	
 		long confirmedCases = 0;
