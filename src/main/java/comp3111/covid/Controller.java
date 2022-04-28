@@ -54,7 +54,13 @@ public class Controller {
     private TextField dateEntry;
 
     @FXML
-    private Button generate;
+    private Button generateA1;
+    
+    @FXML
+    private Button generateB1;
+    
+    @FXML
+    private Button generateC1;
 
     @FXML
     private Tab tabApp1;
@@ -82,9 +88,6 @@ public class Controller {
 
     @FXML
     private TextArea textAreaConsole;
-
-    @FXML
-    private TextArea textAreaConsole1;
     
     @FXML
     private TextField textfieldDataset;
@@ -147,20 +150,22 @@ public class Controller {
     }
     
     @FXML
-    void generateTableA(ActionEvent event) {
-    	textAreaConsole.clear();
+    void generateTableA1(ActionEvent event) {
+    	//textAreaConsole.clear();
 
     	String date;
     	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
     		textAreaConsole.appendText("Please Enter a Date" + "\n");
     		return;
+    	}
+    	else if (false) {
     		
     	}
-
     	else {
     		date = dateEntry.getText();
-        	dateEntry.clear();
+        	//dateEntry.clear();
     	}
+    	/*
     	textAreaConsole.appendText( "Countries:" + "\n");
 
     	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
@@ -169,18 +174,89 @@ public class Controller {
     	
     	textAreaConsole.appendText( "\nDate:\n" + date + "\n");
     	textAreaConsole.appendText( "\n" + "Generating Table for task A"+ "\n");
-    	
+    	*/
+    	textAreaConsole.appendText("\n");
     	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
     		
         	textAreaConsole.appendText( countryList.get(i) + " " + DataAnalysis.retrieveTotalCases(countryList.get(i), date) + " " + 
         			DataAnalysis.retrieveTotalCasesPer1M(countryList.get(i), date) + "\n");
     	}
-    	//    	DataAnalysis.retrieveTotalCases(String country, String date);
-    	//		DataAnalysis.retrieveTotalCasesPer1M(String country, String date);
+    	textAreaConsole.appendText( "World \n" );
     	
-    	// private void generateTable(List<String> countries, String){}
-    	//{"Hong Kong", "India"}, "6/20/2021"
 
+    } 
+
+    @FXML
+    void generateTableB1(ActionEvent event) {
+    	//textAreaConsole.clear();
+
+    	String date;
+    	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
+    		textAreaConsole.appendText("Please Enter a Date" + "\n");
+    		return;
+    	}
+    	else if (false) {
+    		
+    	}
+    	else {
+    		date = dateEntry.getText();
+        	//dateEntry.clear();
+    	}
+    	/*
+    	textAreaConsole.appendText( "Countries:" + "\n");
+
+    	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
+        	textAreaConsole.appendText( countryList.get(i) + "\n");
+    	}
+    	
+    	textAreaConsole.appendText( "\nDate:\n" + date + "\n");
+    	textAreaConsole.appendText( "\n" + "Generating Table for task A"+ "\n");
+    	*/
+    	textAreaConsole.appendText("\n");
+    	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
+    		
+        	textAreaConsole.appendText( countryList.get(i) + " " + DataAnalysis.retrieveTotal_deaths(countryList.get(i), date) + " " + 
+        			DataAnalysis.retrieveTotalDeathsPer1M(countryList.get(i), date) + "\n");
+    	}
+    	textAreaConsole.appendText( "World \n" );
+    	
+
+    } 
+
+    @FXML
+    void generateTableC1(ActionEvent event) {
+    	//textAreaConsole.clear();
+
+    	String date;
+    	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
+    		textAreaConsole.appendText("Please Enter a Date" + "\n");
+    		return;
+    	}
+    	else if (false) {
+    		
+    	}
+    	else {
+    		date = dateEntry.getText();
+        	//dateEntry.clear();
+    	}
+    	/*
+    	textAreaConsole.appendText( "Countries:" + "\n");
+
+    	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
+        	textAreaConsole.appendText( countryList.get(i) + "\n");
+    	}
+    	
+    	textAreaConsole.appendText( "\nDate:\n" + date + "\n");
+    	textAreaConsole.appendText( "\n" + "Generating Table for task A"+ "\n");
+    	*/
+    	textAreaConsole.appendText("\n");
+    	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
+    		
+        	textAreaConsole.appendText( countryList.get(i) + " " + DataAnalysis.retrieveRateOfVaccination(countryList.get(i), date) + " " + 
+        			DataAnalysis.retrieveRateOfVaccination(countryList.get(i), date) + "\n");
+    	}
+    	textAreaConsole.appendText( "World \n" );
+    	
 
     } 
     
