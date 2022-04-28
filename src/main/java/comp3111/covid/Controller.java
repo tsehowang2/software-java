@@ -47,8 +47,6 @@ public class Controller {
     private List<String> countries2 = DataAnalysis.getUniqueLocations();
     private ObservableList<String> countryList = FXCollections.observableArrayList(countries2);
     
-
-    
     
     
     @FXML
