@@ -40,8 +40,8 @@ jacocoTestReport {
 }
 
 javafx {
-	version = "13.0.2"
-	sdk = "/Users/howangtse/OpenJFX/javafx-sdk-18"
+	version = "17.0.2"
+	//sdk = "/Users/howangtse/OpenJFX/javafx-sdk-18"
 	modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
