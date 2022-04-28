@@ -127,7 +127,6 @@ public class Controller {
     	String oReport = DataAnalysis.getConfirmedDeaths(iDataset, iISO);
     	textAreaConsole.setText(oReport);
     }
-
  
     /**
      *  Task Zero

@@ -21,7 +21,6 @@ public class DataAnalysis {
 	     return fr.getCSVParser(true);
 	     }
 	
-
 	public static String getConfirmedCases(String dataset, String iso_code) {
 		String oReport = "";	
 		long confirmedCases = 0;
@@ -119,11 +118,88 @@ public class DataAnalysis {
 		 return uniqueLocation;
 	 }
 	 
+	 public static int retrieveTotalCases(String country, String date) {
+		 int total_cases = 0;
+		 for(Country row : countries) {
+			 if(row.getLocation() == country) {
+				 if(row.getDate() == date) {
+					 	total_cases = row.getTotal_cases();
+					 }
+				 }
+		 }
+		return total_cases;
+	 }
+	 
+	 public static float retrieveTotalCasesPer1M(String country, String date) {
+		 float total_cases_per_million = 0;
+		 for(Country row : countries) {
+			 if(row.getLocation() == country) {
+				 if(row.getDate() == date) {
+					 total_cases_per_million = row.getTotal_cases_per_million();
+					 }
+				 }
+		 }
+		return total_cases_per_million;
+	 }
+	 
+	 public static int retrieveTotal_deaths(String country, String date) {
+		 int total_deaths = 0;
+		 for(Country row : countries) {
+			 if(row.getLocation() == country) {
+				 if(row.getDate() == date) {
+					 total_deaths = row.getTotal_deaths();
+					 }
+				 }
+		 }
+		return total_deaths;
+	 }
+	 
+	 public static float retrieveTotalDeathsPer1M(String country, String date) {
+		 float total_deaths_per_million = 0;
+		 for(Country row : countries) {
+			 if(row.getLocation() == country) {
+				 if(row.getDate() == date) {
+					 total_deaths_per_million = row.getTotal_deaths_per_million();
+					 }
+				 }
+		 }
+		return total_deaths_per_million;
+	 }
+	 
+	 public static int retrieveFullyVaccinated(String country, String date) {
+		 int people_fully_vaccinated = 0;
+		 for(Country row : countries) {
+			 if(row.getLocation() == country) {
+				 if(row.getDate() == date) {
+					 people_fully_vaccinated = row.getPeople_fully_vaccinated();
+					 }
+				 }
+		 }
+		return people_fully_vaccinated;
+	 }
+	 
+	 public static float retrieveRateOfVaccination(String country, String date) {
+		 float rate = 0;
+		 float population = 0;
+		 int people_fully_vaccinated = retrieveFullyVaccinated(country, date);
+		 for(Country row : countries) {
+			 if(row.getLocation() == country) {
+				 if(row.getDate() == date) {
+					 population = row.getPopulation();
+					 }
+				 }
+		 }
+		 rate = people_fully_vaccinated / population;
+		return rate;
+	 }
+	 
+	 // ToDo: make a row call "world"
 	 public static void setClass(String dataset) {
 
 		 for (CSVRecord rec : getFileParser(dataset)) {
 			 Case _case = new Case(
 					 rec.get("iso_code"),
+					 rec.get("date"),
 					 Integer.parseInt(rec.get("new_cases").isEmpty()?"0":rec.get("new_cases")),
 					 Float.parseFloat(rec.get("new_cases_per_million").isEmpty()?"0":rec.get("new_cases_per_million")),
 					 Float.parseFloat(rec.get("new_cases_smoothed").isEmpty()?"0":rec.get("new_cases_smoothed")),
@@ -152,6 +228,7 @@ public class DataAnalysis {
 			 
 			 Country _country = new Country(
 					 rec.get("iso_code"),
+					 rec.get("date"),
 					 rec.get("continent"),
 					 rec.get("location"),
 					 Float.parseFloat(rec.get("reproduction_rate").isEmpty()?"0":rec.get("reproduction_rate")),
@@ -189,17 +266,5 @@ public class DataAnalysis {
 			 cases.add(_case);
 			 countries.add(_country);
 		 }
-		 
-//		 for (Case _case : cases) {
-//			 System.out.println(_case.getNew_deaths());
-//		 }
-//		 for (Country _country : countries) {
-//			 System.out.println(_country.getMedian_age());
-//		 }
-		 
-		 List<String>uniqueLocation = getUniqueLocations();
-		 for (int i = 0; i < uniqueLocation.size(); ++i) {
-			 System.out.println(uniqueLocation.get(i));
-			 }
-		 }
+	 }
 }
