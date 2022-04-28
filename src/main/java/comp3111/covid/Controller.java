@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -58,6 +59,9 @@ public class Controller {
     @FXML
     private Tab tabApp1;
 
+    @FXML
+    private TableView<?> tableA1;
+    
     @FXML
     private Tab tabApp2;
 
