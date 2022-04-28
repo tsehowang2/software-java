@@ -121,20 +121,20 @@ public class DataAnalysis {
 	 public static int retrieveTotalCases(String country, String date) {
 		 int total_cases = 0;
 		 for(Country row : countries) {
-			 if(row.getLocation() == country) {
-				 if(row.getDate() == date) {
+			 if(row.getLocation().equals(country)) {
+				 if(row.getDate().equals(date)) {
 					 	total_cases = row.getTotal_cases();
 					 }
 				 }
 		 }
-		return total_cases;
+		 return total_cases;
 	 }
 	 
 	 public static float retrieveTotalCasesPer1M(String country, String date) {
 		 float total_cases_per_million = 0;
 		 for(Country row : countries) {
-			 if(row.getLocation() == country) {
-				 if(row.getDate() == date) {
+			 if(row.getLocation().equals(country)) {
+				 if(row.getDate().equals(date)) {
 					 total_cases_per_million = row.getTotal_cases_per_million();
 					 }
 				 }
@@ -145,8 +145,8 @@ public class DataAnalysis {
 	 public static int retrieveTotal_deaths(String country, String date) {
 		 int total_deaths = 0;
 		 for(Country row : countries) {
-			 if(row.getLocation() == country) {
-				 if(row.getDate() == date) {
+			 if(row.getLocation().equals(country)) {
+				 if(row.getDate().equals(date)) {
 					 total_deaths = row.getTotal_deaths();
 					 }
 				 }
@@ -157,8 +157,8 @@ public class DataAnalysis {
 	 public static float retrieveTotalDeathsPer1M(String country, String date) {
 		 float total_deaths_per_million = 0;
 		 for(Country row : countries) {
-			 if(row.getLocation() == country) {
-				 if(row.getDate() == date) {
+			 if(row.getLocation().equals(country)) {
+				 if(row.getDate().equals(date)) {
 					 total_deaths_per_million = row.getTotal_deaths_per_million();
 					 }
 				 }
@@ -169,8 +169,8 @@ public class DataAnalysis {
 	 public static int retrieveFullyVaccinated(String country, String date) {
 		 int people_fully_vaccinated = 0;
 		 for(Country row : countries) {
-			 if(row.getLocation() == country) {
-				 if(row.getDate() == date) {
+			 if(row.getLocation().equals(country)) {
+				 if(row.getDate().equals(date)) {
 					 people_fully_vaccinated = row.getPeople_fully_vaccinated();
 					 }
 				 }
