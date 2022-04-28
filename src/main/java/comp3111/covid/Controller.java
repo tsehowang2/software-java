@@ -82,6 +82,9 @@ public class Controller {
     private TextArea textAreaConsole;
 
     @FXML
+    private TextArea textAreaConsole1;
+    
+    @FXML
     private TextField textfieldDataset;
 
     @FXML
@@ -151,20 +154,32 @@ public class Controller {
     		return;
     		
     	}
+
     	else {
     		date = dateEntry.getText();
         	dateEntry.clear();
     	}
     	textAreaConsole.appendText( "Countries:" + "\n");
+
     	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
         	textAreaConsole.appendText( countryList.get(i) + "\n");
     	}
     	
     	textAreaConsole.appendText( "\nDate:\n" + date + "\n");
-    	textAreaConsole.appendText( "Generating Table for task A"+ "\n");
+    	textAreaConsole.appendText( "\n" + "Generating Table for task A"+ "\n");
+    	
+    	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
+    		
+        	textAreaConsole.appendText( countryList.get(i) + " " + DataAnalysis.retrieveTotalCases(countryList.get(i), date) + " " + 
+        			DataAnalysis.retrieveTotalCasesPer1M(countryList.get(i), date) + "\n");
+    	}
+    	//    	DataAnalysis.retrieveTotalCases(String country, String date);
+    	//		DataAnalysis.retrieveTotalCasesPer1M(String country, String date);
     	
     	// private void generateTable(List<String> countries, String){}
     	//{"Hong Kong", "India"}, "6/20/2021"
+
+
     } 
     
     @FXML 
