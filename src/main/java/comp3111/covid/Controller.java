@@ -44,13 +44,21 @@ public class Controller {
     @FXML
     private ListView<String> countryEntry;
     //private String[] countries = {"Hong Kong0","Hong Kong1","Hong Kong2","Hong Kong3","Hong Kong4"};
+    private List<String> countries = DataAnalysis.getUniqueLocations();
+    private ObservableList<String> countryList = FXCollections.observableArrayList(countries);
+    
+    @FXML
+    private ListView<String> countryEntry2;
     private List<String> countries2 = DataAnalysis.getUniqueLocations();
-    private ObservableList<String> countryList = FXCollections.observableArrayList(countries2);
+    private ObservableList<String> countryList2 = FXCollections.observableArrayList(countries);
     
     
     
     @FXML
     private TextField dateEntry;
+    
+    @FXML
+    private TextField dateEntry2;
 
     @FXML
     private Button generateA1;
@@ -60,6 +68,15 @@ public class Controller {
     
     @FXML
     private Button generateC1;
+    
+    @FXML
+    private Button generateA2;
+    
+    @FXML
+    private Button generateB2;
+    
+    @FXML
+    private Button generateC2;
 
     @FXML
     private Tab tabApp1;
@@ -86,6 +103,9 @@ public class Controller {
     private TextArea textAreaConsole;
     
     @FXML
+    private TextArea textAreaConsole2;
+    
+    @FXML
     private TextField textfieldDataset;
 
     @FXML
@@ -98,53 +118,18 @@ public class Controller {
     	
     	System.out.print( "Test End" + "\n");
 
+    	countries = DataAnalysis.getUniqueLocations();
+    	countryList = FXCollections.observableArrayList(countries);
+    	
     	countries2 = DataAnalysis.getUniqueLocations();
-    	countryList = FXCollections.observableArrayList(countries2);
+    	countryList2 = FXCollections.observableArrayList(countries);
     	
 
     	initialize();
     }
     
     private 
-    /**
-     *  Task Zero
-     *  To be triggered by the "Confirmed Cases" button on the Task Zero Tab 
-     *  
-     */
-    @FXML
-    void doConfirmedCases(ActionEvent event) {
-    	String iDataset = textfieldDataset.getText();
-    	String iISO = textfieldISO.getText();
-    	String oReport = DataAnalysis.getConfirmedCases(iDataset, iISO);
-    	textAreaConsole.setText(oReport);
-    }
-  
-    /**
-     *  Task Zero
-     *  To be triggered by the "Confirmed Deaths" button on the Task Zero Tab
-     *  
-     */
-    @FXML
-    void doConfirmedDeaths(ActionEvent event) {
-    	String iDataset = textfieldDataset.getText();
-    	String iISO = textfieldISO.getText();
-    	String oReport = DataAnalysis.getConfirmedDeaths(iDataset, iISO);
-    	textAreaConsole.setText(oReport);
-    }
- 
-    /**
-     *  Task Zero
-     *  To be triggered by the "Rate of Vaccination" button on the Task Zero Tab
-     *  
-     */
-    @FXML
-    void doRateOfVaccination(ActionEvent event) {
-    	String iDataset = textfieldDataset.getText();
-    	String iISO = textfieldISO.getText();
-    	String oReport = DataAnalysis.getRateOfVaccination(iDataset, iISO);
-    	textAreaConsole.setText(oReport);
-    }
-    
+
     @FXML
     void generateTableA1(ActionEvent event) {
     	//textAreaConsole.clear();
@@ -255,17 +240,126 @@ public class Controller {
     	
 
     } 
-    
-    @FXML 
-    private void generate() {
+    @FXML
+    void generateTableA2(ActionEvent event) {
+    	//textAreaConsole.clear();
+
+    	String date;
+    	if (dateEntry2.getText() == null || dateEntry2.getText().trim().isEmpty()) {
+    		textAreaConsole2.appendText("Please Enter a Date" + "\n");
+    		return;
+    	}
+    	else if (false) {
+    		
+    	}
+    	else {
+    		date = dateEntry2.getText();
+        	//dateEntry.clear();
+    	}
+    	/*
+    	textAreaConsole.appendText( "Countries:" + "\n");
+
+    	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
+        	textAreaConsole.appendText( countryList.get(i) + "\n");
+    	}
     	
-    }
+    	textAreaConsole.appendText( "\nDate:\n" + date + "\n");
+    	textAreaConsole.appendText( "\n" + "Generating Table for task A"+ "\n");
+    	*/
+    	textAreaConsole2.appendText("\n");
+    	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
+    		
+        	textAreaConsole2.appendText( countryList2.get(i) + " " + DataAnalysis.retrieveTotalCases(countryList2.get(i), date) + " " + 
+        			DataAnalysis.retrieveTotalCasesPer1M(countryList2.get(i), date) + "\n");
+    	}
+    	textAreaConsole2.appendText( "World \n" );
+    	
+
+    } 
+
+    @FXML
+    void generateTableB2(ActionEvent event) {
+    	//textAreaConsole.clear();
+
+    	String date;
+    	if (dateEntry2.getText() == null || dateEntry2.getText().trim().isEmpty()) {
+    		textAreaConsole2.appendText("Please Enter a Date" + "\n");
+    		return;
+    	}
+    	else if (false) {
+    		
+    	}
+    	else {
+    		date = dateEntry2.getText();
+        	//dateEntry.clear();
+    	}
+    	/*
+    	textAreaConsole.appendText( "Countries:" + "\n");
+
+    	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
+        	textAreaConsole.appendText( countryList.get(i) + "\n");
+    	}
+    	
+    	textAreaConsole.appendText( "\nDate:\n" + date + "\n");
+    	textAreaConsole.appendText( "\n" + "Generating Table for task A"+ "\n");
+    	*/
+    	textAreaConsole2.appendText("\n");
+    	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
+    		
+        	textAreaConsole2.appendText( countryList2.get(i) + " " + DataAnalysis.retrieveTotal_deaths(countryList2.get(i), date) + " " + 
+        			DataAnalysis.retrieveTotalDeathsPer1M(countryList2.get(i), date) + "\n");
+    	}
+    	textAreaConsole2.appendText( "World \n" );
+    	
+
+    } 
+
+    @FXML
+    void generateTableC2(ActionEvent event) {
+    	//textAreaConsole.clear();
+
+    	String date;
+    	if (dateEntry2.getText() == null || dateEntry2.getText().trim().isEmpty()) {
+    		textAreaConsole2.appendText("Please Enter a Date" + "\n");
+    		return;
+    	}
+    	else if (false) {
+    		
+    	}
+    	else {
+    		date = dateEntry2.getText();
+        	//dateEntry.clear();
+    	}
+    	/*
+    	textAreaConsole.appendText( "Countries:" + "\n");
+
+    	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
+        	textAreaConsole.appendText( countryList.get(i) + "\n");
+    	}
+    	
+    	textAreaConsole.appendText( "\nDate:\n" + date + "\n");
+    	textAreaConsole.appendText( "\n" + "Generating Table for task A"+ "\n");
+    	*/
+    	textAreaConsole2.appendText("\n");
+    	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
+    		
+        	textAreaConsole2.appendText( countryList2.get(i) + " " + DataAnalysis.retrieveRateOfVaccination(countryList2.get(i), date) + " " + 
+        			DataAnalysis.retrieveRateOfVaccination(countryList2.get(i), date) + "\n");
+    	}
+    	textAreaConsole2.appendText( "World \n" );
+    	
+
+    } 
+
     
     @FXML
     public void initialize() {
     	countryEntry.setItems(countryList);
-  
     	countryEntry.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);    	
+    	
+        countryEntry2.setItems(countryList);
+        countryEntry2.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE); 
+
     }
 }
 
