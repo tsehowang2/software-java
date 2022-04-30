@@ -12,7 +12,10 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+//import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.SelectionMode;
@@ -61,12 +64,21 @@ public class Controller {
     
     @FXML
     private Button generateC1;
+    
+    @FXML
+    private Label table_label;
+    
+    @FXML
+    private TableView<?> table;
+    
+    @FXML
+    private Label chart_label;
+    
+    @FXML
+    private LineChart<?, ?> chart;
 
     @FXML
     private Tab tabApp1;
-
-    @FXML
-    private TableView<?> tableA1;
     
     @FXML
     private Tab tabApp2;
@@ -183,7 +195,7 @@ public class Controller {
     	}
     	textAreaConsole.appendText( "World \n" );
     	
-
+    	
     } 
 
     @FXML
@@ -220,7 +232,14 @@ public class Controller {
     	}
     	textAreaConsole.appendText( "World \n" );
     	
-
+    	//Defining X axis  
+    	//NumberAxis xAxis = new NumberAxis(1960, 2020, 10); 
+    	//xAxis.setLabel("Years"); 
+    	        
+    	//Defining y axis 
+    	//NumberAxis yAxis = new NumberAxis(0, 350, 50); 
+    	//yAxis.setLabel("No.of schools");
+    	//LineChart lineChart = new LineChart(xAxis, yAxis);
     } 
 
     @FXML
