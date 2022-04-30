@@ -2,6 +2,9 @@ package comp3111.covid;
 
 import org.apache.commons.csv.*;
 import java.util.stream.Collectors;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import edu.duke.*;
 /**
@@ -11,10 +14,25 @@ import edu.duke.*;
  * @version	1.1
  * 
  */
+
 public class DataAnalysis {
 	
 	 static List<Case> cases = new ArrayList<Case>();
 	 static List<Country> countries = new ArrayList<Country>();
+	 
+	 
+	 public static boolean isValidDate(String input) {
+		 //String input = "31/02/2000";
+		 DateTimeFormatter f = DateTimeFormatter.ofPattern ( "M/d/uuuu" );
+		 try {
+		     LocalDate ld = LocalDate.parse ( input , f );
+		     System.out.println ( "ld: " + ld );
+		     return true;
+		 } catch ( DateTimeParseException e ) {
+		     System.out.println ( "ERROR: " + e );
+		 }
+		 return false;
+	 }
 	 
 	public static CSVParser getFileParser(String dataset) {
 	     FileResource fr = new FileResource("dataset/" + dataset);
@@ -212,10 +230,11 @@ public class DataAnalysis {
 		 for(Country row : countries) {
 			 if(row.getLocation().equals(country)) {
 				 if(row.getDate().equals(date)) {
-					 people_fully_vaccinated = row.getPeople_fully_vaccinated();
+					 people_fully_vaccinated = (row.getPeople_fully_vaccinated()==-1?0:row.getPeople_fully_vaccinated());
 					 }
 				 }
 		 }
+		 
 		return people_fully_vaccinated;
 	 }
 	 
@@ -234,8 +253,8 @@ public class DataAnalysis {
 		 float population = 0;
 		 int people_fully_vaccinated = retrieveFullyVaccinated(country, date);
 		 for(Country row : countries) {
-			 if(row.getLocation() == country) {
-				 if(row.getDate() == date) {
+			 if(row.getLocation().equals(country)) {
+				 if(row.getDate().equals(date)) {
 					 population = row.getPopulation();
 					 }
 				 }
@@ -249,12 +268,13 @@ public class DataAnalysis {
 		 float population = 0;
 		 int people_fully_vaccinated = 0;
 		 for(Country row : countries) {
-				 if(row.getDate() == date) {
+				 if(row.getDate().equals(date)) {
 					 people_fully_vaccinated += retrieveFullyVaccinated(row.getLocation(), date);
 					 population += row.getPopulation();
 					 }
 				 }
 		 rate = people_fully_vaccinated / population * 100;
+		 System.out.println(people_fully_vaccinated + "  " + population);
 		return rate;
 	 }
 	 
