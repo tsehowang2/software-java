@@ -234,8 +234,8 @@ public class DataAnalysis {
 		 float population = 0;
 		 int people_fully_vaccinated = retrieveFullyVaccinated(country, date);
 		 for(Country row : countries) {
-			 if(row.getLocation() == country) {
-				 if(row.getDate() == date) {
+			 if(row.getLocation().equals(country)) {
+				 if(row.getDate().equals(date)) {
 					 population = row.getPopulation();
 					 }
 				 }
@@ -249,11 +249,11 @@ public class DataAnalysis {
 		 float population = 0;
 		 int people_fully_vaccinated = 0;
 		 for(Country row : countries) {
-				 if(row.getDate() == date) {
-					 people_fully_vaccinated += retrieveFullyVaccinated(row.getLocation(), date);
-					 population += row.getPopulation();
-					 }
+			 if(row.getDate().equals(date)) {
+				 people_fully_vaccinated += retrieveFullyVaccinated(row.getLocation(), date);
+				 population += row.getPopulation();
 				 }
+			 }
 		 rate = people_fully_vaccinated / population * 100;
 		return rate;
 	 }
