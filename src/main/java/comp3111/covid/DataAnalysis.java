@@ -2,6 +2,9 @@ package comp3111.covid;
 
 import org.apache.commons.csv.*;
 import java.util.stream.Collectors;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import edu.duke.*;
 /**
@@ -15,6 +18,20 @@ public class DataAnalysis {
 	
 	 static List<Case> cases = new ArrayList<Case>();
 	 static List<Country> countries = new ArrayList<Country>();
+	 public static boolean isValidDate(String input) {
+		 //String input = "31/02/2000";
+		 DateTimeFormatter f = DateTimeFormatter.ofPattern ( "M/d/uuuu" );
+		 try {
+		     LocalDate ld = LocalDate.parse ( input , f );
+		     System.out.println ( "ld: " + ld );
+		     return true;
+		 } catch ( DateTimeParseException e ) {
+			 
+		     System.out.println ( "ERROR1234: " + e );
+		 }
+		 return false;
+		 //testforterry
+	 }
 	 
 	public static CSVParser getFileParser(String dataset) {
 	     FileResource fr = new FileResource("dataset/" + dataset);
