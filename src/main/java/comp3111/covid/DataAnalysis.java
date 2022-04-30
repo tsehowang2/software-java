@@ -130,6 +130,17 @@ public class DataAnalysis {
 		 return total_cases;
 	 }
 	 
+	 public static int retrieveWorldTotalCasesWorld(String date) {
+		 int total_cases = 0;
+		 for(Country row : countries) {
+			 if(row.getDate().equals(date)) {
+				 
+				 total_cases += (row.getTotal_cases()==-1?0:row.getTotal_cases());
+				 }
+			 }
+		 return total_cases;
+	 }
+	 
 	 public static float retrieveTotalCasesPer1M(String country, String date) {
 		 float total_cases_per_million = 0;
 		 for(Country row : countries) {
@@ -142,6 +153,16 @@ public class DataAnalysis {
 		return total_cases_per_million;
 	 }
 	 
+	 public static float retrieveWorldTotalCasesPer1M(String date) {
+		 float total_cases_per_million = 0;
+		 for(Country row : countries) {
+			 if(row.getDate().equals(date)) {
+				 total_cases_per_million += (row.getTotal_cases_per_million()==-1?0:row.getTotal_cases_per_million());
+				 }
+			 }
+		 return total_cases_per_million;
+	 }
+	 
 	 public static int retrieveTotal_deaths(String country, String date) {
 		 int total_deaths = 0;
 		 for(Country row : countries) {
@@ -151,6 +172,16 @@ public class DataAnalysis {
 					 }
 				 }
 		 }
+		return total_deaths;
+	 }
+	 
+	 public static int retrieveWorldTotal_deaths(String date) {
+		 int total_deaths = 0;
+		 for(Country row : countries) {
+			 if(row.getDate().equals(date)) {
+				 total_deaths += (row.getTotal_deaths()==-1?0:row.getTotal_deaths());
+				 }
+			 }
 		return total_deaths;
 	 }
 	 
@@ -166,6 +197,16 @@ public class DataAnalysis {
 		return total_deaths_per_million;
 	 }
 	 
+	 public static float retrieveWorldTotalDeathsPer1M(String date) {
+		 float total_deaths_per_million = 0;
+		 for(Country row : countries) {
+			 if(row.getDate().equals(date)) {
+				 total_deaths_per_million += (row.getTotal_deaths_per_million()==-1?0:row.getTotal_deaths_per_million());
+				 }
+			 }
+		return total_deaths_per_million;
+	 }
+	 
 	 public static int retrieveFullyVaccinated(String country, String date) {
 		 int people_fully_vaccinated = 0;
 		 for(Country row : countries) {
@@ -175,6 +216,16 @@ public class DataAnalysis {
 					 }
 				 }
 		 }
+		return people_fully_vaccinated;
+	 }
+	 
+	 public static int retrieveWorldFullyVaccinated(String date) {
+		 int people_fully_vaccinated = 0;
+		 for(Country row : countries) {
+			 if(row.getDate().equals(date)) {
+				 people_fully_vaccinated += (row.getPeople_fully_vaccinated()==-1?0:row.getPeople_fully_vaccinated());
+				 }
+			 }
 		return people_fully_vaccinated;
 	 }
 	 
@@ -189,79 +240,92 @@ public class DataAnalysis {
 					 }
 				 }
 		 }
-		 rate = people_fully_vaccinated / population;
+		 rate = people_fully_vaccinated / population * 100;
 		return rate;
 	 }
 	 
-	 // ToDo: make a row call "world"
+	 public static float retrieveWorldRateOfVaccination(String date) {
+		 float rate = 0;
+		 float population = 0;
+		 int people_fully_vaccinated = 0;
+		 for(Country row : countries) {
+				 if(row.getDate() == date) {
+					 people_fully_vaccinated += retrieveFullyVaccinated(row.getLocation(), date);
+					 population += row.getPopulation();
+					 }
+				 }
+		 rate = people_fully_vaccinated / population * 100;
+		return rate;
+	 }
+	 
 	 public static void setClass(String dataset) {
-
+		 
 		 for (CSVRecord rec : getFileParser(dataset)) {
 			 Case _case = new Case(
 					 rec.get("iso_code"),
 					 rec.get("date"),
-					 Integer.parseInt(rec.get("new_cases").isEmpty()?"0":rec.get("new_cases")),
-					 Float.parseFloat(rec.get("new_cases_per_million").isEmpty()?"0":rec.get("new_cases_per_million")),
-					 Float.parseFloat(rec.get("new_cases_smoothed").isEmpty()?"0":rec.get("new_cases_smoothed")),
-					 Float.parseFloat(rec.get("new_cases_smoothed_per_million").isEmpty()?"0":rec.get("new_cases_smoothed_per_million")),
-					 Integer.parseInt(rec.get("new_deaths").isEmpty()?"0":rec.get("new_deaths")),
-					 Float.parseFloat(rec.get("new_deaths_per_million").isEmpty()?"0":rec.get("new_deaths_per_million")),
-					 Float.parseFloat(rec.get("new_deaths_smoothed").isEmpty()?"0":rec.get("new_deaths_smoothed")),
-					 Float.parseFloat(rec.get("new_deaths_smoothed_per_million").isEmpty()?"0":rec.get("new_deaths_smoothed_per_million")),
-					 Float.parseFloat(rec.get("tests_per_case").isEmpty()?"0":rec.get("tests_per_case")),
-					 Integer.parseInt(rec.get("new_tests").isEmpty()?"0":rec.get("new_tests")),
-					 Float.parseFloat(rec.get("new_tests_per_thousand").isEmpty()?"0":rec.get("new_tests_per_thousand")),
-					 Float.parseFloat(rec.get("new_tests_smoothed").isEmpty()?"0":rec.get("new_tests_smoothed")),
-					 Float.parseFloat(rec.get("new_tests_smoothed_per_thousand").isEmpty()?"0":rec.get("new_tests_smoothed_per_thousand")),
-					 Integer.parseInt(rec.get("new_vaccinations").isEmpty()?"0":rec.get("new_vaccinations")),
-					 Float.parseFloat(rec.get("new_vaccinations_smoothed").isEmpty()?"0":rec.get("new_vaccinations_smoothed")),
-					 Float.parseFloat(rec.get("new_vaccinations_smoothed_per_million").isEmpty()?"0":rec.get("new_vaccinations_smoothed_per_million")),
-					 Integer.parseInt(rec.get("icu_patients").isEmpty()?"0":rec.get("icu_patients")),
-					 Float.parseFloat(rec.get("icu_patients_per_million").isEmpty()?"0":rec.get("icu_patients_per_million")),
-					 Float.parseFloat(rec.get("weekly_icu_admissions").isEmpty()?"0":rec.get("weekly_icu_admissions")),
-					 Float.parseFloat(rec.get("weekly_icu_admissions_per_million").isEmpty()?"0":rec.get("weekly_icu_admissions_per_million")),
-					 Integer.parseInt(rec.get("hosp_patients").isEmpty()?"0":rec.get("hosp_patients")),
-					 Float.parseFloat(rec.get("hosp_patients_per_million").isEmpty()?"0":rec.get("hosp_patients_per_million")),
-					 Float.parseFloat(rec.get("weekly_hosp_admissions").isEmpty()?"0":rec.get("weekly_hosp_admissions")),
-					 Float.parseFloat(rec.get("weekly_hosp_admissions_per_million").isEmpty()?"0":rec.get("weekly_hosp_admissions_per_million")),
-					 Float.parseFloat(rec.get("hospital_beds_per_thousand").isEmpty()?"0":rec.get("hospital_beds_per_thousand")));
+					 Integer.parseInt(rec.get("new_cases").equals("")?"-1":rec.get("new_cases")),
+					 Float.parseFloat(rec.get("new_cases_per_million").equals("")?"-1":rec.get("new_cases_per_million")),
+					 Float.parseFloat(rec.get("new_cases_smoothed").equals("")?"-1":rec.get("new_cases_smoothed")),
+					 Float.parseFloat(rec.get("new_cases_smoothed_per_million").equals("")?"-1":rec.get("new_cases_smoothed_per_million")),
+					 Integer.parseInt(rec.get("new_deaths").equals("")?"-1":rec.get("new_deaths")),
+					 Float.parseFloat(rec.get("new_deaths_per_million").equals("")?"-1":rec.get("new_deaths_per_million")),
+					 Float.parseFloat(rec.get("new_deaths_smoothed").equals("")?"-1":rec.get("new_deaths_smoothed")),
+					 Float.parseFloat(rec.get("new_deaths_smoothed_per_million").equals("")?"-1":rec.get("new_deaths_smoothed_per_million")),
+					 Float.parseFloat(rec.get("tests_per_case").equals("")?"-1":rec.get("tests_per_case")),
+					 Integer.parseInt(rec.get("new_tests").equals("")?"-1":rec.get("new_tests")),
+					 Float.parseFloat(rec.get("new_tests_per_thousand").equals("")?"-1":rec.get("new_tests_per_thousand")),
+					 Float.parseFloat(rec.get("new_tests_smoothed").equals("")?"-1":rec.get("new_tests_smoothed")),
+					 Float.parseFloat(rec.get("new_tests_smoothed_per_thousand").equals("")?"-1":rec.get("new_tests_smoothed_per_thousand")),
+					 Integer.parseInt(rec.get("new_vaccinations").equals("")?"-1":rec.get("new_vaccinations")),
+					 Float.parseFloat(rec.get("new_vaccinations_smoothed").equals("")?"-1":rec.get("new_vaccinations_smoothed")),
+					 Float.parseFloat(rec.get("new_vaccinations_smoothed_per_million").equals("")?"-1":rec.get("new_vaccinations_smoothed_per_million")),
+					 Integer.parseInt(rec.get("icu_patients").equals("")?"-1":rec.get("icu_patients")),
+					 Float.parseFloat(rec.get("icu_patients_per_million").equals("")?"-1":rec.get("icu_patients_per_million")),
+					 Float.parseFloat(rec.get("weekly_icu_admissions").equals("")?"-1":rec.get("weekly_icu_admissions")),
+					 Float.parseFloat(rec.get("weekly_icu_admissions_per_million").equals("")?"-1":rec.get("weekly_icu_admissions_per_million")),
+					 Integer.parseInt(rec.get("hosp_patients").equals("")?"-1":rec.get("hosp_patients")),
+					 Float.parseFloat(rec.get("hosp_patients_per_million").equals("")?"-1":rec.get("hosp_patients_per_million")),
+					 Float.parseFloat(rec.get("weekly_hosp_admissions").equals("")?"-1":rec.get("weekly_hosp_admissions")),
+					 Float.parseFloat(rec.get("weekly_hosp_admissions_per_million").equals("")?"-1":rec.get("weekly_hosp_admissions_per_million")),
+					 Float.parseFloat(rec.get("hospital_beds_per_thousand").equals("")?"-1":rec.get("hospital_beds_per_thousand")));
 			 
 			 Country _country = new Country(
 					 rec.get("iso_code"),
 					 rec.get("date"),
 					 rec.get("continent"),
 					 rec.get("location"),
-					 Float.parseFloat(rec.get("reproduction_rate").isEmpty()?"0":rec.get("reproduction_rate")),
-					 rec.get("tests_units").isEmpty()?"":rec.get("tests_units"),
-					 Float.parseFloat(rec.get("population_density").isEmpty()?"0":rec.get("population_density")),
-					 Float.parseFloat(rec.get("median_age").isEmpty()?"0":rec.get("median_age")),
-					 Float.parseFloat(rec.get("aged_65_older").isEmpty()?"0":rec.get("aged_65_older")),
-					 Float.parseFloat(rec.get("aged_70_older").isEmpty()?"0":rec.get("aged_70_older")),
-					 Float.parseFloat(rec.get("gdp_per_capita").isEmpty()?"0":rec.get("gdp_per_capita")),
-					 Float.parseFloat(rec.get("extreme_poverty").isEmpty()?"0":rec.get("extreme_poverty")),
-					 Float.parseFloat(rec.get("cardiovasc_death_rate").isEmpty()?"0":rec.get("cardiovasc_death_rate")),
-					 Float.parseFloat(rec.get("diabetes_prevalence").isEmpty()?"0":rec.get("diabetes_prevalence")),
-					 Float.parseFloat(rec.get("female_smokers").isEmpty()?"0":rec.get("female_smokers")),
-					 Float.parseFloat(rec.get("male_smokers").isEmpty()?"0":rec.get("male_smokers")),
-					 Float.parseFloat(rec.get("life_expectancy").isEmpty()?"0":rec.get("life_expectancy")),
-					 Float.parseFloat(rec.get("handwashing_facilities").isEmpty()?"0":rec.get("handwashing_facilities")),
-					 Float.parseFloat(rec.get("human_development_index").isEmpty()?"0":rec.get("human_development_index")),
-					 Float.parseFloat(rec.get("excess_mortality").isEmpty()?"0":rec.get("excess_mortality")),
-					 Long.parseLong(rec.get("population").isEmpty()?"0":rec.get("population")),
-					 Float.parseFloat(rec.get("positive_rate").isEmpty()?"0":rec.get("positive_rate")),
-					 Float.parseFloat(rec.get("stringency_index").isEmpty()?"0":rec.get("stringency_index")),
-					 Integer.parseInt(rec.get("people_fully_vaccinated").isEmpty()?"0":rec.get("people_fully_vaccinated")),
-					 Float.parseFloat(rec.get("people_fully_vaccinated_per_hundred").isEmpty()?"0":rec.get("people_fully_vaccinated_per_hundred")),
-					 Integer.parseInt(rec.get("people_vaccinated").isEmpty()?"0":rec.get("people_vaccinated")),
-					 Float.parseFloat(rec.get("people_vaccinated_per_hundred").isEmpty()?"0":rec.get("people_vaccinated_per_hundred")),
-					 Long.parseLong(rec.get("total_vaccinations").isEmpty()?"0":rec.get("total_vaccinations")),
-					 Float.parseFloat(rec.get("total_vaccinations_per_hundred").isEmpty()?"0":rec.get("total_vaccinations_per_hundred")),
-					 Integer.parseInt(rec.get("total_tests").isEmpty()?"0":rec.get("total_tests")),
-					 Float.parseFloat(rec.get("total_tests_per_thousand").isEmpty()?"0":rec.get("total_tests_per_thousand")),
-					 Integer.parseInt(rec.get("total_cases").isEmpty()?"0":rec.get("total_cases")),
-					 Float.parseFloat(rec.get("total_cases_per_million").isEmpty()?"0":rec.get("total_cases_per_million")),
-					 Integer.parseInt(rec.get("total_deaths").isEmpty()?"0":rec.get("total_deaths")),
-					 Float.parseFloat(rec.get("total_deaths_per_million").isEmpty()?"0":rec.get("total_deaths_per_million")));
+					 Float.parseFloat(rec.get("reproduction_rate").equals("")?"-1":rec.get("reproduction_rate")),
+					 rec.get("tests_units"),
+					 Float.parseFloat(rec.get("population_density").equals("")?"-1":rec.get("population_density")),
+					 Float.parseFloat(rec.get("median_age").equals("")?"-1":rec.get("median_age")),
+					 Float.parseFloat(rec.get("aged_65_older").equals("")?"-1":rec.get("aged_65_older")),
+					 Float.parseFloat(rec.get("aged_70_older").equals("")?"-1":rec.get("aged_70_older")),
+					 Float.parseFloat(rec.get("gdp_per_capita").equals("")?"-1":rec.get("gdp_per_capita")),
+					 Float.parseFloat(rec.get("extreme_poverty").equals("")?"-1":rec.get("extreme_poverty")),
+					 Float.parseFloat(rec.get("cardiovasc_death_rate").equals("")?"-1":rec.get("cardiovasc_death_rate")),
+					 Float.parseFloat(rec.get("diabetes_prevalence").equals("")?"-1":rec.get("diabetes_prevalence")),
+					 Float.parseFloat(rec.get("female_smokers").equals("")?"-1":rec.get("female_smokers")),
+					 Float.parseFloat(rec.get("male_smokers").equals("")?"-1":rec.get("male_smokers")),
+					 Float.parseFloat(rec.get("life_expectancy").equals("")?"-1":rec.get("life_expectancy")),
+					 Float.parseFloat(rec.get("handwashing_facilities").equals("")?"-1":rec.get("handwashing_facilities")),
+					 Float.parseFloat(rec.get("human_development_index").equals("")?"-1":rec.get("human_development_index")),
+					 Float.parseFloat(rec.get("excess_mortality").equals("")?"-1":rec.get("excess_mortality")),
+					 Long.parseLong(rec.get("population").equals("")?"-1":rec.get("population")),
+					 Float.parseFloat(rec.get("positive_rate").equals("")?"-1":rec.get("positive_rate")),
+					 Float.parseFloat(rec.get("stringency_index").equals("")?"-1":rec.get("stringency_index")),
+					 Integer.parseInt(rec.get("people_fully_vaccinated").equals("")?"-1":rec.get("people_fully_vaccinated")),
+					 Float.parseFloat(rec.get("people_fully_vaccinated_per_hundred").equals("")?"-1":rec.get("people_fully_vaccinated_per_hundred")),
+					 Integer.parseInt(rec.get("people_vaccinated").equals("")?"-1":rec.get("people_vaccinated")),
+					 Float.parseFloat(rec.get("people_vaccinated_per_hundred").equals("")?"-1":rec.get("people_vaccinated_per_hundred")),
+					 Long.parseLong(rec.get("total_vaccinations").equals("")?"-1":rec.get("total_vaccinations")),
+					 Float.parseFloat(rec.get("total_vaccinations_per_hundred").equals("")?"-1":rec.get("total_vaccinations_per_hundred")),
+					 Integer.parseInt(rec.get("total_tests").equals("")?"-1":rec.get("total_tests")),
+					 Float.parseFloat(rec.get("total_tests_per_thousand").equals("")?"-1":rec.get("total_tests_per_thousand")),
+					 Integer.parseInt(rec.get("total_cases").equals("")?"-1":rec.get("total_cases")),
+					 Float.parseFloat(rec.get("total_cases_per_million").equals("")?"-1":rec.get("total_cases_per_million")),
+					 Integer.parseInt(rec.get("total_deaths").equals("")?"-1":rec.get("total_deaths")),
+					 Float.parseFloat(rec.get("total_deaths_per_million").equals("")?"-1":rec.get("total_deaths_per_million")));
 			 
 			 cases.add(_case);
 			 countries.add(_country);
