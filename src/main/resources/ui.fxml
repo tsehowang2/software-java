@@ -46,9 +46,9 @@
                               <Button fx:id="generateC1" layoutX="235.0" layoutY="283.0" mnemonicParsing="false" onAction="#generateTableC1" text="GenerateC1" />
                               <TableView fx:id="table" layoutX="15.0" layoutY="373.0" prefHeight="293.0" prefWidth="687.0">
                                 <columns>
-                                  <TableColumn fx:id="country" prefWidth="215.99996948242188" />
-                                  <TableColumn fx:id="table_output1" prefWidth="217.9999542236328" />
-                                    <TableColumn fx:id="table_output2" prefWidth="251.33334350585938" />
+                                  <TableColumn fx:id="country" prefWidth="215.99996948242188" text="Country" />
+                                  <TableColumn fx:id="table_output1" prefWidth="217.9999542236328" text="Total Cases" />
+                                    <TableColumn fx:id="table_output2" prefWidth="251.33334350585938" text="Total Cases (per 1M)" />
                                 </columns>
                               </TableView>
                               <Label fx:id="table_label" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="340.0" prefHeight="25.0" prefWidth="691.0" text="Number of Confirmed COVID-19 Cases as of [Date of Interest]" textAlignment="CENTER">

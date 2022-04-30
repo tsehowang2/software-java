@@ -220,21 +220,24 @@ public class Controller {
     	textAreaConsole.appendText( "\n" + "Generating Table for task A"+ "\n");
     	*/
     	textAreaConsole.appendText("\n");
+    	ObservableList<TableResult> countryView = FXCollections.observableArrayList();
     	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
     		
         	textAreaConsole.appendText( countryList.get(i) + " " + DataAnalysis.retrieveTotalCases(countryList.get(i), date) + " " + 
         			DataAnalysis.retrieveTotalCasesPer1M(countryList.get(i), date) + "\n");
+        	countryView.add(new TableResult(countryList.get(i), DataAnalysis.retrieveTotalCases(countryList.get(i), date), DataAnalysis.retrieveTotalCasesPer1M(countryList.get(i), date)));
     	}
     	textAreaConsole.appendText( "World \n" );
+    	table.setItems(countryView);
     	country.setCellValueFactory(new PropertyValueFactory<TableResult, String>("Country"));
     	table_output1.setCellValueFactory(new PropertyValueFactory<TableResult, Integer>("Total Cases"));
     	table_output2.setCellValueFactory(new PropertyValueFactory<TableResult, Float>("Total Cases (per 1M)"));
-    	table.getColumns().setAll(country, table_output1, table_output2);
+    	//table.getColumns().setAll(country, table_output1, table_output2);
     	//country.setCellValueFactory(new PropertyValueFactory<TableResult, String>("Country"));
     	//table_output1.setCellValueFactory(new PropertyValueFactory<TableResult, Integer>("Total Cases"));
     	//table_output2.setCellValueFactory(new PropertyValueFactory<TableResult, Float>("Total Cases (per 1M)"));
-    	
-    	table.setItems(getTableResult(countryList, date));
+
+    	//table.setItems(getTableResult(countryList, date));
     } 
     
     public ObservableList<TableResult> getTableResult(ObservableList<String> countryList, String date)
