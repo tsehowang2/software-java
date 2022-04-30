@@ -29,9 +29,11 @@ public class DataAnalysis {
 		     System.out.println ( "ld: " + ld );
 		     return true;
 		 } catch ( DateTimeParseException e ) {
-		     System.out.println ( "ERROR: " + e );
+			 
+		     System.out.println ( "ERROR1234: " + e );
 		 }
 		 return false;
+		 //testforterry
 	 }
 	 
 	public static CSVParser getFileParser(String dataset) {
