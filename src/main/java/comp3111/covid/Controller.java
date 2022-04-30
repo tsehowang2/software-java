@@ -4,10 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -77,7 +79,16 @@ public class Controller {
     private Label table_label;
     
     @FXML
-    private TableView<?> table;
+    private TableView<TableResult> table;
+    
+    @FXML
+    private TableColumn<TableResult, String> country;
+    
+    @FXML
+    private TableColumn<TableResult, Integer> table_output1;
+
+    @FXML
+    private TableColumn<TableResult, Float> table_output2;
     
     @FXML
     private Label chart_label;
@@ -144,6 +155,42 @@ public class Controller {
     	initialize();
     }
     
+    public class TableResult {
+    	private String tableCountryName;
+    	private int tableOutput1;
+    	private float tableOutput2;
+    	
+    	public TableResult(String tableCountryName, int tableOutput1, float tableOutput2) {
+    		this.setTableCountryName(tableCountryName);
+    		this.setTableOutput1(tableOutput1);
+    		this.setTableOutput2(tableOutput2);
+    	}
+    	
+    	public String getTableCountryName() {
+    		return tableCountryName;
+    	}
+
+    	public void setTableCountryName(String tableCountryName) {
+    		this.tableCountryName = tableCountryName;
+    	}
+
+    	public int getTableOutput1() {
+    		return tableOutput1;
+    	}
+
+    	public void setTableOutput1(int tableOutput1) {
+    		this.tableOutput1 = tableOutput1;
+    	}
+    	
+    	public float getTableOutput2() {
+    		return tableOutput2;
+    	}
+
+    	public void setTableOutput2(float tableOutput2) {
+    		this.tableOutput2 = tableOutput2;
+    	}
+    }
+    
     private 
 
     @FXML
@@ -179,9 +226,25 @@ public class Controller {
         			DataAnalysis.retrieveTotalCasesPer1M(countryList.get(i), date) + "\n");
     	}
     	textAreaConsole.appendText( "World \n" );
+    	country.setCellValueFactory(new PropertyValueFactory<TableResult, String>("Country"));
+    	table_output1.setCellValueFactory(new PropertyValueFactory<TableResult, Integer>("Total Cases"));
+    	table_output2.setCellValueFactory(new PropertyValueFactory<TableResult, Float>("Total Cases (per 1M)"));
+    	table.getColumns().setAll(country, table_output1, table_output2);
+    	//country.setCellValueFactory(new PropertyValueFactory<TableResult, String>("Country"));
+    	//table_output1.setCellValueFactory(new PropertyValueFactory<TableResult, Integer>("Total Cases"));
+    	//table_output2.setCellValueFactory(new PropertyValueFactory<TableResult, Float>("Total Cases (per 1M)"));
     	
-    	
+    	table.setItems(getTableResult(countryList, date));
     } 
+    
+    public ObservableList<TableResult> getTableResult(ObservableList<String> countryList, String date)
+    {
+    	ObservableList<TableResult> country = FXCollections.observableArrayList();
+    	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
+    		country.add(new TableResult(countryList.get(i), DataAnalysis.retrieveTotalCases(countryList.get(i), date), DataAnalysis.retrieveTotalCasesPer1M(countryList.get(i), date)));
+    	}
+    	return country;
+    }
 
     @FXML
     void generateTableB1(ActionEvent event) {
