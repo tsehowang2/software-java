@@ -276,7 +276,6 @@ public class Controller {
 
     @FXML
     void generateTableB1(ActionEvent event) {
-    	//textAreaConsole.clear();
     	String date;
     	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
     		textAreaConsole.appendText("\nPlease Enter a Date" + "\n");
@@ -288,15 +287,9 @@ public class Controller {
     			textAreaConsole.appendText("\nPlease Enter a VALID Date" + "\n");
     			return;
     		}
-        	//dateEntry.clear();
     	}
     	
 		ObservableList<TableResult> countryView = FXCollections.observableArrayList();
-
-    	//textAreaConsole.appendText("\n");
-    	//textAreaConsole.appendText("Number of Confirmed COVID-19 Cases as of " + date + "\n");
-    	//textAreaConsole.appendText( "Country - Total Cases - Total Cases (per 1M)" + "\n");
-    	
     	int info1;
     	float info2;
     	String use1;
@@ -319,11 +312,9 @@ public class Controller {
     			use2 = "NaN";
     		}
     		
-    		//textAreaConsole.appendText( countryList.get(i) + " " + use1 + " " + use2 + "\n");
         	countryView.add(new TableResult(countryList.get(i), use1, use2));
     	}
     	
-    	//textAreaConsole.appendText( "World " + DataAnalysis.retrieveTotalCases("World", date) + " " + DataAnalysis.retrieveTotalCasesPer1M("World", date));
     	
     	use1 = Integer.toString(DataAnalysis.retrieveTotal_deaths("World", date));
     	use2 = Float.toString(DataAnalysis.retrieveTotalDeathsPer1M("World", date));
@@ -343,9 +334,6 @@ public class Controller {
 
     @FXML
     void generateTableC1(ActionEvent event) {
-
-    	//textAreaConsole.clear();
-
     	String date;
     	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
     		textAreaConsole.appendText("\nPlease Enter a Date" + "\n");
@@ -357,42 +345,52 @@ public class Controller {
     			textAreaConsole.appendText("\nPlease Enter a VALID Date" + "\n");
     			return;
     		}
-        	//dateEntry.clear();
     	}
     	
-    	textAreaConsole.appendText("\n");
-    	textAreaConsole.appendText("Rate of Vaccination against COVID-19 as of " + date + "\n");
-    	textAreaConsole.appendText("Country - Fully Vaccinated - Rate of Vaccination" + "\n");
+		ObservableList<TableResult> countryView = FXCollections.observableArrayList();
+
     	int info1;
     	float info2;
+    	String use1;
+    	String use2;
     	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
     		info1 = DataAnalysis.retrieveFullyVaccinated(countryList.get(i), date);
     		info2 = DataAnalysis.retrieveRateOfVaccination(countryList.get(i), date);
         	
-    		textAreaConsole.appendText( countryList.get(i) + " ");
     		
     		if (info1 != -1) {
-    			textAreaConsole.appendText(info1 + " "); 
+    			use1 = Integer.toString(info1);
     		} 
     		else {
-    			textAreaConsole.appendText("NaN ");
+    			use1 = "NaN";
     		}
     		if (info2 != -1) {
-    			textAreaConsole.appendText(info2 + " "); 
+    			use2 = Float.toString(info2);
     		} 
     		else {
-    			textAreaConsole.appendText("NaN ");
+    			use2 = "NaN";
     		}
     		
-        	textAreaConsole.appendText("\n");
+    		//textAreaConsole.appendText( countryList.get(i) + " " + use1 + " " + use2 + "\n");
+        	countryView.add(new TableResult(countryList.get(i), use1, use2));
     	}
-    	textAreaConsole.appendText( "World " + DataAnalysis.retrieveFullyVaccinated("World", date) + " " +
-   			 + DataAnalysis.retrieveFullyVaccinated("World", date));
+    	    	
+    	use1 = Integer.toString(DataAnalysis.retrieveFullyVaccinated("World", date));
+    	use2 = Float.toString(DataAnalysis.retrieveRateOfVaccination("World", date));
+    	countryView.add(new TableResult("World", use1, use2));
+
     	
-    	textAreaConsole.appendText("\n");
-
-
+		table_label.setText("Rate of Vaccination against COVID-19 as of " + date);
+		country.setText("Country");
+		country.setCellValueFactory(new PropertyValueFactory<TableResult, String>("tableCountryName"));
+		table_output1.setText("Fully Vaccinated");
+		table_output1.setCellValueFactory(new PropertyValueFactory<TableResult, String>("tableOutput1"));
+		table_output2.setText("Rate of Vaccination");
+		table_output2.setCellValueFactory(new PropertyValueFactory<TableResult, String>("tableOutput2"));
+		table.setItems(countryView);
+		
     } 
+    
     @FXML
     void generateTableA2(ActionEvent event) {
     	//textAreaConsole.clear();
