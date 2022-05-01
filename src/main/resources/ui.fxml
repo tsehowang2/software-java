@@ -68,10 +68,10 @@
                               <TextArea fx:id="textAreaConsole2" editable="false" layoutX="349.0" layoutY="14.0" prefHeight="294.0" prefWidth="355.0" text="This tab will generate tables showing information regarding COVID-19 cases by country and date.&#10;&#10;To generate a table please:&#10;Select the countries of interest (use ctrl+left click to select multiple)&#10;&#10;Enter the state and end dates in &quot;mm/dd/yyyy&quot; format&#10;&#10;Then depending on desired table, click Button:&#10;GenerateA1 for Confirmed Cases&#10;GenerateA2 for Confirmed Deaths&#10;GenerateA3 for Rate of Vaccination &#10;&#10;Output in text:&#10;" wrapText="true" />
                               <ListView fx:id="countryEntry2" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="300.0" />
                               <TextField fx:id="dateEntry2" layoutX="14.0" layoutY="234.0" prefHeight="26.0" prefWidth="130.0" />
+                              <TextField fx:id="dateEntry3" layoutX="183.0" layoutY="234.0" prefHeight="26.0" prefWidth="130.0" />
                               <Button fx:id="generateA2" layoutX="14.0" layoutY="283.0" mnemonicParsing="false" onAction="#generateTableA2" text="GenerateA2" />
                               <Button fx:id="generateB2" layoutX="125.0" layoutY="283.0" mnemonicParsing="false" onAction="#generateTableB2" text="GenerateB2" />
                               <Button fx:id="generateC2" layoutX="235.0" layoutY="283.0" mnemonicParsing="false" onAction="#generateTableC2" text="GenerateC2" />
-                              <TextField fx:id="dateEntry3" layoutX="183.0" layoutY="234.0" prefHeight="26.0" prefWidth="130.0" />
                               <LineChart fx:id="chart" layoutX="14.0" layoutY="352.0" prefHeight="291.0" prefWidth="684.0">
                                 <xAxis>
                                   <CategoryAxis side="BOTTOM" />

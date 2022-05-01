@@ -422,31 +422,19 @@ public class Controller {
     	
     	float info1;
     	float info2;
+    	
+    	ArrayList<Float> data;
     	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
-    		info1 = DataAnalysis.retrieveTotalCasesPer1M(countryList.get(i), startdate);
-    		info2 = DataAnalysis.retrieveTotalCasesPer1M(countryList.get(i), enddate);
+        	textAreaConsole2.appendText(countryList.get(i) + " ");
         	
-    		textAreaConsole2.appendText( countryList.get(i) + " ");
-    		
-    		if (info1 != -1) {
-    			textAreaConsole2.appendText(info1 + " "); 
-    		} 
-    		else {
-    			textAreaConsole2.appendText("NaN ");
+    		data = DataAnalysis.retrieveTotalCasesList(countryList.get(i),startdate,enddate);
+    		for (int j = 0; j < data.size(); j++) {
+    			textAreaConsole2.appendText(Float.toString(data.get(j)) + " ");
     		}
-    		if (info2 != -1) {
-    			textAreaConsole2.appendText(info2 + " "); 
-    		} 
-    		else {
-    			textAreaConsole2.appendText("NaN ");
-    		}
-    		
-        	textAreaConsole2.appendText("\n");
-
+    		textAreaConsole2.appendText(" \n");
     	}
 
-    	textAreaConsole2.appendText( "World " + DataAnalysis.retrieveTotalCasesPer1M("World", startdate) + " " +
-      			 + DataAnalysis.retrieveTotalCasesPer1M("World", enddate));
+    	//textAreaConsole2.appendText( "World " + DataAnalysis.retrieveTotalCasesPer1M("World", startdate) + " " + DataAnalysis.retrieveTotalCasesPer1M("World", enddate));
     	
 
     } 

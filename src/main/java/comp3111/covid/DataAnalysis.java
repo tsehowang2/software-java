@@ -290,25 +290,23 @@ public class DataAnalysis {
 		return rate;
 	 }
 	 
-	 public static ArrayList<Integer> retrieveTotalCasesList(String country, String startDate, String endDate) {
-		 ArrayList<Integer> totalCases = new ArrayList<Integer>();
-		 int i = 0;
-		 while (countries.size() > i) {
-			 if(countries.get(i).getLocation().equals(country)) {
-				if(countries.get(i).getDate().equals(startDate)) {
-					int j = 0;
-					while(!countries.get(i+j).getDate().equals(endDate)) {
-						totalCases.add(countries.get(i+j).getTotal_cases());
-						j++;
-					}
-					break;
-				}
-			 }
-			 i++;
-	      }
-		 return totalCases;
-	 }
-	 
+
+     public static ArrayList<Float> retrieveTotalCasesList(String country, String startDate, String endDate) {
+         ArrayList<Float> totalCases = new ArrayList<Float>();
+         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/uuuu");
+         LocalDate _startDate = LocalDate.parse(startDate, formatter);
+         LocalDate _endDate = LocalDate.parse(endDate, formatter);
+          
+        for(Country row : countries) {
+            if(row.getLocation().equals(country)) {
+                 LocalDate rowDate = LocalDate.parse(row.getDate(), formatter);
+                 if((rowDate.isAfter(_startDate) && rowDate.isBefore(_endDate)) || rowDate.isEqual(_startDate) || rowDate.isEqual(_endDate)) {
+                     totalCases.add(row.getTotal_cases_per_million());
+                 }
+             }
+          }
+         return totalCases;
+     }
 	 
 	 public static void setClass(String dataset) {
 		 
