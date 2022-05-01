@@ -143,6 +143,7 @@ public class DataAnalysis {
 					 	total_cases = row.getTotal_cases();
 					 }
 				 }
+			 break;
 		 }
 		 return total_cases;
 	 }
@@ -151,7 +152,6 @@ public class DataAnalysis {
 		 int total_cases = 0;
 		 for(Country row : countries) {
 			 if(row.getDate().equals(date)) {
-				 
 				 total_cases += (row.getTotal_cases()==-1?0:row.getTotal_cases());
 				 }
 			 }
@@ -166,6 +166,7 @@ public class DataAnalysis {
 					 total_cases_per_million = row.getTotal_cases_per_million();
 					 }
 				 }
+			 break;
 		 }
 		return total_cases_per_million;
 	 }
@@ -188,6 +189,7 @@ public class DataAnalysis {
 					 total_deaths = row.getTotal_deaths();
 					 }
 				 }
+			 break;
 		 }
 		return total_deaths;
 	 }
@@ -210,6 +212,7 @@ public class DataAnalysis {
 					 total_deaths_per_million = row.getTotal_deaths_per_million();
 					 }
 				 }
+			 break;
 		 }
 		return total_deaths_per_million;
 	 }
@@ -234,6 +237,7 @@ public class DataAnalysis {
 					 haveData = true;
 					 }
 				 }
+			 break;
 		 }
 		return haveData?people_fully_vaccinated:-1;
 	 }
@@ -260,14 +264,15 @@ public class DataAnalysis {
 					 haveData = true;
 					 }
 				 }
+			 break;
 		 }
+		 
 		 if (haveData && people_fully_vaccinated != -1) {
 			 rate = people_fully_vaccinated / population * 100;
 		 }
 		 else {
 			 rate = -1;
 		 }
-
 		return rate;
 	 }
 	 
@@ -284,6 +289,26 @@ public class DataAnalysis {
 		 rate = people_fully_vaccinated / population * 100;
 		return rate;
 	 }
+	 
+	 public static ArrayList<Integer> retrieveTotalCasesList(String country, String startDate, String endDate) {
+		 ArrayList<Integer> totalCases = new ArrayList<Integer>();
+		 int i = 0;
+		 while (countries.size() > i) {
+			 if(countries.get(i).getLocation().equals(country)) {
+				if(countries.get(i).getDate().equals(startDate)) {
+					int j = 0;
+					while(!countries.get(i+j).getDate().equals(endDate)) {
+						totalCases.add(countries.get(i+j).getTotal_cases());
+						j++;
+					}
+					break;
+				}
+			 }
+			 i++;
+	      }
+		 return totalCases;
+	 }
+	 
 	 
 	 public static void setClass(String dataset) {
 		 
