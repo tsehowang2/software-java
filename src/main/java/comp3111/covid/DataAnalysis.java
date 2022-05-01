@@ -14,13 +14,10 @@ import edu.duke.*;
  * @version	1.1
  * 
  */
-
 public class DataAnalysis {
 	
 	 static List<Case> cases = new ArrayList<Case>();
 	 static List<Country> countries = new ArrayList<Country>();
-	 
-	 
 	 public static boolean isValidDate(String input) {
 		 //String input = "31/02/2000";
 		 DateTimeFormatter f = DateTimeFormatter.ofPattern ( "M/d/uuuu" );
@@ -146,6 +143,7 @@ public class DataAnalysis {
 					 	total_cases = row.getTotal_cases();
 					 }
 				 }
+			 break;
 		 }
 		 return total_cases;
 	 }
@@ -154,7 +152,6 @@ public class DataAnalysis {
 		 int total_cases = 0;
 		 for(Country row : countries) {
 			 if(row.getDate().equals(date)) {
-				 
 				 total_cases += (row.getTotal_cases()==-1?0:row.getTotal_cases());
 				 }
 			 }
@@ -169,6 +166,7 @@ public class DataAnalysis {
 					 total_cases_per_million = row.getTotal_cases_per_million();
 					 }
 				 }
+			 break;
 		 }
 		return total_cases_per_million;
 	 }
@@ -191,6 +189,7 @@ public class DataAnalysis {
 					 total_deaths = row.getTotal_deaths();
 					 }
 				 }
+			 break;
 		 }
 		return total_deaths;
 	 }
@@ -213,6 +212,7 @@ public class DataAnalysis {
 					 total_deaths_per_million = row.getTotal_deaths_per_million();
 					 }
 				 }
+			 break;
 		 }
 		return total_deaths_per_million;
 	 }
@@ -229,15 +229,17 @@ public class DataAnalysis {
 	 
 	 public static int retrieveFullyVaccinated(String country, String date) {
 		 int people_fully_vaccinated = 0;
+		 boolean haveData = false;
 		 for(Country row : countries) {
 			 if(row.getLocation().equals(country)) {
 				 if(row.getDate().equals(date)) {
-					 people_fully_vaccinated = (row.getPeople_fully_vaccinated()==-1?0:row.getPeople_fully_vaccinated());
+					 people_fully_vaccinated = row.getPeople_fully_vaccinated();
+					 haveData = true;
 					 }
 				 }
+			 break;
 		 }
-		 
-		return people_fully_vaccinated;
+		return haveData?people_fully_vaccinated:-1;
 	 }
 	 
 	 public static int retrieveWorldFullyVaccinated(String date) {
@@ -253,15 +255,24 @@ public class DataAnalysis {
 	 public static float retrieveRateOfVaccination(String country, String date) {
 		 float rate = 0;
 		 float population = 0;
+		 boolean haveData = false;
 		 int people_fully_vaccinated = retrieveFullyVaccinated(country, date);
 		 for(Country row : countries) {
 			 if(row.getLocation().equals(country)) {
 				 if(row.getDate().equals(date)) {
 					 population = row.getPopulation();
+					 haveData = true;
 					 }
 				 }
+			 break;
 		 }
-		 rate = people_fully_vaccinated / population * 100;
+		 
+		 if (haveData && people_fully_vaccinated != -1) {
+			 rate = people_fully_vaccinated / population * 100;
+		 }
+		 else {
+			 rate = -1;
+		 }
 		return rate;
 	 }
 	 
@@ -270,15 +281,34 @@ public class DataAnalysis {
 		 float population = 0;
 		 int people_fully_vaccinated = 0;
 		 for(Country row : countries) {
-				 if(row.getDate().equals(date)) {
-					 people_fully_vaccinated += retrieveFullyVaccinated(row.getLocation(), date);
-					 population += row.getPopulation();
-					 }
+			 if(row.getDate().equals(date) && !(row.getContinent().equals(""))) {
+				 people_fully_vaccinated += retrieveFullyVaccinated(row.getLocation(), date);
+				 population += row.getPopulation();
 				 }
+			 }
 		 rate = people_fully_vaccinated / population * 100;
-		 System.out.println(people_fully_vaccinated + "  " + population);
 		return rate;
 	 }
+	 
+	 public static ArrayList<Integer> retrieveTotalCasesList(String country, String startDate, String endDate) {
+		 ArrayList<Integer> totalCases = new ArrayList<Integer>();
+		 int i = 0;
+		 while (countries.size() > i) {
+			 if(countries.get(i).getLocation().equals(country)) {
+				if(countries.get(i).getDate().equals(startDate)) {
+					int j = 0;
+					while(!countries.get(i+j).getDate().equals(endDate)) {
+						totalCases.add(countries.get(i+j).getTotal_cases());
+						j++;
+					}
+					break;
+				}
+			 }
+			 i++;
+	      }
+		 return totalCases;
+	 }
+	 
 	 
 	 public static void setClass(String dataset) {
 		 
@@ -315,7 +345,7 @@ public class DataAnalysis {
 			 Country _country = new Country(
 					 rec.get("iso_code"),
 					 rec.get("date"),
-					 rec.get("continent"),
+					 rec.get("continent").equals("")?"":rec.get("continent"),
 					 rec.get("location"),
 					 Float.parseFloat(rec.get("reproduction_rate").equals("")?"-1":rec.get("reproduction_rate")),
 					 rec.get("tests_units"),
