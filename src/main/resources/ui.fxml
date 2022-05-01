@@ -38,7 +38,7 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="605.0" prefWidth="719.0">
                            <children>
                               <Label layoutX="79.0" layoutY="44.0" />
-                              <TextArea fx:id="textAreaConsole" editable="false" layoutX="349.0" layoutY="14.0" prefHeight="294.0" prefWidth="355.0" text="This tab will generate data tables showing the number of confirmed COVID-19 cases by country&#10;&#10;To generate a table please:&#10;Select the countries of interest (use ctrl+left click to select multiple)&#10;Enter the date of interest in &quot;mm/dd/yyyy&quot; format&#10;Click generate &#10;&#10;Output in text:" wrapText="true" />
+                              <TextArea fx:id="textAreaConsole" editable="false" layoutX="349.0" layoutY="14.0" prefHeight="294.0" prefWidth="355.0" text="This tab will generate data tables showingregarding information COVID-19 cases by country and date.&#10;&#10;To generate a table please:&#10;Select the countries of interest (use ctrl+left click to select multiple)&#10;&#10;Enter the date of interest in &quot;mm/dd/yyyy&quot; format&#10;&#10;Click Button:&#10;GenerateA1 for &#10;GenerateA2 for &#10;GenerateA3 for &#10;&#10;Output in text:" wrapText="true" />
                               <ListView fx:id="countryEntry" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="300.0" />
                               <TextField fx:id="dateEntry" layoutX="14.0" layoutY="238.0" prefHeight="26.0" prefWidth="300.0" />
                               <Button fx:id="generateA1" layoutX="14.0" layoutY="283.0" mnemonicParsing="false" onAction="#generateTableA1" text="GenerateA1" />
@@ -64,9 +64,9 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="412.0" prefWidth="719.0">
                            <children>
                               <Label />
-                              <TextArea fx:id="textAreaConsole2" editable="false" layoutX="349.0" layoutY="13.0" prefHeight="294.0" prefWidth="355.0" text="This tab will generate data tables showing the number of confirmed COVID-19 cases by country&#10;&#10;To generate a table please:&#10;Select the countries of interest (use ctrl+left click to select multiple)&#10;Enter the date of interest in &quot;mm/dd/yyyy&quot; format&#10;Click generate &#10;&#10;Output in text:" wrapText="true" />
-                              <ListView fx:id="countryEntry2" layoutX="14.0" layoutY="18.0" prefHeight="200.0" prefWidth="300.0" />
-                              <TextField fx:id="dateEntry2" layoutX="14.0" layoutY="233.0" prefHeight="26.0" prefWidth="300.0" />
+                              <TextArea fx:id="textAreaConsole2" editable="false" layoutX="349.0" layoutY="14.0" prefHeight="294.0" prefWidth="355.0" text="This tab will generate data tables showing the number of confirmed COVID-19 cases by country&#10;&#10;To generate a table please:&#10;Select the countries of interest (use ctrl+left click to select multiple)&#10;Enter the date of interest in &quot;mm/dd/yyyy&quot; format&#10;Click generate &#10;&#10;Output in text:" wrapText="true" />
+                              <ListView fx:id="countryEntry2" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="300.0" />
+                              <TextField fx:id="dateEntry2" layoutX="14.0" layoutY="228.0" prefHeight="26.0" prefWidth="130.0" />
                               <Button fx:id="generateA2" layoutX="14.0" layoutY="274.0" mnemonicParsing="false" onAction="#generateTableA2" text="GenerateA2" />
                               <Button fx:id="generateB2" layoutX="125.0" layoutY="274.0" mnemonicParsing="false" onAction="#generateTableB2" text="GenerateB2" />
                               <Button fx:id="generateC2" layoutX="235.0" layoutY="274.0" mnemonicParsing="false" onAction="#generateTableC2" text="GenerateC2" />
@@ -79,6 +79,7 @@
                                 </yAxis>
                               </LineChart>
                               <Label fx:id="chart_label" layoutX="32.0" layoutY="328.0" prefHeight="33.0" prefWidth="671.0" />
+                              <TextField fx:id="dateEntry3" layoutX="183.0" layoutY="228.0" prefHeight="26.0" prefWidth="130.0" />
                            </children>
                         </AnchorPane>
                     </content>
