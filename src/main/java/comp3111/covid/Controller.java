@@ -219,11 +219,13 @@ public class Controller {
     		}
         	//dateEntry.clear();
     	}
+    	
 		ObservableList<TableResult> countryView = FXCollections.observableArrayList();
 
     	textAreaConsole.appendText("\n");
     	textAreaConsole.appendText("Number of Confirmed COVID-19 Cases as of " + date + "\n");
     	textAreaConsole.appendText( "Country - Total Cases - Total Cases (per 1M)" + "\n");
+    	
     	int info1;
     	float info2;
     	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
@@ -378,28 +380,59 @@ public class Controller {
     @FXML
     void generateTableA2(ActionEvent event) {
     	//textAreaConsole.clear();
-
+    	
     	String startdate;
     	String enddate;
-    	if (dateEntry2.getText() == null || dateEntry2.getText().trim().isEmpty()) {
-    		textAreaConsole2.appendText("Please Enter a Date" + "\n");
+    	if (dateEntry2.getText() == null || dateEntry2.getText().trim().isEmpty() || dateEntry3.getText() == null || dateEntry3.getText().trim().isEmpty()) {
+    		textAreaConsole2.appendText("Please Enter Dates" + "\n");
     		return;
-    	}
-    	else if (false) {
-    		
     	}
     	else {
     		startdate = dateEntry2.getText();
+    		if (DataAnalysis.isValidDate(startdate) == false) {
+    			textAreaConsole.appendText("\nPlease Enter a VALID Date" + "\n");
+    			return;
+    		}
     		enddate = dateEntry3.getText();
+    		if (DataAnalysis.isValidDate(enddate) == false) {
+    			textAreaConsole.appendText("\nPlease Enter a VALID Date" + "\n");
+    			return;
+    		}
         	//dateEntry.clear();
     	}
+    	
+    	
 
     	textAreaConsole2.appendText("\n");
+    	textAreaConsole2.appendText("Cumulative Confirmed COVID-19 Cases (per 1M)\n");
+    	
+    	float info1;
+    	float info2;
     	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
+    		info1 = DataAnalysis.retrieveTotalCasesPer1M(countryList.get(i), startdate);
+    		info2 = DataAnalysis.retrieveTotalCasesPer1M(countryList.get(i), enddate);
+        	
+    		textAreaConsole2.appendText( countryList.get(i) + " ");
     		
-        	textAreaConsole2.appendText( countryList2.get(i) + " from " + startdate + " to " + enddate + "\n");
+    		if (info1 != -1) {
+    			textAreaConsole2.appendText(info1 + " "); 
+    		} 
+    		else {
+    			textAreaConsole2.appendText("NaN ");
+    		}
+    		if (info2 != -1) {
+    			textAreaConsole2.appendText(info2 + " "); 
+    		} 
+    		else {
+    			textAreaConsole2.appendText("NaN ");
+    		}
+    		
+        	textAreaConsole2.appendText("\n");
+
     	}
-    	textAreaConsole2.appendText( "World \n" );
+
+    	textAreaConsole2.appendText( "World " + DataAnalysis.retrieveTotalCasesPer1M("World", startdate) + " " +
+      			 + DataAnalysis.retrieveTotalCasesPer1M("World", enddate));
     	
 
     } 
