@@ -291,21 +291,67 @@ public class DataAnalysis {
 		return rate;
 	 }
 	 
-	 public static ArrayList<Integer> retrieveTotalCasesList(String country, String startDate, String endDate) {
-		 ArrayList<Integer> totalCases = new ArrayList<Integer>();
+	 public static ArrayList<Float> retrieveTotalCasesList(String country, String startDate, String endDate) {
+		 ArrayList<Float> totalCases = new ArrayList<Float>();
 		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/uuuu");
 		 LocalDate _startDate = LocalDate.parse(startDate, formatter);
 		 LocalDate _endDate = LocalDate.parse(endDate, formatter);
 		  
 		for(Country row : countries) {
 			if(row.getLocation().equals(country)) {
-				 LocalDate currDate = LocalDate.parse(row.getDate(), formatter);
-				 if(_startDate.isAfter(currDate) && _startDate.isBefore(_endDate)) {
-					 totalCases.add(row.getTotal_cases());
+				 LocalDate rowDate = LocalDate.parse(row.getDate(), formatter);
+				 if(rowDate.isAfter(_startDate) && rowDate.isBefore(_endDate) || rowDate.isEqual(_endDate) || rowDate.isEqual(_startDate)) {
+					 totalCases.add(row.getTotal_cases_per_million());
 				 }
 			 }
 	      }
 		 return totalCases;
+	 }
+	 
+	 public static ArrayList<Float> retrieveTotalDeathList(String country, String startDate, String endDate) {
+		 ArrayList<Float> totalDeaths = new ArrayList<Float>();
+		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/uuuu");
+		 LocalDate _startDate = LocalDate.parse(startDate, formatter);
+		 LocalDate _endDate = LocalDate.parse(endDate, formatter);
+		  
+		for(Country row : countries) {
+			if(row.getLocation().equals(country)) {
+				 LocalDate rowDate = LocalDate.parse(row.getDate(), formatter);
+				 if(rowDate.isAfter(_startDate) && rowDate.isBefore(_endDate) || rowDate.isEqual(_endDate) || rowDate.isEqual(_startDate)) {
+					 totalDeaths.add(row.getTotal_deaths_per_million());
+				 }
+			 }
+	      }
+		 return totalDeaths;
+	 }
+	 
+	 public static ArrayList<Float> retrieveRateOfVaccinationList(String country, String startDate, String endDate) {
+		 ArrayList<Float> rate = new ArrayList<Float>();
+		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/uuuu");
+		 LocalDate _startDate = LocalDate.parse(startDate, formatter);
+		 LocalDate _endDate = LocalDate.parse(endDate, formatter);
+		 
+		 float population = -1;
+		 int people_fully_vaccinated = -1;
+		 for(Country row : countries) {
+			 if(row.getLocation().equals(country)) {
+				 LocalDate rowDate = LocalDate.parse(row.getDate(), formatter);
+				 if(rowDate.isAfter(_startDate) && rowDate.isBefore(_endDate) || rowDate.isEqual(_endDate) || rowDate.isEqual(_startDate)) {
+					 people_fully_vaccinated = row.getPeople_fully_vaccinated();
+					 }
+				 population = row.getPopulation();
+				 }
+			 if(population != -1 && people_fully_vaccinated != -1) {
+				 rate.add(people_fully_vaccinated / population * 100);
+			 }
+			 else {
+				 if(rate.isEmpty()) {
+					 rate.add((float)0);
+				 }
+				 rate.add(rate.get(rate.size() - 1));
+			 }
+		 }
+		return rate;
 	 }
 	 
 	 
