@@ -139,7 +139,8 @@ public class Controller {
     @FXML
     void generateTableA1(ActionEvent event) {
     	//textAreaConsole.clear();
-
+    	//textAreaConsole.appendText(null);
+    	
     	String date;
     	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
     		textAreaConsole.appendText("\nPlease Enter a Date" + "\n");
@@ -180,11 +181,14 @@ public class Controller {
     		
         	textAreaConsole.appendText("\n");
     	}
-    	textAreaConsole.appendText( "World " + DataAnalysis.retrieveWorldTotalCasesWorld(date) + " " +
-    			 + DataAnalysis.retrieveWorldTotalCasesPer1M(date));
+    	
+    	textAreaConsole.appendText( "World " + DataAnalysis.retrieveTotalCases("World", date) + " " +
+    			 + DataAnalysis.retrieveTotalCasesPer1M("World", date));
     	
 
     	textAreaConsole.appendText("\n");
+    	
+    	
 
     } 
 
@@ -233,8 +237,8 @@ public class Controller {
         	textAreaConsole.appendText("\n");
     	}
 
-    	textAreaConsole.appendText( "World " + DataAnalysis.retrieveWorldTotal_deaths(date) + " " +
-   			 + DataAnalysis.retrieveWorldTotalDeathsPer1M(date));
+    	textAreaConsole.appendText( "World " + DataAnalysis.retrieveTotal_deaths("World", date) + " " +
+   			 + DataAnalysis.retrieveTotalDeathsPer1M("World", date));
     	
     	textAreaConsole.appendText("\n");
     	
@@ -286,8 +290,8 @@ public class Controller {
     		
         	textAreaConsole.appendText("\n");
     	}
-    	textAreaConsole.appendText( "World " + DataAnalysis.retrieveWorldFullyVaccinated(date) + " " +
-   			 + DataAnalysis.retrieveWorldRateOfVaccination(date));
+    	textAreaConsole.appendText( "World " + DataAnalysis.retrieveFullyVaccinated("World", date) + " " +
+   			 + DataAnalysis.retrieveFullyVaccinated("World", date));
     	
     	textAreaConsole.appendText("\n");
 
