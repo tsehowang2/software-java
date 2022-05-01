@@ -18,6 +18,7 @@ public class DataAnalysis {
 	
 	 static List<Case> cases = new ArrayList<Case>();
 	 static List<Country> countries = new ArrayList<Country>();
+	 
 	 public static boolean isValidDate(String input) {
 		 //String input = "31/02/2000";
 		 DateTimeFormatter f = DateTimeFormatter.ofPattern ( "M/d/uuuu" );
@@ -292,19 +293,17 @@ public class DataAnalysis {
 	 
 	 public static ArrayList<Integer> retrieveTotalCasesList(String country, String startDate, String endDate) {
 		 ArrayList<Integer> totalCases = new ArrayList<Integer>();
-		 int i = 0;
-		 while (countries.size() > i) {
-			 if(countries.get(i).getLocation().equals(country)) {
-				if(countries.get(i).getDate().equals(startDate)) {
-					int j = 0;
-					while(!countries.get(i+j).getDate().equals(endDate)) {
-						totalCases.add(countries.get(i+j).getTotal_cases());
-						j++;
-					}
-					break;
-				}
+		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/uuuu");
+		 LocalDate _startDate = LocalDate.parse(startDate, formatter);
+		 LocalDate _endDate = LocalDate.parse(endDate, formatter);
+		  
+		for(Country row : countries) {
+			if(row.getLocation().equals(country)) {
+				 LocalDate currDate = LocalDate.parse(row.getDate(), formatter);
+				 if(_startDate.isAfter(currDate) && _startDate.isBefore(_endDate)) {
+					 totalCases.add(row.getTotal_cases());
+				 }
 			 }
-			 i++;
 	      }
 		 return totalCases;
 	 }
