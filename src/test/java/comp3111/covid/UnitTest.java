@@ -1,61 +1,164 @@
 package comp3111.covid;
-// <<<<<<< HEAD
-// import static org.junit.Assert.*;
-// import org.junit.Before;
-// import org.junit.Test;
-// public class UnitTest {
-//   int age;
-//   @Before
-//   public void setUp() throws Exception {
-//     age = 30;
-//   }
-//   @Test
-//   public void getIsoCodeWithValidInput() {
-//     assertEquals("CHN", Case.getIsoCode());
-//   }
-//   @Test
-//   public void getMedianAgeWithValidInput() {
-//     assertEquals(age, Country.getMedianAge());
-//   }
-// }
-// =======
 
 import static org.junit.Assert.*;
+
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import javafx.event.ActionEvent;
+
 public class UnitTest {
 	
-//	@Before
-//	public void setUp() throws Exception {
-//		
-//	}
-//
+	//Country countriesTest;
+	//Case casesTest;
+	//DataAnalysis dataAnalysisTest;
+	
+
+	@Before
+	public void setUp() throws Exception {
+		DataAnalysis.setClass("COVID_Dataset_v1.0.csv");
+	}
+
+	@After
+	public void clearUp() throws Exception {
+		System.gc();
+	}
+	
 //	@Test
-//	public void getIsoCodeCaseWithValidInput() {
-//		assertEquals("AFG", Case.getIsoCode());
-//	}
-//	
-//	@Test
-//	public void getIsoCodeCountryWithValidInput() {
-//		assertEquals("AFG",Country.getIsoCode());
+//	public void startWithValidInput() {
+//		String[] test = {"test"};
+//		MyApplication.main(test);
 //	}
 	
-//	int age;
-//	Case c1;
+	@Test
+	public void getIso_codeWithValidInput() {
+		assertEquals("AFG",DataAnalysis.cases.get(0).getIso_code());
+	}
+	
+	@Test
+	public void getNew_casesWithValidInput() {
+		assertEquals(1,DataAnalysis.cases.get(0).getNew_cases());
+	}
+	
+	@Test
+	public void getNew_cases_per_millionWithValidInput() {
+		assertEquals(0.026,DataAnalysis.cases.get(0).getNew_cases_per_million(),0.001);
+	}
+	
+	@Test
+	public void getNew_cases_smoothedWithValidInput() {
+		assertEquals(-1,DataAnalysis.cases.get(0).getNew_cases_smoothed(), 0.001);
+	}
+	
+	@Test
+	public void getNew_cases_smoothed_per_millionWithValidInput() {
+		assertEquals(-1,DataAnalysis.cases.get(0).getNew_cases_smoothed_per_million(), 0.001);
+	}
+	
+	@Test
+	public void getNew_deathsWithValidInput() {
+		assertEquals(-1,DataAnalysis.cases.get(0).getNew_deaths());
+	}
+	
+	@Test
+	public void getNew_deaths_per_millionWithValidInput() {
+		assertEquals(-1,DataAnalysis.cases.get(0).getNew_deaths_per_million(), 0.001);
+	}
+	
+	@Test
+	public void getNew_deaths_smoothed_per_millionWithValidInput() {
+		assertEquals(-1,DataAnalysis.cases.get(0).getNew_deaths_smoothed_per_million(), 0.001);
+		System.out.print(java.lang.Runtime.getRuntime());
+		
+	}
+	
+	@Test
+	public void getTests_per_caseWithValidInput() {
+		assertEquals(-1,DataAnalysis.cases.get(0).getTests_per_case(), 0.001);
+	}
+//	@Test
+//	public void getNew_testsWithValidInput() {
+//		assertEquals(-1,DataAnalysis.cases.get(0).getNew_tests());
+//	}
 //	
-//	@Before
-//	public void setUp() throws Exception {
-//		age = 30;
+//	@Test
+//	public void getNew_tests_per_thousandWithValidInput() {
+//		assertEquals(-1,DataAnalysis.cases.get(0).getNew_tests_per_thousand(), 0.001);
+//	}
+//	
+//	@Test
+//	public void getNew_tests_smoothedWithValidInput() {
+//		assertEquals(-1,DataAnalysis.cases.get(0).getNew_tests_smoothed(), 0.001);
+//	}
+//	
+//	@Test
+//	public void getNew_tests_smoothed_per_thousandWithValidInput() {
+//		assertEquals(-1,DataAnalysis.cases.get(0).getNew_tests_smoothed_per_thousand(), 0.001);
+//	}
+//	
+//	@Test
+//	public void getNew_vaccinationsWithValidInput() {
+//		assertEquals(-1,DataAnalysis.cases.get(0).getNew_vaccinations());
+//	}
+//	
+//	@Test
+//	public void getNew_vaccinations_smoothedWithValidInput() {
+//		assertEquals(-1,DataAnalysis.cases.get(0).getNew_vaccinations_smoothed(), 0.001);
+//	}
+//	
+//	@Test
+//	public void getNew_vaccinations_smoothed_per_millionWithValidInput() {
+//		assertEquals(-1,DataAnalysis.cases.get(0).getNew_vaccinations_smoothed_per_million(), 0.001);
+//	}
+//	
+//	@Test
+//	public void getIcu_patientsWithValidInput() {
+//		assertEquals(-1,DataAnalysis.cases.get(0).getIcu_patients());
 //	}
 //
 //	@Test
-//	public void getIsoCodeWithValidInput() {
-//		assertEquals("AFG", c1.getIso_code("AFG"));
+//	public void getIcu_patients_per_millionWithValidInput() {
+//		assertEquals(-1,DataAnalysis.cases.get(0).getIcu_patients_per_million(), 0.001);
 //	}
+//	
 //	@Test
-//	public void getMedianAgeWithValidInput() {
-//		assertEquals(age, Country.getMedianAge());
+//	public void getWeekly_icu_admissionsWithValidInput() {
+//		assertEquals(-1,DataAnalysis.cases.get(0).getWeekly_icu_admissions(), 0.001);
 //	}
+//	
+//	@Test
+//	public void getWeekly_icu_admissions_per_millionWithValidInput() {
+//		assertEquals(-1,DataAnalysis.cases.get(0).getWeekly_icu_admissions_per_million(), 0.001);
+//	}
+//	
+//	@Test
+//	public void getHosp_patientsWithValidInput() {
+//		assertEquals(-1,DataAnalysis.cases.get(0).getHosp_patients());
+//	}
+//	
+//	@Test
+//	public void getHosp_patients_per_millionWithValidInput() {
+//		assertEquals(-1,DataAnalysis.cases.get(0).getHosp_patients_per_million(), 0.001);
+//	}
+//	
+//	@Test
+//	public void getWeekly_hosp_admissionsWithValidInput() {
+//		assertEquals(-1,DataAnalysis.cases.get(0).getWeekly_hosp_admissions(), 0.001);
+//	}
+//	
+//	@Test
+//	public void getWeekly_hosp_admissions_per_millionWithValidInput() {
+//		assertEquals(-1,DataAnalysis.cases.get(0).getWeekly_hosp_admissions_per_million(), 0.001);
+//	}
+//	
+//	@Test
+//	public void getHospital_beds_per_thousandWithValidInput() {
+//		assertEquals(-1,DataAnalysis.cases.get(0).getHospital_beds_per_thousand(), 0.001);
+//	}
+	@Test
+	public void getDataWithValidInput() {
+		
+	}
 
 }

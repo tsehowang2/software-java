@@ -142,9 +142,9 @@ public class DataAnalysis {
 			 if(row.getLocation().equals(country)) {
 				 if(row.getDate().equals(date)) {
 					 	total_cases = row.getTotal_cases();
+						 break;
 					 }
 				 }
-			 break;
 		 }
 		 return total_cases;
 	 }
@@ -165,9 +165,9 @@ public class DataAnalysis {
 			 if(row.getLocation().equals(country)) {
 				 if(row.getDate().equals(date)) {
 					 total_cases_per_million = row.getTotal_cases_per_million();
+					 break;
 					 }
 				 }
-			 break;
 		 }
 		return total_cases_per_million;
 	 }
@@ -188,9 +188,9 @@ public class DataAnalysis {
 			 if(row.getLocation().equals(country)) {
 				 if(row.getDate().equals(date)) {
 					 total_deaths = row.getTotal_deaths();
+					 break;
 					 }
 				 }
-			 break;
 		 }
 		return total_deaths;
 	 }
@@ -211,9 +211,9 @@ public class DataAnalysis {
 			 if(row.getLocation().equals(country)) {
 				 if(row.getDate().equals(date)) {
 					 total_deaths_per_million = row.getTotal_deaths_per_million();
+					 break;
 					 }
 				 }
-			 break;
 		 }
 		return total_deaths_per_million;
 	 }
@@ -229,18 +229,14 @@ public class DataAnalysis {
 	 }
 	 
 	 public static int retrieveFullyVaccinated(String country, String date) {
-		 int people_fully_vaccinated = 0;
-		 boolean haveData = false;
 		 for(Country row : countries) {
 			 if(row.getLocation().equals(country)) {
 				 if(row.getDate().equals(date)) {
-					 people_fully_vaccinated = row.getPeople_fully_vaccinated();
-					 haveData = true;
+					 return row.getPeople_fully_vaccinated();
 					 }
 				 }
-			 break;
-		 }
-		return haveData?people_fully_vaccinated:-1;
+			 }
+		return -1;
 	 }
 	 
 	 public static int retrieveWorldFullyVaccinated(String date) {
@@ -265,7 +261,6 @@ public class DataAnalysis {
 					 haveData = true;
 					 }
 				 }
-			 break;
 		 }
 		 
 		 if (haveData && people_fully_vaccinated != -1) {
