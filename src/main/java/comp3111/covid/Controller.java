@@ -150,7 +150,10 @@ public class Controller {
     private TextField textfieldISO;
 
     @FXML
-
+    /**
+     * this function do this
+     * @param event
+     */
     void doImportCSV(ActionEvent event) {
     	String iDataset = textfieldDataset.getText();
     	DataAnalysis.setClass(iDataset);
@@ -203,23 +206,23 @@ public class Controller {
 		}
 	}
     
-    private 
+    //private 
 
     @FXML
-    void generateTableA1(ActionEvent event) {
+    int generateTableA1(ActionEvent event) {
     	//textAreaConsole.clear();
     	//textAreaConsole.appendText(null);
     	
     	String date;
     	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
     		textAreaConsole.appendText("\nPlease Enter a Date");
-    		return;
+    		return 0;
     	}
     	else {
     		date = dateEntry.getText();
     		if (DataAnalysis.isValidDate(date) == false) {
     			textAreaConsole.appendText("\nPlease Enter a VALID Date");
-    			return;
+    			return 0;
     		}
         	//dateEntry.clear();
     	}
@@ -275,7 +278,7 @@ public class Controller {
     	//textAreaConsole.appendText("\n");
     	
     	
-
+		return 1;
     } 
 
     @FXML
@@ -521,6 +524,7 @@ public class Controller {
     
     @FXML
     public void initialize() {
+    	
     	countryEntry.setItems(countryList);
     	countryEntry.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);    	
     	
