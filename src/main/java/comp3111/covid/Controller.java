@@ -208,13 +208,13 @@ public class Controller {
     	
     	String date;
     	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
-    		textAreaConsole.appendText("\nPlease Enter a Date" + "\n");
+    		textAreaConsole.appendText("\nPlease Enter a Date");
     		return;
     	}
     	else {
     		date = dateEntry.getText();
     		if (DataAnalysis.isValidDate(date) == false) {
-    			textAreaConsole.appendText("\nPlease Enter a VALID Date" + "\n");
+    			textAreaConsole.appendText("\nPlease Enter a VALID Date");
     			return;
     		}
         	//dateEntry.clear();
@@ -278,13 +278,13 @@ public class Controller {
     void generateTableB1(ActionEvent event) {
     	String date;
     	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
-    		textAreaConsole.appendText("\nPlease Enter a Date" + "\n");
+    		textAreaConsole.appendText("\nPlease Enter a Date");
     		return;
     	}
     	else {
     		date = dateEntry.getText();
     		if (DataAnalysis.isValidDate(date) == false) {
-    			textAreaConsole.appendText("\nPlease Enter a VALID Date" + "\n");
+    			textAreaConsole.appendText("\nPlease Enter a VALID Date");
     			return;
     		}
     	}
@@ -336,13 +336,13 @@ public class Controller {
     void generateTableC1(ActionEvent event) {
     	String date;
     	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
-    		textAreaConsole.appendText("\nPlease Enter a Date" + "\n");
+    		textAreaConsole.appendText("\nPlease Enter a Date");
     		return;
     	}
     	else {
     		date = dateEntry.getText();
     		if (DataAnalysis.isValidDate(date) == false) {
-    			textAreaConsole.appendText("\nPlease Enter a VALID Date" + "\n");
+    			textAreaConsole.appendText("\nPlease Enter a VALID Date");
     			return;
     		}
     	}
@@ -415,14 +415,10 @@ public class Controller {
         	//dateEntry.clear();
     	}
     	
-    	
-
+    
     	textAreaConsole2.appendText("\n");
     	textAreaConsole2.appendText("Cumulative Confirmed COVID-19 Cases (per 1M)\n");
-    	
-    	float info1;
-    	float info2;
-    	
+
     	ArrayList<Float> data;
     	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
         	textAreaConsole2.appendText(countryList.get(i) + " ");
