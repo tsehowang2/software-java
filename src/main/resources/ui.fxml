@@ -80,7 +80,10 @@
                                   <NumberAxis side="LEFT" />
                                 </yAxis>
                               </LineChart>
-                              <Label fx:id="chart_label" layoutX="32.0" layoutY="328.0" prefHeight="33.0" prefWidth="671.0" />
+                              <Label fx:id="chart_label" layoutX="32.0" layoutY="328.0" prefHeight="33.0" prefWidth="671.0" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font></Label>
                               <Text layoutX="158.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to" />
                            </children>
                         </AnchorPane>

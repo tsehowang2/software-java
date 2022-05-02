@@ -24,14 +24,35 @@ public class DataAnalysis {
 		 DateTimeFormatter f = DateTimeFormatter.ofPattern ( "M/d/uuuu" );
 		 try {
 		     LocalDate ld = LocalDate.parse ( input , f );
-		     System.out.println ( "ld: " + ld );
+		     //System.out.println ( "ld: " + ld );
+		     if (input.charAt(0) == '2') {
+		    	 if (input.charAt(2) == '2' &&  input.charAt(3) == '9') {
+		    		 int year = Integer.parseInt(input.substring(input.length() - 4));
+		    		 System.out.println(year);
+		    	     if (((year % 4 == 0) && (year % 100!= 0)) || (year%400 == 0))
+		    	    	 return true;
+		    	     else
+		    	    	 return false;
+		    	 }
+		    	 if (input.charAt(2) == '3' &&  input.charAt(3) == '0') {
+	    	    	  return false;
+		    	 }
+		    	 if (input.charAt(2) == '3' &&  input.charAt(3) == '1') {
+		    		 return false;
+		    	 }
+		     }
+		     if (input.charAt(0) == '4' || input.charAt(0) == '6' || input.charAt(0) == '9' || (input.charAt(0) == '1' && input.charAt(0) == '1')) {
+		    	 if (input.charAt(2) == '3' &&  input.charAt(3) == '1') {
+		    		 return false;
+		    	 }
+		     }
+		     
 		     return true;
+		     
 		 } catch ( DateTimeParseException e ) {
-			 
-		     System.out.println ( "ERROR1234: " + e );
+			 return false;
+		     //System.out.println ( "ERROR1234: " + e );
 		 }
-		 return false;
-		 //testforterry
 	 }
 	 
 	public static CSVParser getFileParser(String dataset) {
@@ -138,14 +159,15 @@ public class DataAnalysis {
 	 
 	 public static int retrieveTotalCases(String country, String date) {
 		 int total_cases = 0;
+		 //System.out.print(country +  " " + date +  " ");
 		 for(Country row : countries) {
 			 if(row.getLocation().equals(country)) {
 				 if(row.getDate().equals(date)) {
 					 	total_cases = row.getTotal_cases();
 					 }
 				 }
-			 break;
 		 }
+		 //System.out.println(total_cases);
 		 return total_cases;
 	 }
 	 
@@ -167,7 +189,6 @@ public class DataAnalysis {
 					 total_cases_per_million = row.getTotal_cases_per_million();
 					 }
 				 }
-			 break;
 		 }
 		return total_cases_per_million;
 	 }
@@ -190,7 +211,6 @@ public class DataAnalysis {
 					 total_deaths = row.getTotal_deaths();
 					 }
 				 }
-			 break;
 		 }
 		return total_deaths;
 	 }
@@ -213,7 +233,6 @@ public class DataAnalysis {
 					 total_deaths_per_million = row.getTotal_deaths_per_million();
 					 }
 				 }
-			 break;
 		 }
 		return total_deaths_per_million;
 	 }
@@ -238,7 +257,6 @@ public class DataAnalysis {
 					 haveData = true;
 					 }
 				 }
-			 break;
 		 }
 		return haveData?people_fully_vaccinated:-1;
 	 }
@@ -265,7 +283,6 @@ public class DataAnalysis {
 					 haveData = true;
 					 }
 				 }
-			 break;
 		 }
 		 
 		 if (haveData && people_fully_vaccinated != -1) {
