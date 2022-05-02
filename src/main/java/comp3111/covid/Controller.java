@@ -17,8 +17,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Data;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -108,6 +112,12 @@ public class Controller {
 
 	@FXML
 	private LineChart<?, ?> chart;
+	
+    @FXML
+    private CategoryAxis x;
+
+    @FXML
+    private NumberAxis y;
 	
     @FXML
     private Tab tabApp1;
@@ -370,6 +380,55 @@ public class Controller {
 
 
     } 
+    
+    public XYChart.Series<Integer, Integer> createSeries(String name, int x, int y) {
+        XYChart.Series<Integer, Integer> series = new XYChart.Series<>();
+        series.setName(name);
+        ObservableList<XYChart.Data<Integer, Integer>> seriesData = FXCollections.observableArrayList();
+        //for (int i = 0; i < aList.size(); i++) {
+          seriesData.add(new XYChart.Data(x, y));
+        //}
+        series.setData(seriesData);
+        
+        return series;
+    }
+    
+    public class chartResult {
+    	//private String chartCountryName;
+		private String chartX;
+		private int chartY;
+		
+//		public chartResult(String chartCountryName, String chartX, int chartY) {
+//			this.setChartCountryName(chartCountryName);
+//			this.setChartX(chartX);
+//			this.setChartY(chartY);
+//		}
+		
+		public chartResult(String chartX, int chartY) {
+			this.setChartX(chartX);
+			this.setChartY(chartY);
+		}
+		
+//		public String getChartCountryName() {
+//			return chartCountryName;
+//		}
+//		public void setChartCountryName(String chartCountryName) {
+//			this.chartCountryName = chartCountryName;
+//		}
+		public String getChartX() {
+			return chartX;
+		}
+		public void setChartX(String chartX) {
+			this.chartX = chartX;
+		}
+		public int getChartY() {
+			return chartY;
+		}
+		public void setChartY(int chartY) {
+			this.chartY = chartY;
+		}
+    }
+    
     @FXML
     void generateTableA2(ActionEvent event) {
     	//textAreaConsole.clear();
@@ -390,16 +449,59 @@ public class Controller {
     	}
 
     	textAreaConsole2.appendText("\n");
+    	// count country number
+    	int count = 0;
     	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
-    		
+    		count++;
+    	}
+    	String[] countryArray = new String[count];
+    	int index = 0;
+    	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
         	textAreaConsole2.appendText( countryList2.get(i) + " from " + startdate + " to " + enddate + "\n");
+        	countryArray[index] = countryList2.get(i);
+        	index++;
     	}
     	textAreaConsole2.appendText( "World \n" );
+    	chart_label.setText("Cumulative Confirmed COVID-19 Cases (per 1M)");
+    	chart.getData().clear();
+    	//ObservableList<chartResult> countryChart = FXCollections.observableArrayList();
+    	//ObservableList<XYChart.Series> seriesList = FXCollections.observableArrayList();
+    	//List<XYChart.Data> data = FXCollections.observableArrayList();
+//        ObservableList<XYChart.Data> aList = FXCollections.observableArrayList(
+//                new XYChart.Data(0, 0),
+//                new XYChart.Data(2, 6),
+//                new XYChart.Data(4, 37),
+//                new XYChart.Data(6, 82),
+//                new XYChart.Data(8, 115)
+//        );
+//    	ObservableList<XYChart.Data> aList = FXCollections.observableArrayList();
+//    	aList.add(new XYChart.Data(0, 0));
     	
+//    	 ObservableList<XYChart.Series<String,Integer>> lineChartData = FXCollections.observableArrayList(
+//    	            new LineChart.Series<String,Integer>("Series 1", FXCollections.observableArrayList(
+//    	                new XYChart.Data<String,Integer>("Jan", 12),
+//    	                new XYChart.Data<String,Integer>("Feb", 24),
+//    	                new XYChart.Data<String,Integer>("March", 60),
+//    	                new XYChart.Data<String,Integer>("April", 90),
+//    	                new XYChart.Data<String,Integer>("May", 100)
+//    	            )),
+//    	            new LineChart.Series<String,Integer>("Series 2", FXCollections.observableArrayList(
+//    	                new XYChart.Data<String,Integer>("Jan", 4),
+//    	                new XYChart.Data<String,Integer>("Feb", 10),
+//    	                new XYChart.Data<String,Integer>("March", 36),
+//    	                new XYChart.Data<String,Integer>("April", 79),
+//    	                new XYChart.Data<String,Integer>("May", 110)
+//    	            ))
+//    	        );
+    	XYChart.Series series2 = new XYChart.Series();
+    	for (int i = 0; i < 10; i++) {
+    		series2.getData().add(new XYChart.Data("Jan"+i, i));
+    	}
+    	series2.setName("test2");
+    	chart.getData().addAll(series2);
+    }
 
-    } 
-
-    @FXML
+	@FXML
     void generateTableB2(ActionEvent event) {
     	//textAreaConsole.clear();
 

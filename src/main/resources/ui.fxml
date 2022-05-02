@@ -63,6 +63,7 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="412.0" prefWidth="719.0">
                            <children>
+                              <Label fx:id="chart_label" alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="328.0" prefHeight="33.0" prefWidth="671.0" textAlignment="CENTER" />
                               <Label />
                               <TextArea fx:id="textAreaConsole2" editable="false" layoutX="349.0" layoutY="14.0" prefHeight="294.0" prefWidth="355.0" text="This tab will generate data tables showing the number of confirmed COVID-19 cases by country&#10;&#10;To generate a table please:&#10;Select the countries of interest (use ctrl+left click to select multiple)&#10;Enter the date of interest in &quot;mm/dd/yyyy&quot; format&#10;Click generate &#10;&#10;Output in text:" wrapText="true" />
                               <ListView fx:id="countryEntry2" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="300.0" />
@@ -73,13 +74,12 @@
                               <TextField fx:id="dateEntry3" layoutX="183.0" layoutY="228.0" prefHeight="26.0" prefWidth="130.0" />
                               <LineChart fx:id="chart" layoutX="14.0" layoutY="352.0" prefHeight="291.0" prefWidth="684.0">
                                 <xAxis>
-                                  <CategoryAxis side="BOTTOM" />
+                                  <CategoryAxis side="BOTTOM" fx:id="x" />
                                 </xAxis>
                                 <yAxis>
-                                  <NumberAxis side="LEFT" />
+                                  <NumberAxis fx:id="y" side="LEFT" upperBound="100000.0" />
                                 </yAxis>
                               </LineChart>
-                              <Label fx:id="chart_label" layoutX="32.0" layoutY="328.0" prefHeight="33.0" prefWidth="671.0" />
                            </children>
                         </AnchorPane>
                     </content>
