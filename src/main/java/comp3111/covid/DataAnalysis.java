@@ -159,14 +159,15 @@ public class DataAnalysis {
 	 
 	 public static int retrieveTotalCases(String country, String date) {
 		 int total_cases = 0;
+		 //System.out.print(country +  " " + date +  " ");
 		 for(Country row : countries) {
 			 if(row.getLocation().equals(country)) {
 				 if(row.getDate().equals(date)) {
 					 	total_cases = row.getTotal_cases();
 					 }
 				 }
-			 break;
 		 }
+		 //System.out.println(total_cases);
 		 return total_cases;
 	 }
 	 
@@ -188,7 +189,6 @@ public class DataAnalysis {
 					 total_cases_per_million = row.getTotal_cases_per_million();
 					 }
 				 }
-			 break;
 		 }
 		return total_cases_per_million;
 	 }
@@ -211,7 +211,6 @@ public class DataAnalysis {
 					 total_deaths = row.getTotal_deaths();
 					 }
 				 }
-			 break;
 		 }
 		return total_deaths;
 	 }
@@ -234,7 +233,6 @@ public class DataAnalysis {
 					 total_deaths_per_million = row.getTotal_deaths_per_million();
 					 }
 				 }
-			 break;
 		 }
 		return total_deaths_per_million;
 	 }
@@ -259,7 +257,6 @@ public class DataAnalysis {
 					 haveData = true;
 					 }
 				 }
-			 break;
 		 }
 		return haveData?people_fully_vaccinated:-1;
 	 }
@@ -286,7 +283,6 @@ public class DataAnalysis {
 					 haveData = true;
 					 }
 				 }
-			 break;
 		 }
 		 
 		 if (haveData && people_fully_vaccinated != -1) {
