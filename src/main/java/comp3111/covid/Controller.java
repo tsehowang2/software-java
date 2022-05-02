@@ -157,6 +157,7 @@ public class Controller {
 	private CharSequence endDate;
 
     @FXML
+
     void doImportCSV(ActionEvent event) {
     	String iDataset = textfieldDataset.getText();
     	DataAnalysis.setClass(iDataset);
@@ -218,13 +219,13 @@ public class Controller {
     	
     	String date;
     	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
-    		textAreaConsole.appendText("\nPlease Enter a Date" + "\n");
+    		textAreaConsole.appendText("\nPlease Enter a Date");
     		return;
     	}
     	else {
     		date = dateEntry.getText();
     		if (DataAnalysis.isValidDate(date) == false) {
-    			textAreaConsole.appendText("\nPlease Enter a VALID Date" + "\n");
+    			textAreaConsole.appendText("\nPlease Enter a VALID Date");
     			return;
     		}
         	//dateEntry.clear();
@@ -288,13 +289,13 @@ public class Controller {
     void generateTableB1(ActionEvent event) {
     	String date;
     	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
-    		textAreaConsole.appendText("\nPlease Enter a Date" + "\n");
+    		textAreaConsole.appendText("\nPlease Enter a Date");
     		return;
     	}
     	else {
     		date = dateEntry.getText();
     		if (DataAnalysis.isValidDate(date) == false) {
-    			textAreaConsole.appendText("\nPlease Enter a VALID Date" + "\n");
+    			textAreaConsole.appendText("\nPlease Enter a VALID Date");
     			return;
     		}
     	}
@@ -346,13 +347,13 @@ public class Controller {
     void generateTableC1(ActionEvent event) {
     	String date;
     	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
-    		textAreaConsole.appendText("\nPlease Enter a Date" + "\n");
+    		textAreaConsole.appendText("\nPlease Enter a Date");
     		return;
     	}
     	else {
     		date = dateEntry.getText();
     		if (DataAnalysis.isValidDate(date) == false) {
-    			textAreaConsole.appendText("\nPlease Enter a VALID Date" + "\n");
+    			textAreaConsole.appendText("\nPlease Enter a VALID Date");
     			return;
     		}
     	}
@@ -414,42 +415,32 @@ public class Controller {
     	else {
     		startdate = dateEntry2.getText();
     		if (DataAnalysis.isValidDate(startdate) == false) {
-    			textAreaConsole.appendText("\nPlease Enter a VALID Date" + "\n");
+    			textAreaConsole.appendText("\nPlease Enter a VALID Date");
     			return;
     		}
     		enddate = dateEntry3.getText();
     		if (DataAnalysis.isValidDate(enddate) == false) {
-    			textAreaConsole.appendText("\nPlease Enter a VALID Date" + "\n");
+    			textAreaConsole.appendText("\nPlease Enter a VALID Date");
     			return;
     		}
         	//dateEntry.clear();
     	}
     	
-    	
-
+    
     	textAreaConsole2.appendText("\n");
-    	// count country number
-    	int count = 0;
+   
     	textAreaConsole2.appendText("Cumulative Confirmed COVID-19 Cases (per 1M)\n");
-    	
-    	float info1;
-    	float info2;
-    	
+    	chart_label.setText("Cumulative Confirmed COVID-19 Cases (per 1M)");
+
     	ArrayList<Float> data;
-//    	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
-//    		count++;
-//    	}
-//    	String[] countryArray = new String[count];
-//    	int index = 0;
-       	chart.getData().clear();
-       	
-        //LocalDate _endDate = LocalDate.parse(enddate, formatter);
-        
+    	
+    	chart.getData().clear();
+    	
     	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
         	textAreaConsole2.appendText( countryList2.get(i) + " from " + startdate + " to " + enddate + "\n");
-//        	countryArray[index] = countryList2.get(i);
-//        	index++;
-        	textAreaConsole2.appendText(countryList.get(i) + " ");
+
+        	textAreaConsole2.appendText( countryList2.get(i) + " ");
+
         	XYChart.Series series = new XYChart.Series();
     		data = DataAnalysis.retrieveTotalCasesList(countryList.get(i),startdate,enddate);
     		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
@@ -458,8 +449,10 @@ public class Controller {
     		for (int j = 0; j < data.size(); j++) {			
     			textAreaConsole2.appendText(Float.toString(data.get(j)) + " ");
     			String formattedString = k.format(formatter);
-    			textAreaConsole2.appendText(formattedString);
-    			series.getData().add(new XYChart.Data(formattedString, data.get(j))); // j.format(formatter)
+    			textAreaConsole2.appendText(formattedString + " ");
+    			if (data.get(j) != -1) {
+    				series.getData().add(new XYChart.Data(formattedString, data.get(j)));
+    			}
     			k = k.plusDays(1);
     		}
     		textAreaConsole2.appendText(" \n");
@@ -468,60 +461,66 @@ public class Controller {
     	}
     	
     	textAreaConsole2.appendText( "World \n" );
-    	chart_label.setText("Cumulative Confirmed COVID-19 Cases (per 1M)");
  
+    } 
 
-    	//textAreaConsole2.appendText( "World " + DataAnalysis.retrieveTotalCasesPer1M("World", startdate) + " " + DataAnalysis.retrieveTotalCasesPer1M("World", enddate));
-    	
-//    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
-//        LocalDate _startDate = LocalDate.parse(startdate, formatter);
-//        LocalDate _endDate = LocalDate.parse(enddate, formatter);
-//    	for (int i = 0; i < count; i++) {
-//    		XYChart.Series series = new XYChart.Series();
-//    		ArrayList<Float> totalCases = DataAnalysis.retrieveTotalCasesList(countryArray[i], startdate, enddate);
-//    		int k = 0;
-//    		for (LocalDate j = _startDate; j != _endDate; j.plusDays(1)) {
-//    			String formattedString = j.format(formatter);
-//    			series.getData().add(new XYChart.Data(formattedString, totalCases.get(k)));
-//    			k++;
-//        	}
-//    		series.setName(countryArray[i]);
-//    		chart.getData().add(series);
-//    	}
-    }
-
-	@FXML
+    @FXML
     void generateTableB2(ActionEvent event) {
     	//textAreaConsole.clear();
 
-    	String date;
+    	String startdate;
+    	String enddate;
     	if (dateEntry2.getText() == null || dateEntry2.getText().trim().isEmpty()) {
-    		textAreaConsole2.appendText("Please Enter a Date" + "\n");
+    		textAreaConsole2.appendText("Please Enter a Dates" + "\n");
     		return;
     	}
-    	else if (false) {
-    		
-    	}
     	else {
-    		date = dateEntry2.getText();
+    		startdate = dateEntry2.getText();
+    		if (DataAnalysis.isValidDate(startdate) == false) {
+    			textAreaConsole.appendText("\nPlease Enter a VALID Date");
+    			return;
+    		}
+    		enddate = dateEntry3.getText();
+    		if (DataAnalysis.isValidDate(enddate) == false) {
+    			textAreaConsole.appendText("\nPlease Enter a VALID Date");
+    			return;
+    		}
         	//dateEntry.clear();
     	}
-    	/*
-    	textAreaConsole.appendText( "Countries:" + "\n");
 
-    	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
-        	textAreaConsole.appendText( countryList.get(i) + "\n");
+    	textAreaConsole2.appendText("\n");
+
+    	textAreaConsole2.appendText("Cumulative Confirmed COVID-19 Deaths (per 1M)\n");
+    	chart_label.setText("Cumulative Confirmed COVID-19 Deaths (per 1M)");
+
+    	ArrayList<Float> data;
+    	
+    	chart.getData().clear();
+    	
+    	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
+    		textAreaConsole2.appendText( countryList2.get(i) + " from " + startdate + " to " + enddate + "\n");
+
+        	textAreaConsole2.appendText( countryList2.get(i) + " ");
+        	
+        	XYChart.Series series = new XYChart.Series();
+    		data = DataAnalysis.retrieveTotalDeathList(countryList.get(i),startdate,enddate);
+    		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+           	LocalDate _startDate = LocalDate.parse(startdate, formatter);
+    		LocalDate k = _startDate;
+    		for (int j = 0; j < data.size(); j++) {	
+    			textAreaConsole2.appendText(Float.toString(data.get(j)) + " ");
+    			String formattedString = k.format(formatter);
+    			textAreaConsole2.appendText(formattedString + " ");
+    			if (data.get(j) != -1) {
+    				series.getData().add(new XYChart.Data(formattedString, data.get(j)));
+    			}
+    			k = k.plusDays(1);
+    		}
+    		textAreaConsole2.appendText(" \n");
+    		series.setName(countryList.get(i));
+    		chart.getData().add(series);
     	}
     	
-    	textAreaConsole.appendText( "\nDate:\n" + date + "\n");
-    	textAreaConsole.appendText( "\n" + "Generating Table for task A"+ "\n");
-    	*/
-    	textAreaConsole2.appendText("\n");
-    	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
-    		
-        	textAreaConsole2.appendText( countryList2.get(i) + " " + DataAnalysis.retrieveTotal_deaths(countryList2.get(i), date) + " " + 
-        			DataAnalysis.retrieveTotalDeathsPer1M(countryList2.get(i), date) + "\n");
-    	}
     	textAreaConsole2.appendText( "World \n" );
     	
 
@@ -531,24 +530,58 @@ public class Controller {
     void generateTableC2(ActionEvent event) {
     	//textAreaConsole.clear();
 
-    	String date;
+    	String startdate;
+    	String enddate;
     	if (dateEntry2.getText() == null || dateEntry2.getText().trim().isEmpty()) {
-    		textAreaConsole2.appendText("Please Enter a Date" + "\n");
+    		textAreaConsole2.appendText("Please Enter a Dates" + "\n");
     		return;
     	}
-    	else if (false) {
-    		
-    	}
     	else {
-    		date = dateEntry2.getText();
+    		startdate = dateEntry2.getText();
+    		if (DataAnalysis.isValidDate(startdate) == false) {
+    			textAreaConsole.appendText("\nPlease Enter a VALID Date");
+    			return;
+    		}
+    		enddate = dateEntry3.getText();
+    		if (DataAnalysis.isValidDate(enddate) == false) {
+    			textAreaConsole.appendText("\nPlease Enter a VALID Date");
+    			return;
+    		}
         	//dateEntry.clear();
     	}
-
+    	
+    	
     	textAreaConsole2.appendText("\n");
+    	
+    	textAreaConsole2.appendText("Cumulative Rate of Vaccination against COVID-19\n");
+    	chart_label.setText("Cumulative Rate of Vaccination against COVID-19");
+    	
+    	ArrayList<Float> data;
+    	
+    	chart.getData().clear();
+    	
     	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
-    		
-        	textAreaConsole2.appendText( countryList2.get(i) + " " + DataAnalysis.retrieveRateOfVaccination(countryList2.get(i), date) + " " + 
-        			DataAnalysis.retrieveRateOfVaccination(countryList2.get(i), date) + "\n");
+    		textAreaConsole2.appendText( countryList2.get(i) + " from " + startdate + " to " + enddate + "\n");
+
+        	textAreaConsole2.appendText( countryList2.get(i) + " ");
+
+        	XYChart.Series series = new XYChart.Series();
+    		data = DataAnalysis.retrieveRateOfVaccinationList(countryList.get(i),startdate,enddate);
+    		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+           	LocalDate _startDate = LocalDate.parse(startdate, formatter);
+    		LocalDate k = _startDate;
+    		for (int j = 0; j < data.size(); j++) {			
+    			textAreaConsole2.appendText(Float.toString(data.get(j)) + " ");
+    			String formattedString = k.format(formatter);
+    			textAreaConsole2.appendText(formattedString + " ");
+    			if (data.get(j) != -1) {
+    				series.getData().add(new XYChart.Data(formattedString, data.get(j)));
+    			}
+    			k = k.plusDays(1);
+    		}
+    		textAreaConsole2.appendText(" \n");
+    		series.setName(countryList.get(i));
+    		chart.getData().add(series);
     	}
     	textAreaConsole2.appendText( "World \n" );
     	

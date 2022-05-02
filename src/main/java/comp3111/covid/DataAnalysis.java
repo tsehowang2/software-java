@@ -39,93 +39,93 @@ public class DataAnalysis {
 	     return fr.getCSVParser(true);
 	     }
 	
-	public static String getConfirmedCases(String dataset, String iso_code) {
-		String oReport = "";	
-		long confirmedCases = 0;
-		long numRecord = 0;
-		long totalNumRecord = 0;
-		
-		for (CSVRecord rec : getFileParser(dataset)) {
-			
-			if (rec.get("iso_code").equals(iso_code)) {
-				String s = rec.get("new_cases");
-				if (!s.equals("")) {
-					confirmedCases += Long.parseLong(s);
-					numRecord++;
-				}
-			}		
-			totalNumRecord++;
-		}
-		
-		oReport = String.format("Dataset (%s): %,d Records\n\n", dataset, totalNumRecord);
-		oReport += String.format("[Summary (%s)]\n", iso_code);
-		oReport += String.format("Number of Confirmed Cases: %,d\n", confirmedCases);
-		oReport += String.format("Number of Days Reported: %,d\n", numRecord);
-		
-		return oReport;
-	}
-	
-	 public static String getConfirmedDeaths(String dataset, String iso_code) {
-			String oReport = "";	
-			long confirmedDeaths = 0;
-			long numRecord = 0;
-			long totalNumRecord = 0;
-			
-			for (CSVRecord rec : getFileParser(dataset)) {
-				
-				if (rec.get("iso_code").equals(iso_code)) {
-					String s = rec.get("new_deaths");
-					if (!s.equals("")) {
-						confirmedDeaths += Long.parseLong(s);
-						numRecord++;
-					}
-				}		
-				totalNumRecord++;
-			}
-			
-			oReport = String.format("Dataset (%s): %,d Records\n\n", dataset, totalNumRecord);
-			oReport += String.format("[Summary (%s)]\n", iso_code);
-			oReport += String.format("Number of Deaths: %,d\n", confirmedDeaths);
-			oReport += String.format("Number of Days Reported: %,d\n", numRecord);
-			
-			return oReport;
-	 }
-	 
-	 public static String getRateOfVaccination(String dataset, String iso_code) {
-			String oReport = "";	
-			long fullyVaccinated = 0;
-			long numRecord = 0;
-			long totalNumRecord = 0;
-			long population = 0;
-			float rate = 0.0f;
-						
-			for (CSVRecord rec : getFileParser(dataset)) {
-				
-				if (rec.get("iso_code").equals(iso_code)) {
-					
-					String s1 = rec.get("people_fully_vaccinated");
-					String s2 = rec.get("population");		
-					if (!s1.equals("") && !s2.equals("")) {
-						fullyVaccinated = Long.parseLong(s1);
-						population = Long.parseLong(s2);						
-						numRecord++;
-					}
-				}		
-				totalNumRecord++;
-			}
-			
-			if (population !=0)
-				rate = (float) fullyVaccinated / population * 100;
-			
-			oReport = String.format("Dataset (%s): %,d Records\n\n", dataset, totalNumRecord);
-			oReport += String.format("[Summary (%s)]\n", iso_code);
-			oReport += String.format("Number of People Fully Vaccinated: %,d\n", fullyVaccinated);
-			oReport += String.format("Population: %,d\n", population);
-			oReport += String.format("Rate of Vaccination: %.2f%%\n", rate);
-			oReport += String.format("Number of Days Reported: %,d\n", numRecord);
-			
-			return oReport;
-	 }
+//	public static String getConfirmedCases(String dataset, String iso_code) {
+//		String oReport = "";	
+//		long confirmedCases = 0;
+//		long numRecord = 0;
+//		long totalNumRecord = 0;
+//		
+//		for (CSVRecord rec : getFileParser(dataset)) {
+//			
+//			if (rec.get("iso_code").equals(iso_code)) {
+//				String s = rec.get("new_cases");
+//				if (!s.equals("")) {
+//					confirmedCases += Long.parseLong(s);
+//					numRecord++;
+//				}
+//			}		
+//			totalNumRecord++;
+//		}
+//		
+//		oReport = String.format("Dataset (%s): %,d Records\n\n", dataset, totalNumRecord);
+//		oReport += String.format("[Summary (%s)]\n", iso_code);
+//		oReport += String.format("Number of Confirmed Cases: %,d\n", confirmedCases);
+//		oReport += String.format("Number of Days Reported: %,d\n", numRecord);
+//		
+//		return oReport;
+//	}
+//	
+//	 public static String getConfirmedDeaths(String dataset, String iso_code) {
+//			String oReport = "";	
+//			long confirmedDeaths = 0;
+//			long numRecord = 0;
+//			long totalNumRecord = 0;
+//			
+//			for (CSVRecord rec : getFileParser(dataset)) {
+//				
+//				if (rec.get("iso_code").equals(iso_code)) {
+//					String s = rec.get("new_deaths");
+//					if (!s.equals("")) {
+//						confirmedDeaths += Long.parseLong(s);
+//						numRecord++;
+//					}
+//				}		
+//				totalNumRecord++;
+//			}
+//			
+//			oReport = String.format("Dataset (%s): %,d Records\n\n", dataset, totalNumRecord);
+//			oReport += String.format("[Summary (%s)]\n", iso_code);
+//			oReport += String.format("Number of Deaths: %,d\n", confirmedDeaths);
+//			oReport += String.format("Number of Days Reported: %,d\n", numRecord);
+//			
+//			return oReport;
+//	 }
+//	 
+//	 public static String getRateOfVaccination(String dataset, String iso_code) {
+//			String oReport = "";	
+//			long fullyVaccinated = 0;
+//			long numRecord = 0;
+//			long totalNumRecord = 0;
+//			long population = 0;
+//			float rate = 0.0f;
+//						
+//			for (CSVRecord rec : getFileParser(dataset)) {
+//				
+//				if (rec.get("iso_code").equals(iso_code)) {
+//					
+//					String s1 = rec.get("people_fully_vaccinated");
+//					String s2 = rec.get("population");		
+//					if (!s1.equals("") && !s2.equals("")) {
+//						fullyVaccinated = Long.parseLong(s1);
+//						population = Long.parseLong(s2);						
+//						numRecord++;
+//					}
+//				}		
+//				totalNumRecord++;
+//			}
+//			
+//			if (population !=0)
+//				rate = (float) fullyVaccinated / population * 100;
+//			
+//			oReport = String.format("Dataset (%s): %,d Records\n\n", dataset, totalNumRecord);
+//			oReport += String.format("[Summary (%s)]\n", iso_code);
+//			oReport += String.format("Number of People Fully Vaccinated: %,d\n", fullyVaccinated);
+//			oReport += String.format("Population: %,d\n", population);
+//			oReport += String.format("Rate of Vaccination: %.2f%%\n", rate);
+//			oReport += String.format("Number of Days Reported: %,d\n", numRecord);
+//			
+//			return oReport;
+//	 }
 	 
 	 public static List<String> getUniqueLocations() {
 		 ArrayList<String> location = new ArrayList<String>();
@@ -142,22 +142,22 @@ public class DataAnalysis {
 			 if(row.getLocation().equals(country)) {
 				 if(row.getDate().equals(date)) {
 					 	total_cases = row.getTotal_cases();
+						 break;
 					 }
 				 }
-			 break;
 		 }
 		 return total_cases;
 	 }
 	 
-	 public static int retrieveWorldTotalCasesWorld(String date) {
-		 int total_cases = 0;
-		 for(Country row : countries) {
-			 if(row.getDate().equals(date)) {
-				 total_cases += (row.getTotal_cases()==-1?0:row.getTotal_cases());
-				 }
-			 }
-		 return total_cases;
-	 }
+//	 public static int retrieveWorldTotalCasesWorld(String date) {
+//		 int total_cases = 0;
+//		 for(Country row : countries) {
+//			 if(row.getDate().equals(date)) {
+//				 total_cases += (row.getTotal_cases()==-1?0:row.getTotal_cases());
+//				 }
+//			 }
+//		 return total_cases;
+//	 }
 	 
 	 public static float retrieveTotalCasesPer1M(String country, String date) {
 		 float total_cases_per_million = 0;
@@ -165,22 +165,22 @@ public class DataAnalysis {
 			 if(row.getLocation().equals(country)) {
 				 if(row.getDate().equals(date)) {
 					 total_cases_per_million = row.getTotal_cases_per_million();
+					 break;
 					 }
 				 }
-			 break;
 		 }
 		return total_cases_per_million;
 	 }
 	 
-	 public static float retrieveWorldTotalCasesPer1M(String date) {
-		 float total_cases_per_million = 0;
-		 for(Country row : countries) {
-			 if(row.getDate().equals(date)) {
-				 total_cases_per_million += (row.getTotal_cases_per_million()==-1?0:row.getTotal_cases_per_million());
-				 }
-			 }
-		 return total_cases_per_million;
-	 }
+//	 public static float retrieveWorldTotalCasesPer1M(String date) {
+//		 float total_cases_per_million = 0;
+//		 for(Country row : countries) {
+//			 if(row.getDate().equals(date)) {
+//				 total_cases_per_million += (row.getTotal_cases_per_million()==-1?0:row.getTotal_cases_per_million());
+//				 }
+//			 }
+//		 return total_cases_per_million;
+//	 }
 	 
 	 public static int retrieveTotal_deaths(String country, String date) {
 		 int total_deaths = 0;
@@ -188,22 +188,22 @@ public class DataAnalysis {
 			 if(row.getLocation().equals(country)) {
 				 if(row.getDate().equals(date)) {
 					 total_deaths = row.getTotal_deaths();
+					 break;
 					 }
 				 }
-			 break;
 		 }
 		return total_deaths;
 	 }
 	 
-	 public static int retrieveWorldTotal_deaths(String date) {
-		 int total_deaths = 0;
-		 for(Country row : countries) {
-			 if(row.getDate().equals(date)) {
-				 total_deaths += (row.getTotal_deaths()==-1?0:row.getTotal_deaths());
-				 }
-			 }
-		return total_deaths;
-	 }
+//	 public static int retrieveWorldTotal_deaths(String date) {
+//		 int total_deaths = 0;
+//		 for(Country row : countries) {
+//			 if(row.getDate().equals(date)) {
+//				 total_deaths += (row.getTotal_deaths()==-1?0:row.getTotal_deaths());
+//				 }
+//			 }
+//		return total_deaths;
+//	 }
 	 
 	 public static float retrieveTotalDeathsPer1M(String country, String date) {
 		 float total_deaths_per_million = 0;
@@ -211,47 +211,43 @@ public class DataAnalysis {
 			 if(row.getLocation().equals(country)) {
 				 if(row.getDate().equals(date)) {
 					 total_deaths_per_million = row.getTotal_deaths_per_million();
+					 break;
 					 }
 				 }
-			 break;
 		 }
 		return total_deaths_per_million;
 	 }
 	 
-	 public static float retrieveWorldTotalDeathsPer1M(String date) {
-		 float total_deaths_per_million = 0;
-		 for(Country row : countries) {
-			 if(row.getDate().equals(date)) {
-				 total_deaths_per_million += (row.getTotal_deaths_per_million()==-1?0:row.getTotal_deaths_per_million());
-				 }
-			 }
-		return total_deaths_per_million;
-	 }
+//	 public static float retrieveWorldTotalDeathsPer1M(String date) {
+//		 float total_deaths_per_million = 0;
+//		 for(Country row : countries) {
+//			 if(row.getDate().equals(date)) {
+//				 total_deaths_per_million += (row.getTotal_deaths_per_million()==-1?0:row.getTotal_deaths_per_million());
+//				 }
+//			 }
+//		return total_deaths_per_million;
+//	 }
 	 
 	 public static int retrieveFullyVaccinated(String country, String date) {
-		 int people_fully_vaccinated = 0;
-		 boolean haveData = false;
 		 for(Country row : countries) {
 			 if(row.getLocation().equals(country)) {
 				 if(row.getDate().equals(date)) {
-					 people_fully_vaccinated = row.getPeople_fully_vaccinated();
-					 haveData = true;
+					 return row.getPeople_fully_vaccinated();
 					 }
 				 }
-			 break;
-		 }
-		return haveData?people_fully_vaccinated:-1;
+			 }
+		return -1;
 	 }
 	 
-	 public static int retrieveWorldFullyVaccinated(String date) {
-		 int people_fully_vaccinated = 0;
-		 for(Country row : countries) {
-			 if(row.getDate().equals(date)) {
-				 people_fully_vaccinated += (row.getPeople_fully_vaccinated()==-1?0:row.getPeople_fully_vaccinated());
-				 }
-			 }
-		return people_fully_vaccinated;
-	 }
+//	 public static int retrieveWorldFullyVaccinated(String date) {
+//		 int people_fully_vaccinated = 0;
+//		 for(Country row : countries) {
+//			 if(row.getDate().equals(date)) {
+//				 people_fully_vaccinated += (row.getPeople_fully_vaccinated()==-1?0:row.getPeople_fully_vaccinated());
+//				 }
+//			 }
+//		return people_fully_vaccinated;
+//	 }
 	 
 	 public static float retrieveRateOfVaccination(String country, String date) {
 		 float rate = 0;
@@ -264,8 +260,7 @@ public class DataAnalysis {
 					 population = row.getPopulation();
 					 haveData = true;
 					 }
-				 }
-			 break;
+				 } 
 		 }
 		 
 		 if (haveData && people_fully_vaccinated != -1) {
@@ -277,21 +272,20 @@ public class DataAnalysis {
 		return rate;
 	 }
 	 
-	 public static float retrieveWorldRateOfVaccination(String date) {
-		 float rate = 0;
-		 float population = 0;
-		 int people_fully_vaccinated = 0;
-		 for(Country row : countries) {
-			 if(row.getDate().equals(date) && !(row.getContinent().equals(""))) {
-				 people_fully_vaccinated += retrieveFullyVaccinated(row.getLocation(), date);
-				 population += row.getPopulation();
-				 }
-			 }
-		 rate = people_fully_vaccinated / population * 100;
-		return rate;
-	 }
+//	 public static float retrieveWorldRateOfVaccination(String date) {
+//		 float rate = 0;
+//		 float population = 0;
+//		 int people_fully_vaccinated = 0;
+//		 for(Country row : countries) {
+//			 if(row.getDate().equals(date) && !(row.getContinent().equals(""))) {
+//				 people_fully_vaccinated += retrieveFullyVaccinated(row.getLocation(), date);
+//				 population += row.getPopulation();
+//				 }
+//			 }
+//		 rate = people_fully_vaccinated / population * 100;
+//		return rate;
+//	 }
 	 
-
 	 public static ArrayList<Float> retrieveTotalCasesList(String country, String startDate, String endDate) {
 		 ArrayList<Float> totalCases = new ArrayList<Float>();
 		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/uuuu");
@@ -338,23 +332,21 @@ public class DataAnalysis {
 			 if(row.getLocation().equals(country)) {
 				 LocalDate rowDate = LocalDate.parse(row.getDate(), formatter);
 				 if(rowDate.isAfter(_startDate) && rowDate.isBefore(_endDate) || rowDate.isEqual(_endDate) || rowDate.isEqual(_startDate)) {
+					 population = row.getPopulation();
 					 people_fully_vaccinated = row.getPeople_fully_vaccinated();
+					 if(population != -1 && people_fully_vaccinated != -1) {
+						 rate.add(people_fully_vaccinated / population * 100);
+						 }
+					 else {
+						 rate.add((float) -1);
+						 }
 					 }
-				 population = row.getPopulation();
 				 }
-			 if(population != -1 && people_fully_vaccinated != -1) {
-				 rate.add(people_fully_vaccinated / population * 100);
 			 }
-			 else {
-				 if(rate.isEmpty()) {
-					 rate.add((float)0);
-				 }
-				 rate.add(rate.get(rate.size() - 1));
-			 }
-		 }
 		return rate;
 	 }
-	 	 
+	 
+	 
 	 public static void setClass(String dataset) {
 		 
 		 for (CSVRecord rec : getFileParser(dataset)) {
@@ -409,8 +401,8 @@ public class DataAnalysis {
 					 Float.parseFloat(rec.get("human_development_index").equals("")?"-1":rec.get("human_development_index")),
 					 Float.parseFloat(rec.get("excess_mortality").equals("")?"-1":rec.get("excess_mortality")),
 					 Long.parseLong(rec.get("population").equals("")?"-1":rec.get("population")),
-					 Float.parseFloat(rec.get("positive_rate").equals("")?"-1":rec.get("positive_rate")),
 					 Float.parseFloat(rec.get("stringency_index").equals("")?"-1":rec.get("stringency_index")),
+					 Float.parseFloat(rec.get("positive_rate").equals("")?"-1":rec.get("positive_rate")),
 					 Integer.parseInt(rec.get("people_fully_vaccinated").equals("")?"-1":rec.get("people_fully_vaccinated")),
 					 Float.parseFloat(rec.get("people_fully_vaccinated_per_hundred").equals("")?"-1":rec.get("people_fully_vaccinated_per_hundred")),
 					 Integer.parseInt(rec.get("people_vaccinated").equals("")?"-1":rec.get("people_vaccinated")),
