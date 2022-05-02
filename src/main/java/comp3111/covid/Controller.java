@@ -102,10 +102,10 @@ public class Controller {
 	private TableColumn<TableResult, String> country;
 
 	@FXML
-	private TableColumn<TableResult, Integer> table_output1;
+	private TableColumn<TableResult, String> table_output1;
 
 	@FXML
-	private TableColumn<TableResult, Float> table_output2;
+	private TableColumn<TableResult, String> table_output2;
 
 	@FXML
 	private Label chart_label;
@@ -171,10 +171,10 @@ public class Controller {
     
     public class TableResult {
 		private SimpleStringProperty tableCountryName;
-		private SimpleIntegerProperty tableOutput1;
-		private SimpleFloatProperty tableOutput2;
+		private SimpleStringProperty tableOutput1;
+		private SimpleStringProperty tableOutput2;
 
-		public TableResult(String tableCountryName, int tableOutput1, float tableOutput2) {
+		public TableResult(String tableCountryName, String tableOutput1, String tableOutput2) {
 			this.setTableCountryName(tableCountryName);
 			this.setTableOutput1(tableOutput1);
 			this.setTableOutput2(tableOutput2);
@@ -188,20 +188,20 @@ public class Controller {
 			this.tableCountryName = new SimpleStringProperty(tableCountryName);
 		}
 
-		public int getTableOutput1() {
+		public String getTableOutput1() {
 			return tableOutput1.get();
 		}
 
-		public void setTableOutput1(int tableOutput1) {
-			this.tableOutput1 = new SimpleIntegerProperty(tableOutput1);
+		public void setTableOutput1(String tableOutput1) {
+			this.tableOutput1 = new SimpleStringProperty(tableOutput1);
 		}
 
-		public float getTableOutput2() {
+		public String getTableOutput2() {
 			return tableOutput2.get();
 		}
 
-		public void setTableOutput2(float tableOutput2) {
-			this.tableOutput2 = new SimpleFloatProperty(tableOutput2);
+		public void setTableOutput2(String tableOutput2) {
+			this.tableOutput2 = new SimpleStringProperty(tableOutput2);
 		}
 	}
     
@@ -225,51 +225,56 @@ public class Controller {
     		}
         	//dateEntry.clear();
     	}
+    	
 		ObservableList<TableResult> countryView = FXCollections.observableArrayList();
-    	textAreaConsole.appendText("\n");
-    	textAreaConsole.appendText("Number of Confirmed COVID-19 Cases as of " + date + "\n");
-    	textAreaConsole.appendText( "Country - Total Cases - Total Cases (per 1M)" + "\n");
+
+    	//textAreaConsole.appendText("\n");
+    	//textAreaConsole.appendText("Number of Confirmed COVID-19 Cases as of " + date + "\n");
+    	//textAreaConsole.appendText( "Country - Total Cases - Total Cases (per 1M)" + "\n");
+    	
     	int info1;
     	float info2;
+    	String use1;
+    	String use2;
     	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
     		info1 = DataAnalysis.retrieveTotalCases(countryList.get(i), date);
     		info2 = DataAnalysis.retrieveTotalCasesPer1M(countryList.get(i), date);
         	
-    		textAreaConsole.appendText( countryList.get(i) + " ");
     		
     		if (info1 != -1) {
-    			textAreaConsole.appendText(info1 + " "); 
+    			use1 = Integer.toString(info1);
     		} 
     		else {
-    			textAreaConsole.appendText("NaN ");
+    			use1 = "NaN";
     		}
     		if (info2 != -1) {
-    			textAreaConsole.appendText(info2 + " "); 
+    			use2 = Float.toString(info2);
     		} 
     		else {
-    			textAreaConsole.appendText("NaN ");
+    			use2 = "NaN";
     		}
     		
-        	textAreaConsole.appendText("\n");
-        	
-        	countryView
-			.add(new TableResult(countryList.get(i), (DataAnalysis.retrieveTotalCases(countryList.get(i), date)),
-					(DataAnalysis.retrieveTotalCasesPer1M(countryList.get(i), date))));
+    		//textAreaConsole.appendText( countryList.get(i) + " " + use1 + " " + use2 + "\n");
+        	countryView.add(new TableResult(countryList.get(i), use1, use2));
     	}
     	
-    	textAreaConsole.appendText( "World " + DataAnalysis.retrieveTotalCases("World", date) + " " +
-    			 + DataAnalysis.retrieveTotalCasesPer1M("World", date));
+    	//textAreaConsole.appendText( "World " + DataAnalysis.retrieveTotalCases("World", date) + " " + DataAnalysis.retrieveTotalCasesPer1M("World", date));
+    	
+    	use1 = Integer.toString(DataAnalysis.retrieveTotalCases("World", date));
+    	use2 = Float.toString(DataAnalysis.retrieveTotalCasesPer1M("World", date));
+    	countryView.add(new TableResult("World", use1, use2));
+
     	
 		table_label.setText("Number of Confirmed COVID-19 Cases as of " + date);
 		country.setText("Country");
 		country.setCellValueFactory(new PropertyValueFactory<TableResult, String>("tableCountryName"));
 		table_output1.setText("Total Cases");
-		table_output1.setCellValueFactory(new PropertyValueFactory<TableResult, Integer>("tableOutput1"));
+		table_output1.setCellValueFactory(new PropertyValueFactory<TableResult, String>("tableOutput1"));
 		table_output2.setText("Total Cases (per 1M)");
-		table_output2.setCellValueFactory(new PropertyValueFactory<TableResult, Float>("tableOutput1"));
+		table_output2.setCellValueFactory(new PropertyValueFactory<TableResult, String>("tableOutput2"));
 		table.setItems(countryView);
 		
-    	textAreaConsole.appendText("\n");
+    	//textAreaConsole.appendText("\n");
     	
     	
 
@@ -277,8 +282,6 @@ public class Controller {
 
     @FXML
     void generateTableB1(ActionEvent event) {
-    	//textAreaConsole.clear();
-
     	String date;
     	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
     		textAreaConsole.appendText("\nPlease Enter a Date" + "\n");
@@ -290,49 +293,53 @@ public class Controller {
     			textAreaConsole.appendText("\nPlease Enter a VALID Date" + "\n");
     			return;
     		}
-        	//dateEntry.clear();
     	}
     	
-    	textAreaConsole.appendText("\n");
-    	textAreaConsole.appendText("Number of Confirmed COVID-19 Deaths as of " + date + "\n");
-    	textAreaConsole.appendText("Country - Total Deaths - Total Deaths (per 1M)" + "\n");
+		ObservableList<TableResult> countryView = FXCollections.observableArrayList();
     	int info1;
     	float info2;
+    	String use1;
+    	String use2;
     	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
     		info1 = DataAnalysis.retrieveTotal_deaths(countryList.get(i), date);
     		info2 = DataAnalysis.retrieveTotalDeathsPer1M(countryList.get(i), date);
         	
-    		textAreaConsole.appendText( countryList.get(i) + " ");
     		
     		if (info1 != -1) {
-    			textAreaConsole.appendText(info1 + " "); 
+    			use1 = Integer.toString(info1);
     		} 
     		else {
-    			textAreaConsole.appendText("NaN ");
+    			use1 = "NaN";
     		}
     		if (info2 != -1) {
-    			textAreaConsole.appendText(info2 + " "); 
+    			use2 = Float.toString(info2);
     		} 
     		else {
-    			textAreaConsole.appendText("NaN ");
+    			use2 = "NaN";
     		}
     		
-        	textAreaConsole.appendText("\n");
+        	countryView.add(new TableResult(countryList.get(i), use1, use2));
     	}
+    	
+    	
+    	use1 = Integer.toString(DataAnalysis.retrieveTotal_deaths("World", date));
+    	use2 = Float.toString(DataAnalysis.retrieveTotalDeathsPer1M("World", date));
+    	countryView.add(new TableResult("World", use1, use2));
 
-    	textAreaConsole.appendText( "World " + DataAnalysis.retrieveTotal_deaths("World", date) + " " +
-   			 + DataAnalysis.retrieveTotalDeathsPer1M("World", date));
     	
-    	textAreaConsole.appendText("\n");
-    	
+		table_label.setText("Number of Confirmed COVID-19 Deaths as of " + date);
+		country.setText("Country");
+		country.setCellValueFactory(new PropertyValueFactory<TableResult, String>("tableCountryName"));
+		table_output1.setText("Total Deaths");
+		table_output1.setCellValueFactory(new PropertyValueFactory<TableResult, String>("tableOutput1"));
+		table_output2.setText("Total Deaths (per 1M)");
+		table_output2.setCellValueFactory(new PropertyValueFactory<TableResult, String>("tableOutput2"));
+		table.setItems(countryView);
 
     } 
 
     @FXML
     void generateTableC1(ActionEvent event) {
-
-    	//textAreaConsole.clear();
-
     	String date;
     	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
     		textAreaConsole.appendText("\nPlease Enter a Date" + "\n");
@@ -344,113 +351,87 @@ public class Controller {
     			textAreaConsole.appendText("\nPlease Enter a VALID Date" + "\n");
     			return;
     		}
-        	//dateEntry.clear();
     	}
     	
-    	textAreaConsole.appendText("\n");
-    	textAreaConsole.appendText("Rate of Vaccination against COVID-19 as of " + date + "\n");
-    	textAreaConsole.appendText("Country - Fully Vaccinated - Rate of Vaccination" + "\n");
+		ObservableList<TableResult> countryView = FXCollections.observableArrayList();
+
     	int info1;
     	float info2;
+    	String use1;
+    	String use2;
     	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
     		info1 = DataAnalysis.retrieveFullyVaccinated(countryList.get(i), date);
     		info2 = DataAnalysis.retrieveRateOfVaccination(countryList.get(i), date);
         	
-    		textAreaConsole.appendText( countryList.get(i) + " ");
     		
     		if (info1 != -1) {
-    			textAreaConsole.appendText(info1 + " "); 
+    			use1 = Integer.toString(info1);
     		} 
     		else {
-    			textAreaConsole.appendText("NaN ");
+    			use1 = "NaN";
     		}
     		if (info2 != -1) {
-    			textAreaConsole.appendText(info2 + " "); 
+    			use2 = Float.toString(info2);
     		} 
     		else {
-    			textAreaConsole.appendText("NaN ");
+    			use2 = "NaN";
     		}
     		
-        	textAreaConsole.appendText("\n");
+    		//textAreaConsole.appendText( countryList.get(i) + " " + use1 + " " + use2 + "\n");
+        	countryView.add(new TableResult(countryList.get(i), use1, use2));
     	}
-    	textAreaConsole.appendText( "World " + DataAnalysis.retrieveFullyVaccinated("World", date) + " " +
-   			 + DataAnalysis.retrieveFullyVaccinated("World", date));
+    	    	
+    	use1 = Integer.toString(DataAnalysis.retrieveFullyVaccinated("World", date));
+    	use2 = Float.toString(DataAnalysis.retrieveRateOfVaccination("World", date));
+    	countryView.add(new TableResult("World", use1, use2));
+
     	
-    	textAreaConsole.appendText("\n");
-
-
+		table_label.setText("Rate of Vaccination against COVID-19 as of " + date);
+		country.setText("Country");
+		country.setCellValueFactory(new PropertyValueFactory<TableResult, String>("tableCountryName"));
+		table_output1.setText("Fully Vaccinated");
+		table_output1.setCellValueFactory(new PropertyValueFactory<TableResult, String>("tableOutput1"));
+		table_output2.setText("Rate of Vaccination");
+		table_output2.setCellValueFactory(new PropertyValueFactory<TableResult, String>("tableOutput2"));
+		table.setItems(countryView);
+		
     } 
-    
-    public XYChart.Series<Integer, Integer> createSeries(String name, int x, int y) {
-        XYChart.Series<Integer, Integer> series = new XYChart.Series<>();
-        series.setName(name);
-        ObservableList<XYChart.Data<Integer, Integer>> seriesData = FXCollections.observableArrayList();
-        //for (int i = 0; i < aList.size(); i++) {
-          seriesData.add(new XYChart.Data(x, y));
-        //}
-        series.setData(seriesData);
-        
-        return series;
-    }
-    
-    public class chartResult {
-    	//private String chartCountryName;
-		private String chartX;
-		private int chartY;
-		
-//		public chartResult(String chartCountryName, String chartX, int chartY) {
-//			this.setChartCountryName(chartCountryName);
-//			this.setChartX(chartX);
-//			this.setChartY(chartY);
-//		}
-		
-		public chartResult(String chartX, int chartY) {
-			this.setChartX(chartX);
-			this.setChartY(chartY);
-		}
-		
-//		public String getChartCountryName() {
-//			return chartCountryName;
-//		}
-//		public void setChartCountryName(String chartCountryName) {
-//			this.chartCountryName = chartCountryName;
-//		}
-		public String getChartX() {
-			return chartX;
-		}
-		public void setChartX(String chartX) {
-			this.chartX = chartX;
-		}
-		public int getChartY() {
-			return chartY;
-		}
-		public void setChartY(int chartY) {
-			this.chartY = chartY;
-		}
-    }
     
     @FXML
     void generateTableA2(ActionEvent event) {
     	//textAreaConsole.clear();
-
+    	
     	String startdate;
     	String enddate;
-    	if (dateEntry2.getText() == null || dateEntry2.getText().trim().isEmpty()) {
-    		textAreaConsole2.appendText("Please Enter a Date" + "\n");
+    	if (dateEntry2.getText() == null || dateEntry2.getText().trim().isEmpty() || dateEntry3.getText() == null || dateEntry3.getText().trim().isEmpty()) {
+    		textAreaConsole2.appendText("Please Enter Dates" + "\n");
     		return;
-    	}
-    	else if (false) {
-    		
     	}
     	else {
     		startdate = dateEntry2.getText();
+    		if (DataAnalysis.isValidDate(startdate) == false) {
+    			textAreaConsole.appendText("\nPlease Enter a VALID Date" + "\n");
+    			return;
+    		}
     		enddate = dateEntry3.getText();
+    		if (DataAnalysis.isValidDate(enddate) == false) {
+    			textAreaConsole.appendText("\nPlease Enter a VALID Date" + "\n");
+    			return;
+    		}
         	//dateEntry.clear();
     	}
+    	
+    	
 
     	textAreaConsole2.appendText("\n");
     	// count country number
     	int count = 0;
+    	textAreaConsole2.appendText("Cumulative Confirmed COVID-19 Cases (per 1M)\n");
+    	
+    	float info1;
+    	float info2;
+    	
+    	ArrayList<Float> data;
     	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
     		count++;
     	}
@@ -460,10 +441,20 @@ public class Controller {
         	textAreaConsole2.appendText( countryList2.get(i) + " from " + startdate + " to " + enddate + "\n");
         	countryArray[index] = countryList2.get(i);
         	index++;
+        	textAreaConsole2.appendText(countryList.get(i) + " ");
+        	
+    		data = DataAnalysis.retrieveTotalCasesList(countryList.get(i),startdate,enddate);
+    		for (int j = 0; j < data.size(); j++) {
+    			textAreaConsole2.appendText(Float.toString(data.get(j)) + " ");
+    		}
+    		textAreaConsole2.appendText(" \n");
     	}
+    	
     	textAreaConsole2.appendText( "World \n" );
     	chart_label.setText("Cumulative Confirmed COVID-19 Cases (per 1M)");
     	chart.getData().clear();
+
+    	//textAreaConsole2.appendText( "World " + DataAnalysis.retrieveTotalCasesPer1M("World", startdate) + " " + DataAnalysis.retrieveTotalCasesPer1M("World", enddate));
     	
     	for (int i = 0; i < count; i++) {
     		XYChart.Series series = new XYChart.Series();
