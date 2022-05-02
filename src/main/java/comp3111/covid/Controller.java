@@ -464,41 +464,15 @@ public class Controller {
     	textAreaConsole2.appendText( "World \n" );
     	chart_label.setText("Cumulative Confirmed COVID-19 Cases (per 1M)");
     	chart.getData().clear();
-    	//ObservableList<chartResult> countryChart = FXCollections.observableArrayList();
-    	//ObservableList<XYChart.Series> seriesList = FXCollections.observableArrayList();
-    	//List<XYChart.Data> data = FXCollections.observableArrayList();
-//        ObservableList<XYChart.Data> aList = FXCollections.observableArrayList(
-//                new XYChart.Data(0, 0),
-//                new XYChart.Data(2, 6),
-//                new XYChart.Data(4, 37),
-//                new XYChart.Data(6, 82),
-//                new XYChart.Data(8, 115)
-//        );
-//    	ObservableList<XYChart.Data> aList = FXCollections.observableArrayList();
-//    	aList.add(new XYChart.Data(0, 0));
     	
-//    	 ObservableList<XYChart.Series<String,Integer>> lineChartData = FXCollections.observableArrayList(
-//    	            new LineChart.Series<String,Integer>("Series 1", FXCollections.observableArrayList(
-//    	                new XYChart.Data<String,Integer>("Jan", 12),
-//    	                new XYChart.Data<String,Integer>("Feb", 24),
-//    	                new XYChart.Data<String,Integer>("March", 60),
-//    	                new XYChart.Data<String,Integer>("April", 90),
-//    	                new XYChart.Data<String,Integer>("May", 100)
-//    	            )),
-//    	            new LineChart.Series<String,Integer>("Series 2", FXCollections.observableArrayList(
-//    	                new XYChart.Data<String,Integer>("Jan", 4),
-//    	                new XYChart.Data<String,Integer>("Feb", 10),
-//    	                new XYChart.Data<String,Integer>("March", 36),
-//    	                new XYChart.Data<String,Integer>("April", 79),
-//    	                new XYChart.Data<String,Integer>("May", 110)
-//    	            ))
-//    	        );
-    	XYChart.Series series2 = new XYChart.Series();
-    	for (int i = 0; i < 10; i++) {
-    		series2.getData().add(new XYChart.Data("Jan"+i, i));
+    	for (int i = 0; i < count; i++) {
+    		XYChart.Series series = new XYChart.Series();
+    		for (int j = 0; j < 10; j++) {
+    			series.getData().add(new XYChart.Data("Jan"+j, Math.random()*100));
+        	}
+    		series.setName("test1");
+    		chart.getData().add(series);
     	}
-    	series2.setName("test2");
-    	chart.getData().addAll(series2);
     }
 
 	@FXML
