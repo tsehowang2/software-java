@@ -291,6 +291,7 @@ public class DataAnalysis {
 		return rate;
 	 }
 	 
+
 	 public static ArrayList<Float> retrieveTotalCasesList(String country, String startDate, String endDate) {
 		 ArrayList<Float> totalCases = new ArrayList<Float>();
 		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/uuuu");
@@ -353,8 +354,7 @@ public class DataAnalysis {
 		 }
 		return rate;
 	 }
-	 
-	 
+	 	 
 	 public static void setClass(String dataset) {
 		 
 		 for (CSVRecord rec : getFileParser(dataset)) {

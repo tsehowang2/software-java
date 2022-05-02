@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox prefHeight="679.0" prefWidth="719.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="comp3111.covid.Controller">
   <children>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="437.0" prefWidth="719.0">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="698.0" prefWidth="719.0">
       <children>
-            <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="350.0" prefWidth="719.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane prefHeight="710.0" prefWidth="719.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab fx:id="tabTaskZero" text="File Selection">
+                <Tab fx:id="tabTaskZero" text="File Import">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="221.0" prefWidth="719.0">
                            <children>
@@ -28,33 +34,54 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                  <Tab fx:id="tabReport1" text="Tables">
+                  <Tab fx:id="tabReport1" text="Table Generation">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="384.0" prefWidth="719.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="605.0" prefWidth="719.0">
                            <children>
                               <Label layoutX="79.0" layoutY="44.0" />
-                              <TextArea fx:id="textAreaConsole" editable="false" layoutX="349.0" layoutY="14.0" prefHeight="294.0" prefWidth="355.0" text="This tab will generate data tables showingregarding information COVID-19 cases by country and date.&#10;&#10;To generate a table please:&#10;Select the countries of interest (use ctrl+left click to select multiple)&#10;&#10;Enter the date of interest in &quot;mm/dd/yyyy&quot; format&#10;&#10;Click Button:&#10;GenerateA1 for &#10;GenerateA2 for &#10;GenerateA3 for &#10;&#10;Output in text:" wrapText="true" />
+                              <TextArea fx:id="textAreaConsole" editable="false" layoutX="349.0" layoutY="14.0" prefHeight="294.0" prefWidth="355.0" text="This tab will generate tables showing information regarding COVID-19 cases by country and date.&#10;&#10;To generate a table please:&#10;Select the countries of interest (use ctrl+left click to select multiple)&#10;&#10;Enter the date of interest in &quot;mm/dd/yyyy&quot; format&#10;&#10;Then depending on desired table, click Button:&#10;GenerateA1 for Confirmed Cases&#10;GenerateA2 for Confirmed Deaths&#10;GenerateA3 for Rate of Vaccination &#10;" wrapText="true" />
                               <ListView fx:id="countryEntry" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="300.0" />
-                              <TextField fx:id="dateEntry" layoutX="14.0" layoutY="238.0" prefHeight="26.0" prefWidth="300.0" />
+                              <TextField fx:id="dateEntry" layoutX="14.0" layoutY="234.0" prefHeight="26.0" prefWidth="300.0" />
                               <Button fx:id="generateA1" layoutX="14.0" layoutY="283.0" mnemonicParsing="false" onAction="#generateTableA1" text="GenerateA1" />
                               <Button fx:id="generateB1" layoutX="125.0" layoutY="283.0" mnemonicParsing="false" onAction="#generateTableB1" text="GenerateB1" />
                               <Button fx:id="generateC1" layoutX="235.0" layoutY="283.0" mnemonicParsing="false" onAction="#generateTableC1" text="GenerateC1" />
+                              <TableView fx:id="table" layoutX="15.0" layoutY="373.0" prefHeight="293.0" prefWidth="687.0">
+                                <columns>
+                                  <TableColumn fx:id="country" prefWidth="215.99996948242188" />
+                                  <TableColumn fx:id="table_output1" prefWidth="217.9999542236328" />
+                                    <TableColumn fx:id="table_output2" prefWidth="251.33334350585938" />
+                                </columns>
+                              </TableView>
+                              <Label fx:id="table_label" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="340.0" prefHeight="25.0" prefWidth="691.0" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font></Label>
                            </children>
                         </AnchorPane>
                     </content>
                   </Tab>
-                  <Tab fx:id="tabApp1" text="Charts">
+                  <Tab fx:id="tabApp1" text="Chart Generation">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="412.0" prefWidth="719.0">
                            <children>
                               <Label />
-                              <TextArea fx:id="textAreaConsole2" editable="false" layoutX="349.0" layoutY="14.0" prefHeight="294.0" prefWidth="355.0" text="This tab will generate data tables showing the number of confirmed COVID-19 cases by country&#10;&#10;To generate a table please:&#10;Select the countries of interest (use ctrl+left click to select multiple)&#10;Enter the date of interest in &quot;mm/dd/yyyy&quot; format&#10;Click generate &#10;&#10;Output in text:" wrapText="true" />
+                              <TextArea fx:id="textAreaConsole2" editable="false" layoutX="349.0" layoutY="14.0" prefHeight="294.0" prefWidth="355.0" text="This tab will generate tables showing information regarding COVID-19 cases by country and date.&#10;&#10;To generate a table please:&#10;Select the countries of interest (use ctrl+left click to select multiple)&#10;&#10;Enter the state and end dates in &quot;mm/dd/yyyy&quot; format&#10;&#10;Then depending on desired table, click Button:&#10;GenerateA1 for Confirmed Cases&#10;GenerateA2 for Confirmed Deaths&#10;GenerateA3 for Rate of Vaccination &#10;&#10;Output in text:&#10;" wrapText="true" />
                               <ListView fx:id="countryEntry2" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="300.0" />
-                              <TextField fx:id="dateEntry2" layoutX="14.0" layoutY="228.0" prefHeight="26.0" prefWidth="130.0" />
-                              <Button fx:id="generateA2" layoutX="14.0" layoutY="274.0" mnemonicParsing="false" onAction="#generateTableA2" text="GenerateA2" />
-                              <Button fx:id="generateB2" layoutX="125.0" layoutY="274.0" mnemonicParsing="false" onAction="#generateTableB2" text="GenerateB2" />
-                              <Button fx:id="generateC2" layoutX="235.0" layoutY="274.0" mnemonicParsing="false" onAction="#generateTableC2" text="GenerateC2" />
-                              <TextField fx:id="dateEntry3" layoutX="183.0" layoutY="228.0" prefHeight="26.0" prefWidth="130.0" />
+                              <TextField fx:id="dateEntry2" layoutX="14.0" layoutY="234.0" prefHeight="26.0" prefWidth="130.0" />
+                              <TextField fx:id="dateEntry3" layoutX="183.0" layoutY="234.0" prefHeight="26.0" prefWidth="130.0" />
+                              <Button fx:id="generateA2" layoutX="14.0" layoutY="283.0" mnemonicParsing="false" onAction="#generateTableA2" text="GenerateA2" />
+                              <Button fx:id="generateB2" layoutX="125.0" layoutY="283.0" mnemonicParsing="false" onAction="#generateTableB2" text="GenerateB2" />
+                              <Button fx:id="generateC2" layoutX="235.0" layoutY="283.0" mnemonicParsing="false" onAction="#generateTableC2" text="GenerateC2" />
+                              <LineChart fx:id="chart" layoutX="14.0" layoutY="352.0" prefHeight="291.0" prefWidth="684.0">
+                                <xAxis>
+                                  <CategoryAxis side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis side="LEFT" />
+                                </yAxis>
+                              </LineChart>
+                              <Label fx:id="chart_label" layoutX="32.0" layoutY="328.0" prefHeight="33.0" prefWidth="671.0" />
+                              <Text layoutX="158.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="to" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -63,6 +90,5 @@
             </TabPane>
       </children>
     </AnchorPane>
-      <ScrollPane prefHeight="387.0" prefWidth="719.0" />
   </children>
 </VBox>
