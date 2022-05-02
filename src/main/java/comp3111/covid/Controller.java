@@ -31,6 +31,8 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -151,6 +153,8 @@ public class Controller {
 
     @FXML
     private TextField textfieldISO;
+
+	private CharSequence endDate;
 
     @FXML
     void doImportCSV(ActionEvent event) {
@@ -432,38 +436,58 @@ public class Controller {
     	float info2;
     	
     	ArrayList<Float> data;
-    	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
-    		count++;
-    	}
-    	String[] countryArray = new String[count];
-    	int index = 0;
+//    	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
+//    		count++;
+//    	}
+//    	String[] countryArray = new String[count];
+//    	int index = 0;
+       	chart.getData().clear();
+       	
+        //LocalDate _endDate = LocalDate.parse(enddate, formatter);
+        
     	for (Integer i : countryEntry2.getSelectionModel().getSelectedIndices()) {
         	textAreaConsole2.appendText( countryList2.get(i) + " from " + startdate + " to " + enddate + "\n");
-        	countryArray[index] = countryList2.get(i);
-        	index++;
+//        	countryArray[index] = countryList2.get(i);
+//        	index++;
         	textAreaConsole2.appendText(countryList.get(i) + " ");
-        	
+        	XYChart.Series series = new XYChart.Series();
     		data = DataAnalysis.retrieveTotalCasesList(countryList.get(i),startdate,enddate);
-    		for (int j = 0; j < data.size(); j++) {
+    		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+           	LocalDate _startDate = LocalDate.parse(startdate, formatter);
+    		LocalDate k = _startDate;
+    		for (int j = 0; j < data.size(); j++) {			
     			textAreaConsole2.appendText(Float.toString(data.get(j)) + " ");
+    			String formattedString = k.format(formatter);
+    			textAreaConsole2.appendText(formattedString);
+    			series.getData().add(new XYChart.Data(formattedString, data.get(j))); // j.format(formatter)
+    			k = k.plusDays(1);
     		}
     		textAreaConsole2.appendText(" \n");
+    		series.setName(countryList.get(i));
+    		chart.getData().add(series);
     	}
     	
     	textAreaConsole2.appendText( "World \n" );
     	chart_label.setText("Cumulative Confirmed COVID-19 Cases (per 1M)");
-    	chart.getData().clear();
+ 
 
     	//textAreaConsole2.appendText( "World " + DataAnalysis.retrieveTotalCasesPer1M("World", startdate) + " " + DataAnalysis.retrieveTotalCasesPer1M("World", enddate));
     	
-    	for (int i = 0; i < count; i++) {
-    		XYChart.Series series = new XYChart.Series();
-    		for (int j = 0; j < 10; j++) {
-    			series.getData().add(new XYChart.Data("Jan"+j, Math.random()*100));
-        	}
-    		series.setName("test1");
-    		chart.getData().add(series);
-    	}
+//    	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+//        LocalDate _startDate = LocalDate.parse(startdate, formatter);
+//        LocalDate _endDate = LocalDate.parse(enddate, formatter);
+//    	for (int i = 0; i < count; i++) {
+//    		XYChart.Series series = new XYChart.Series();
+//    		ArrayList<Float> totalCases = DataAnalysis.retrieveTotalCasesList(countryArray[i], startdate, enddate);
+//    		int k = 0;
+//    		for (LocalDate j = _startDate; j != _endDate; j.plusDays(1)) {
+//    			String formattedString = j.format(formatter);
+//    			series.getData().add(new XYChart.Data(formattedString, totalCases.get(k)));
+//    			k++;
+//        	}
+//    		series.setName(countryArray[i]);
+//    		chart.getData().add(series);
+//    	}
     }
 
 	@FXML
