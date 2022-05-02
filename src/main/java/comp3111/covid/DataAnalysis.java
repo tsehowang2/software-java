@@ -260,7 +260,7 @@ public class DataAnalysis {
 					 population = row.getPopulation();
 					 haveData = true;
 					 }
-				 }
+				 } 
 		 }
 		 
 		 if (haveData && people_fully_vaccinated != -1) {
