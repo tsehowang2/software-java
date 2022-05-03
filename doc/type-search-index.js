@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"comp3111.covid","l":"Controller"},{"p":"comp3111.covid","l":"Controller.TableResult"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"comp3111.covid","l":"Case"},{"p":"comp3111.covid","l":"Controller"},{"p":"comp3111.covid","l":"Country"},{"p":"comp3111.covid","l":"DataAnalysis"},{"p":"comp3111.covid","l":"MyApplication"},{"p":"comp3111.covid","l":"Controller.TableResult"},{"p":"comp3111.covid","l":"UnitTest"}];updateSearchResults();
