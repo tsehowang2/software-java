@@ -283,10 +283,7 @@ public class Controller {
     	}
     	
     	//textAreaConsole.appendText( "World " + DataAnalysis.retrieveTotalCases("World", date) + " " + DataAnalysis.retrieveTotalCasesPer1M("World", date));
-    	
-    	use1 = Integer.toString(DataAnalysis.retrieveTotalCases("World", date));
-    	use2 = Float.toString(DataAnalysis.retrieveTotalCasesPer1M("World", date));
-    	countryView.add(new TableResult("World", use1, use2));
+
 
     	
 		table_label.setText("Number of Confirmed COVID-19 Cases as of " + date);
@@ -352,11 +349,6 @@ public class Controller {
     	}
     	
     	
-    	use1 = Integer.toString(DataAnalysis.retrieveTotal_deaths("World", date));
-    	use2 = Float.toString(DataAnalysis.retrieveTotalDeathsPer1M("World", date));
-    	countryView.add(new TableResult("World", use1, use2));
-
-    	
 		table_label.setText("Number of Confirmed COVID-19 Deaths as of " + date);
 		country.setText("Country");
 		country.setCellValueFactory(new PropertyValueFactory<TableResult, String>("tableCountryName"));
@@ -417,10 +409,6 @@ public class Controller {
         	countryView.add(new TableResult(countryList.get(i), use1, use2));
     	}
     	    	
-    	use1 = Integer.toString(DataAnalysis.retrieveFullyVaccinated("World", date));
-    	use2 = Float.toString(DataAnalysis.retrieveRateOfVaccination("World", date));
-    	countryView.add(new TableResult("World", use1, use2));
-
     	
 		table_label.setText("Rate of Vaccination against COVID-19 as of " + date);
 		country.setText("Country");
