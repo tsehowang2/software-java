@@ -30,6 +30,24 @@ public class DataAnalysis {
 		 DateTimeFormatter f = DateTimeFormatter.ofPattern ( "M/d/uuuu" );
 		 try {
 		     LocalDate ld = LocalDate.parse ( input , f );
+		     
+		     LocalDate earlyd = LocalDate.parse("12/31/2999",f);
+		     for (Country c : countries) {
+			     LocalDate cd = LocalDate.parse(c.getDate(),f);
+			     if(cd.isBefore(earlyd)) {
+			    	 earlyd = cd;
+			     }
+		     }
+		     LocalDate lated = LocalDate.parse("12/31/1999",f);
+		     for (Country c : countries) {
+			     LocalDate cd = LocalDate.parse(c.getDate(),f);
+			     if(cd.isAfter(lated)) {
+			    	 lated = cd;
+			     }
+		     }
+		     if (ld.isBefore(earlyd) || ld.isAfter(lated)) {
+			     return false;
+		     }
 		     if (input.charAt(0) == '2') {
 		    	 if (input.charAt(2) == '2' &&  input.charAt(3) == '9') {
 		    		 int year = Integer.parseInt(input.substring(input.length() - 4));
@@ -51,6 +69,7 @@ public class DataAnalysis {
 		    		 return false;
 		    	 }
 		     }
+
 		     return true;
 
 		 } catch (DateTimeParseException e) {}
