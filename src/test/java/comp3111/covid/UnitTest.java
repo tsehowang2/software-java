@@ -393,7 +393,48 @@ public class UnitTest {
 	public void testA1() {
 		ActionEvent event = null;     
 		Controller controller = new Controller();
+		//controller.initialize();
 		controller.generateTableA1(event);
+	}
+	
+	@Test
+	public void testB1() {
+		ActionEvent event = null;     
+		Controller controller = new Controller();
+		//controller.initialize();
+		controller.generateTableB1(event);
+	}
+	
+	@Test
+	public void testC1() {
+		ActionEvent event = null;     
+		Controller controller = new Controller();
+		//controller.initialize();
+		controller.generateTableC1(event);
+	}
+	
+	@Test
+	public void testA2() {
+		ActionEvent event = null;     
+		Controller controller = new Controller();
+		//controller.initialize();
+		controller.generateTableA2(event);
+	}
+	
+	@Test
+	public void testB2() {
+		ActionEvent event = null;     
+		Controller controller = new Controller();
+		//controller.initialize();
+		controller.generateTableB2(event);
+	}
+	
+	@Test
+	public void testC2() {
+		ActionEvent event = null;     
+		Controller controller = new Controller();
+		//controller.initialize();
+		controller.generateTableC2(event);
 	}
 	
 	@Test
