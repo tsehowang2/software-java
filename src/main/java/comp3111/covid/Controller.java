@@ -153,10 +153,9 @@ public class Controller {
 
     @FXML
     private TextField textfieldISO;
-
-	private CharSequence endDate;
-
+    
     @FXML
+	private CharSequence endDate;
 
     /**
      * import the CSV file
