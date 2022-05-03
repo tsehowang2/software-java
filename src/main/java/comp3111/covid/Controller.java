@@ -41,7 +41,11 @@ import java.util.List;
  */
 
 
-
+/**
+ * class Controller
+ * @author chleungba, AlanHLTong
+ *
+ */
 public class Controller {
 
     @FXML
@@ -620,7 +624,9 @@ public class Controller {
 
     } 
 
-    
+    /**
+     * initialize
+     */
     @FXML
     public void initialize() {
     	countryEntry.setItems(countryList);
