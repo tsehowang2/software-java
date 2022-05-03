@@ -1,12 +1,10 @@
 package comp3111.covid;
 
 import static org.junit.Assert.*;
-<<<<<<< HEAD
 
 import org.junit.After;
 import org.junit.Before;
-=======
->>>>>>> branch 'master' of https://github.com/chleungba/GroupProject.git
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -158,6 +156,13 @@ public class UnitTest {
 	@Test
 	public void getHospital_beds_per_thousandWithValidInput() {
 		assertEquals(0.5,DataAnalysis.cases.get(0).getHospital_beds_per_thousand(), 0.001);
+	}
+	
+	@Test
+	public void testA1() {
+		ActionEvent event = null;     
+		Controller controller = new Controller();
+		controller.generateTableA1(event);
 	}
 
 }

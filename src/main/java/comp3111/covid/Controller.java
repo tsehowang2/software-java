@@ -214,7 +214,11 @@ public class Controller {
     	//textAreaConsole.appendText(null);
     	
     	String date;
-    	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
+    	if (event == null) {
+    		date = "1";
+    		return 0;
+    	}
+    	else if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
     		textAreaConsole.appendText("\nPlease Enter a Date");
     		return 0;
     	}
@@ -523,8 +527,7 @@ public class Controller {
 
     
     @FXML
-    public void initialize() {
-    	
+    public void initialize() {    	
     	countryEntry.setItems(countryList);
     	countryEntry.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);    	
     	
