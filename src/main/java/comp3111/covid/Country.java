@@ -1,5 +1,10 @@
 package comp3111.covid;
 
+/**
+ * Class Country
+ * @author chleungba, tsehowang2
+ *
+ */
 public class Country {
 	private String iso_code;
 	private String date;

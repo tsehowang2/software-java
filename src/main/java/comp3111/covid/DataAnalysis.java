@@ -19,6 +19,12 @@ public class DataAnalysis {
 	 static List<Case> cases = new ArrayList<Case>();
 	 static List<Country> countries = new ArrayList<Country>();
 	 
+	 /**
+	  * checking the date is valid or not
+	  * @param input
+	  * @return <code>true</code> if the date is vaild
+	  * 		<code>false</code> otherwise.
+	  */
 	 public static boolean isValidDate(String input) {
 		 //String input = "31/02/2000";
 		 DateTimeFormatter f = DateTimeFormatter.ofPattern ( "M/d/uuuu" );
@@ -39,94 +45,97 @@ public class DataAnalysis {
 	     return fr.getCSVParser(true);
 	     }
 	
-	public static String getConfirmedCases(String dataset, String iso_code) {
-		String oReport = "";	
-		long confirmedCases = 0;
-		long numRecord = 0;
-		long totalNumRecord = 0;
-		
-		for (CSVRecord rec : getFileParser(dataset)) {
-			
-			if (rec.get("iso_code").equals(iso_code)) {
-				String s = rec.get("new_cases");
-				if (!s.equals("")) {
-					confirmedCases += Long.parseLong(s);
-					numRecord++;
-				}
-			}		
-			totalNumRecord++;
-		}
-		
-		oReport = String.format("Dataset (%s): %,d Records\n\n", dataset, totalNumRecord);
-		oReport += String.format("[Summary (%s)]\n", iso_code);
-		oReport += String.format("Number of Confirmed Cases: %,d\n", confirmedCases);
-		oReport += String.format("Number of Days Reported: %,d\n", numRecord);
-		
-		return oReport;
-	}
-	
-	 public static String getConfirmedDeaths(String dataset, String iso_code) {
-			String oReport = "";	
-			long confirmedDeaths = 0;
-			long numRecord = 0;
-			long totalNumRecord = 0;
-			
-			for (CSVRecord rec : getFileParser(dataset)) {
-				
-				if (rec.get("iso_code").equals(iso_code)) {
-					String s = rec.get("new_deaths");
-					if (!s.equals("")) {
-						confirmedDeaths += Long.parseLong(s);
-						numRecord++;
-					}
-				}		
-				totalNumRecord++;
-			}
-			
-			oReport = String.format("Dataset (%s): %,d Records\n\n", dataset, totalNumRecord);
-			oReport += String.format("[Summary (%s)]\n", iso_code);
-			oReport += String.format("Number of Deaths: %,d\n", confirmedDeaths);
-			oReport += String.format("Number of Days Reported: %,d\n", numRecord);
-			
-			return oReport;
-	 }
-	 
-	 public static String getRateOfVaccination(String dataset, String iso_code) {
-			String oReport = "";	
-			long fullyVaccinated = 0;
-			long numRecord = 0;
-			long totalNumRecord = 0;
-			long population = 0;
-			float rate = 0.0f;
-						
-			for (CSVRecord rec : getFileParser(dataset)) {
-				
-				if (rec.get("iso_code").equals(iso_code)) {
-					
-					String s1 = rec.get("people_fully_vaccinated");
-					String s2 = rec.get("population");		
-					if (!s1.equals("") && !s2.equals("")) {
-						fullyVaccinated = Long.parseLong(s1);
-						population = Long.parseLong(s2);						
-						numRecord++;
-					}
-				}		
-				totalNumRecord++;
-			}
-			
-			if (population !=0)
-				rate = (float) fullyVaccinated / population * 100;
-			
-			oReport = String.format("Dataset (%s): %,d Records\n\n", dataset, totalNumRecord);
-			oReport += String.format("[Summary (%s)]\n", iso_code);
-			oReport += String.format("Number of People Fully Vaccinated: %,d\n", fullyVaccinated);
-			oReport += String.format("Population: %,d\n", population);
-			oReport += String.format("Rate of Vaccination: %.2f%%\n", rate);
-			oReport += String.format("Number of Days Reported: %,d\n", numRecord);
-			
-			return oReport;
-	 }
-	 
+//	public static String getConfirmedCases(String dataset, String iso_code) {
+//		String oReport = "";	
+//		long confirmedCases = 0;
+//		long numRecord = 0;
+//		long totalNumRecord = 0;
+//		
+//		for (CSVRecord rec : getFileParser(dataset)) {
+//			
+//			if (rec.get("iso_code").equals(iso_code)) {
+//				String s = rec.get("new_cases");
+//				if (!s.equals("")) {
+//					confirmedCases += Long.parseLong(s);
+//					numRecord++;
+//				}
+//			}		
+//			totalNumRecord++;
+//		}
+//		
+//		oReport = String.format("Dataset (%s): %,d Records\n\n", dataset, totalNumRecord);
+//		oReport += String.format("[Summary (%s)]\n", iso_code);
+//		oReport += String.format("Number of Confirmed Cases: %,d\n", confirmedCases);
+//		oReport += String.format("Number of Days Reported: %,d\n", numRecord);
+//		
+//		return oReport;
+//	}
+//	
+//	 public static String getConfirmedDeaths(String dataset, String iso_code) {
+//			String oReport = "";	
+//			long confirmedDeaths = 0;
+//			long numRecord = 0;
+//			long totalNumRecord = 0;
+//			
+//			for (CSVRecord rec : getFileParser(dataset)) {
+//				
+//				if (rec.get("iso_code").equals(iso_code)) {
+//					String s = rec.get("new_deaths");
+//					if (!s.equals("")) {
+//						confirmedDeaths += Long.parseLong(s);
+//						numRecord++;
+//					}
+//				}		
+//				totalNumRecord++;
+//			}
+//			
+//			oReport = String.format("Dataset (%s): %,d Records\n\n", dataset, totalNumRecord);
+//			oReport += String.format("[Summary (%s)]\n", iso_code);
+//			oReport += String.format("Number of Deaths: %,d\n", confirmedDeaths);
+//			oReport += String.format("Number of Days Reported: %,d\n", numRecord);
+//			
+//			return oReport;
+//	 }
+//	 
+//	 public static String getRateOfVaccination(String dataset, String iso_code) {
+//			String oReport = "";	
+//			long fullyVaccinated = 0;
+//			long numRecord = 0;
+//			long totalNumRecord = 0;
+//			long population = 0;
+//			float rate = 0.0f;
+//						
+//			for (CSVRecord rec : getFileParser(dataset)) {
+//				
+//				if (rec.get("iso_code").equals(iso_code)) {
+//					
+//					String s1 = rec.get("people_fully_vaccinated");
+//					String s2 = rec.get("population");		
+//					if (!s1.equals("") && !s2.equals("")) {
+//						fullyVaccinated = Long.parseLong(s1);
+//						population = Long.parseLong(s2);						
+//						numRecord++;
+//					}
+//				}		
+//				totalNumRecord++;
+//			}
+//			
+//			if (population !=0)
+//				rate = (float) fullyVaccinated / population * 100;
+//			
+//			oReport = String.format("Dataset (%s): %,d Records\n\n", dataset, totalNumRecord);
+//			oReport += String.format("[Summary (%s)]\n", iso_code);
+//			oReport += String.format("Number of People Fully Vaccinated: %,d\n", fullyVaccinated);
+//			oReport += String.format("Population: %,d\n", population);
+//			oReport += String.format("Rate of Vaccination: %.2f%%\n", rate);
+//			oReport += String.format("Number of Days Reported: %,d\n", numRecord);
+//			
+//			return oReport;
+//	 }
+	 /**
+	  * get the Unique Locations
+	  * @return Unique locations list
+	  */
 	 public static List<String> getUniqueLocations() {
 		 ArrayList<String> location = new ArrayList<String>();
 		 for(Country row : countries) {
@@ -136,6 +145,12 @@ public class DataAnalysis {
 		 return uniqueLocation;
 	 }
 	 
+	 /**
+	  * get the total case with specific country and date
+	  * @param country
+	  * @param date
+	  * @return total cases
+	  */
 	 public static int retrieveTotalCases(String country, String date) {
 		 int total_cases = 0;
 		 for(Country row : countries) {
@@ -149,16 +164,22 @@ public class DataAnalysis {
 		 return total_cases;
 	 }
 	 
-	 public static int retrieveWorldTotalCasesWorld(String date) {
-		 int total_cases = 0;
-		 for(Country row : countries) {
-			 if(row.getDate().equals(date)) {
-				 total_cases += (row.getTotal_cases()==-1?0:row.getTotal_cases());
-				 }
-			 }
-		 return total_cases;
-	 }
+//	 public static int retrieveWorldTotalCasesWorld(String date) {
+//		 int total_cases = 0;
+//		 for(Country row : countries) {
+//			 if(row.getDate().equals(date)) {
+//				 total_cases += (row.getTotal_cases()==-1?0:row.getTotal_cases());
+//				 }
+//			 }
+//		 return total_cases;
+//	 }
 	 
+	 /**
+	  * get the total case per million with specific country and date
+	  * @param country
+	  * @param date
+	  * @return total cases per million
+	  */
 	 public static float retrieveTotalCasesPer1M(String country, String date) {
 		 float total_cases_per_million = 0;
 		 for(Country row : countries) {
@@ -172,16 +193,22 @@ public class DataAnalysis {
 		return total_cases_per_million;
 	 }
 	 
-	 public static float retrieveWorldTotalCasesPer1M(String date) {
-		 float total_cases_per_million = 0;
-		 for(Country row : countries) {
-			 if(row.getDate().equals(date)) {
-				 total_cases_per_million += (row.getTotal_cases_per_million()==-1?0:row.getTotal_cases_per_million());
-				 }
-			 }
-		 return total_cases_per_million;
-	 }
+//	 public static float retrieveWorldTotalCasesPer1M(String date) {
+//		 float total_cases_per_million = 0;
+//		 for(Country row : countries) {
+//			 if(row.getDate().equals(date)) {
+//				 total_cases_per_million += (row.getTotal_cases_per_million()==-1?0:row.getTotal_cases_per_million());
+//				 }
+//			 }
+//		 return total_cases_per_million;
+//	 }
 	 
+	 /**
+	  * get the total deaths with specific country and date
+	  * @param country
+	  * @param date
+	  * @return total deaths
+	  */
 	 public static int retrieveTotal_deaths(String country, String date) {
 		 int total_deaths = 0;
 		 for(Country row : countries) {
@@ -195,16 +222,22 @@ public class DataAnalysis {
 		return total_deaths;
 	 }
 	 
-	 public static int retrieveWorldTotal_deaths(String date) {
-		 int total_deaths = 0;
-		 for(Country row : countries) {
-			 if(row.getDate().equals(date)) {
-				 total_deaths += (row.getTotal_deaths()==-1?0:row.getTotal_deaths());
-				 }
-			 }
-		return total_deaths;
-	 }
+//	 public static int retrieveWorldTotal_deaths(String date) {
+//		 int total_deaths = 0;
+//		 for(Country row : countries) {
+//			 if(row.getDate().equals(date)) {
+//				 total_deaths += (row.getTotal_deaths()==-1?0:row.getTotal_deaths());
+//				 }
+//			 }
+//		return total_deaths;
+//	 }
 	 
+	 /**
+	  * get the total deaths per million with specific country and date
+	  * @param country
+	  * @param date
+	  * @return total deaths per million
+	  */
 	 public static float retrieveTotalDeathsPer1M(String country, String date) {
 		 float total_deaths_per_million = 0;
 		 for(Country row : countries) {
@@ -218,16 +251,22 @@ public class DataAnalysis {
 		return total_deaths_per_million;
 	 }
 	 
-	 public static float retrieveWorldTotalDeathsPer1M(String date) {
-		 float total_deaths_per_million = 0;
-		 for(Country row : countries) {
-			 if(row.getDate().equals(date)) {
-				 total_deaths_per_million += (row.getTotal_deaths_per_million()==-1?0:row.getTotal_deaths_per_million());
-				 }
-			 }
-		return total_deaths_per_million;
-	 }
+//	 public static float retrieveWorldTotalDeathsPer1M(String date) {
+//		 float total_deaths_per_million = 0;
+//		 for(Country row : countries) {
+//			 if(row.getDate().equals(date)) {
+//				 total_deaths_per_million += (row.getTotal_deaths_per_million()==-1?0:row.getTotal_deaths_per_million());
+//				 }
+//			 }
+//		return total_deaths_per_million;
+//	 }
 	 
+	 /**
+	  * get the number people fully vaccinated
+	  * @param country
+	  * @param date
+	  * @return the number people fully vaccinated / -1 for no result
+	  */
 	 public static int retrieveFullyVaccinated(String country, String date) {
 		 for(Country row : countries) {
 			 if(row.getLocation().equals(country)) {
@@ -239,16 +278,22 @@ public class DataAnalysis {
 		return -1;
 	 }
 	 
-	 public static int retrieveWorldFullyVaccinated(String date) {
-		 int people_fully_vaccinated = 0;
-		 for(Country row : countries) {
-			 if(row.getDate().equals(date)) {
-				 people_fully_vaccinated += (row.getPeople_fully_vaccinated()==-1?0:row.getPeople_fully_vaccinated());
-				 }
-			 }
-		return people_fully_vaccinated;
-	 }
+//	 public static int retrieveWorldFullyVaccinated(String date) {
+//		 int people_fully_vaccinated = 0;
+//		 for(Country row : countries) {
+//			 if(row.getDate().equals(date)) {
+//				 people_fully_vaccinated += (row.getPeople_fully_vaccinated()==-1?0:row.getPeople_fully_vaccinated());
+//				 }
+//			 }
+//		return people_fully_vaccinated;
+//	 }
 	 
+	 /**
+	  * get the rate of vaccination
+	  * @param country
+	  * @param date
+	  * @return the rate of vaccination / -1 for no result
+	  */
 	 public static float retrieveRateOfVaccination(String country, String date) {
 		 float rate = 0;
 		 float population = 0;
@@ -272,20 +317,27 @@ public class DataAnalysis {
 		return rate;
 	 }
 	 
-	 public static float retrieveWorldRateOfVaccination(String date) {
-		 float rate = 0;
-		 float population = 0;
-		 int people_fully_vaccinated = 0;
-		 for(Country row : countries) {
-			 if(row.getDate().equals(date) && !(row.getContinent().equals(""))) {
-				 people_fully_vaccinated += retrieveFullyVaccinated(row.getLocation(), date);
-				 population += row.getPopulation();
-				 }
-			 }
-		 rate = people_fully_vaccinated / population * 100;
-		return rate;
-	 }
+//	 public static float retrieveWorldRateOfVaccination(String date) {
+//		 float rate = 0;
+//		 float population = 0;
+//		 int people_fully_vaccinated = 0;
+//		 for(Country row : countries) {
+//			 if(row.getDate().equals(date) && !(row.getContinent().equals(""))) {
+//				 people_fully_vaccinated += retrieveFullyVaccinated(row.getLocation(), date);
+//				 population += row.getPopulation();
+//				 }
+//			 }
+//		 rate = people_fully_vaccinated / population * 100;
+//		return rate;
+//	 }
 	 
+	 /**
+	  * get the arraylist of the total cases of the specific country and dates
+	  * @param country
+	  * @param startDate
+	  * @param endDate
+	  * @return the arraylist of the total cases of the specific country and dates
+	  */
 	 public static ArrayList<Float> retrieveTotalCasesList(String country, String startDate, String endDate) {
 		 ArrayList<Float> totalCases = new ArrayList<Float>();
 		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/uuuu");
@@ -303,6 +355,13 @@ public class DataAnalysis {
 		 return totalCases;
 	 }
 	 
+	 /**
+	  * get the arraylist of the total deaths of the specific country and dates
+	  * @param country
+	  * @param startDate
+	  * @param endDate
+	  * @return the arraylist of the total deaths of the specific country and dates
+	  */
 	 public static ArrayList<Float> retrieveTotalDeathList(String country, String startDate, String endDate) {
 		 ArrayList<Float> totalDeaths = new ArrayList<Float>();
 		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/uuuu");
@@ -320,6 +379,13 @@ public class DataAnalysis {
 		 return totalDeaths;
 	 }
 	 
+	 /**
+	  * get the arraylist of Rate of Vaccination of the specific country and dates
+	  * @param country
+	  * @param startDate
+	  * @param endDate
+	  * @return the arraylist of Rate of Vaccination of the specific country and dates
+	  */
 	 public static ArrayList<Float> retrieveRateOfVaccinationList(String country, String startDate, String endDate) {
 		 ArrayList<Float> rate = new ArrayList<Float>();
 		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/uuuu");
@@ -332,24 +398,25 @@ public class DataAnalysis {
 			 if(row.getLocation().equals(country)) {
 				 LocalDate rowDate = LocalDate.parse(row.getDate(), formatter);
 				 if(rowDate.isAfter(_startDate) && rowDate.isBefore(_endDate) || rowDate.isEqual(_endDate) || rowDate.isEqual(_startDate)) {
+					 population = row.getPopulation();
 					 people_fully_vaccinated = row.getPeople_fully_vaccinated();
+					 if(population != -1 && people_fully_vaccinated != -1) {
+						 rate.add(people_fully_vaccinated / population * 100);
+						 }
+					 else {
+						 rate.add((float) -1);
+						 }
 					 }
-				 population = row.getPopulation();
 				 }
-			 if(population != -1 && people_fully_vaccinated != -1) {
-				 rate.add(people_fully_vaccinated / population * 100);
 			 }
-			 else {
-				 if(rate.isEmpty()) {
-					 rate.add((float)0);
-				 }
-				 rate.add(rate.get(rate.size() - 1));
-			 }
-		 }
 		return rate;
 	 }
 	 
 	 
+	 /**
+	  * set the Country class and Case class
+	  * @param dataset
+	  */
 	 public static void setClass(String dataset) {
 		 
 		 for (CSVRecord rec : getFileParser(dataset)) {
@@ -404,8 +471,8 @@ public class DataAnalysis {
 					 Float.parseFloat(rec.get("human_development_index").equals("")?"-1":rec.get("human_development_index")),
 					 Float.parseFloat(rec.get("excess_mortality").equals("")?"-1":rec.get("excess_mortality")),
 					 Long.parseLong(rec.get("population").equals("")?"-1":rec.get("population")),
-					 Float.parseFloat(rec.get("positive_rate").equals("")?"-1":rec.get("positive_rate")),
 					 Float.parseFloat(rec.get("stringency_index").equals("")?"-1":rec.get("stringency_index")),
+					 Float.parseFloat(rec.get("positive_rate").equals("")?"-1":rec.get("positive_rate")),
 					 Integer.parseInt(rec.get("people_fully_vaccinated").equals("")?"-1":rec.get("people_fully_vaccinated")),
 					 Float.parseFloat(rec.get("people_fully_vaccinated_per_hundred").equals("")?"-1":rec.get("people_fully_vaccinated_per_hundred")),
 					 Integer.parseInt(rec.get("people_vaccinated").equals("")?"-1":rec.get("people_vaccinated")),
