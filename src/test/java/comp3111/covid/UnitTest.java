@@ -4,8 +4,13 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import org.junit.After;
+import org.junit.Before;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import javafx.event.ActionEvent;
 
 /**
  * the unit testing
@@ -24,6 +29,7 @@ public class UnitTest {
 		String[] test = {"test"};
 		MyApplication.main(test);
 	}
+	
 	
 	@Test
 	public void getIso_codeWithValidInput() {
@@ -382,4 +388,58 @@ public class UnitTest {
 		rate.add((float) -1);
 		assertArrayEquals(rate.toArray(),DataAnalysis.retrieveRateOfVaccinationList("Afghanistan","2/24/2020","2/25/2020").toArray());
 	}
+	
+	@Test
+	public void testA1() {
+		ActionEvent event = null;     
+		Controller controller = new Controller();
+		controller.generateTableA1(event);
+	}
+	
+	@Test
+	public void checkisValidDatewithValidDate1() {
+		String date = "2/21/2021";
+		assertEquals(true,DataAnalysis.isValidDate(date));	
+	}
+	public void checkisValidDatewithValidDate2() {
+		String date = "2/29/2020";
+		assertEquals(true,DataAnalysis.isValidDate(date));	
+	}
+	
+	@Test
+	public void checkisValidDatewithInvalidDate1() {
+		String date = "2/29/2021";
+		assertEquals(false,DataAnalysis.isValidDate(date));	
+	}
+	
+	@Test
+	public void checkisValidDatewithInvalidDate2() {
+		String date = "2/30/2021";
+		assertEquals(false,DataAnalysis.isValidDate(date));	
+	}
+	
+	@Test
+	public void checkisValidDatewithInvalidDate3() {
+		String date = "2/31/2021";
+		assertEquals(false,DataAnalysis.isValidDate(date));	
+	}
+	
+	@Test
+	public void checkisValidDatewithInvalidDate4() {
+		String date = "4/31/2021";
+		assertEquals(false,DataAnalysis.isValidDate(date));	
+	}
+	
+	@Test
+	public void checkisValidDatewithInvalidDate5() {
+		String date = "abcde";
+		assertEquals(false,DataAnalysis.isValidDate(date));	
+	}
+	
+	@Test
+	public void checkisValidDatewithInvalidDate6() {
+		String date = "2/29/2100";
+		assertEquals(false,DataAnalysis.isValidDate(date));	
+	}
+
 }
