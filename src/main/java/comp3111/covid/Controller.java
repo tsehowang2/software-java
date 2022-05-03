@@ -158,6 +158,10 @@ public class Controller {
 
     @FXML
 
+    /**
+     * import the CSV file
+     * @param event
+     */
     void doImportCSV(ActionEvent event) {
     	String iDataset = textfieldDataset.getText();
     	DataAnalysis.setClass(iDataset);
@@ -174,6 +178,11 @@ public class Controller {
     	initialize();
     }
     
+    /**
+     * A class to store the table result
+     * @author chleungba
+     *
+     */
     public class TableResult {
 		private SimpleStringProperty tableCountryName;
 		private SimpleStringProperty tableOutput1;
@@ -212,6 +221,10 @@ public class Controller {
     
     private 
 
+    /**
+     * A1 task
+     * @param event
+     */
     @FXML
     void generateTableA1(ActionEvent event) {
     	//textAreaConsole.clear();
@@ -285,6 +298,10 @@ public class Controller {
 
     } 
 
+    /**
+     * B1 task
+     * @param event
+     */
     @FXML
     void generateTableB1(ActionEvent event) {
     	String date;
@@ -343,6 +360,10 @@ public class Controller {
 
     } 
 
+    /**
+     * C1 task
+     * @param event
+     */
     @FXML
     void generateTableC1(ActionEvent event) {
     	String date;
@@ -402,6 +423,10 @@ public class Controller {
 		
     } 
     
+    /**
+     * A2 task
+     * @param event
+     */
     @FXML
     void generateTableA2(ActionEvent event) {
     	//textAreaConsole.clear();
@@ -464,6 +489,10 @@ public class Controller {
  
     } 
 
+    /**
+     * B2 task
+     * @param event
+     */
     @FXML
     void generateTableB2(ActionEvent event) {
     	//textAreaConsole.clear();
@@ -526,6 +555,10 @@ public class Controller {
 
     } 
 
+    /**
+     * C2 task
+     * @param event
+     */
     @FXML
     void generateTableC2(ActionEvent event) {
     	//textAreaConsole.clear();

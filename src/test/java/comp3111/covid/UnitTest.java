@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+/**
+ * the unit testing
+ * @author tsehowang2
+ *
+ */
 public class UnitTest {
 
 	@BeforeClass

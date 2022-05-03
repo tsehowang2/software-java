@@ -19,6 +19,12 @@ public class DataAnalysis {
 	 static List<Case> cases = new ArrayList<Case>();
 	 static List<Country> countries = new ArrayList<Country>();
 	 
+	 /**
+	  * checking the date is valid or not
+	  * @param input
+	  * @return <code>true</code> if the date is vaild
+	  * 		<code>false</code> otherwise.
+	  */
 	 public static boolean isValidDate(String input) {
 		 //String input = "31/02/2000";
 		 DateTimeFormatter f = DateTimeFormatter.ofPattern ( "M/d/uuuu" );
@@ -126,7 +132,10 @@ public class DataAnalysis {
 //			
 //			return oReport;
 //	 }
-	 
+	 /**
+	  * get the Unique Locations
+	  * @return Unique locations list
+	  */
 	 public static List<String> getUniqueLocations() {
 		 ArrayList<String> location = new ArrayList<String>();
 		 for(Country row : countries) {
@@ -136,6 +145,12 @@ public class DataAnalysis {
 		 return uniqueLocation;
 	 }
 	 
+	 /**
+	  * get the total case with specific country and date
+	  * @param country
+	  * @param date
+	  * @return total cases
+	  */
 	 public static int retrieveTotalCases(String country, String date) {
 		 int total_cases = 0;
 		 for(Country row : countries) {
@@ -159,6 +174,12 @@ public class DataAnalysis {
 //		 return total_cases;
 //	 }
 	 
+	 /**
+	  * get the total case per million with specific country and date
+	  * @param country
+	  * @param date
+	  * @return total cases per million
+	  */
 	 public static float retrieveTotalCasesPer1M(String country, String date) {
 		 float total_cases_per_million = 0;
 		 for(Country row : countries) {
@@ -182,6 +203,12 @@ public class DataAnalysis {
 //		 return total_cases_per_million;
 //	 }
 	 
+	 /**
+	  * get the total deaths with specific country and date
+	  * @param country
+	  * @param date
+	  * @return total deaths
+	  */
 	 public static int retrieveTotal_deaths(String country, String date) {
 		 int total_deaths = 0;
 		 for(Country row : countries) {
@@ -205,6 +232,12 @@ public class DataAnalysis {
 //		return total_deaths;
 //	 }
 	 
+	 /**
+	  * get the total deaths per million with specific country and date
+	  * @param country
+	  * @param date
+	  * @return total deaths per million
+	  */
 	 public static float retrieveTotalDeathsPer1M(String country, String date) {
 		 float total_deaths_per_million = 0;
 		 for(Country row : countries) {
@@ -228,6 +261,12 @@ public class DataAnalysis {
 //		return total_deaths_per_million;
 //	 }
 	 
+	 /**
+	  * get the number people fully vaccinated
+	  * @param country
+	  * @param date
+	  * @return the number people fully vaccinated / -1 for no result
+	  */
 	 public static int retrieveFullyVaccinated(String country, String date) {
 		 for(Country row : countries) {
 			 if(row.getLocation().equals(country)) {
@@ -249,6 +288,12 @@ public class DataAnalysis {
 //		return people_fully_vaccinated;
 //	 }
 	 
+	 /**
+	  * get the rate of vaccination
+	  * @param country
+	  * @param date
+	  * @return the rate of vaccination / -1 for no result
+	  */
 	 public static float retrieveRateOfVaccination(String country, String date) {
 		 float rate = 0;
 		 float population = 0;
@@ -286,6 +331,13 @@ public class DataAnalysis {
 //		return rate;
 //	 }
 	 
+	 /**
+	  * get the arraylist of the total cases of the specific country and dates
+	  * @param country
+	  * @param startDate
+	  * @param endDate
+	  * @return the arraylist of the total cases of the specific country and dates
+	  */
 	 public static ArrayList<Float> retrieveTotalCasesList(String country, String startDate, String endDate) {
 		 ArrayList<Float> totalCases = new ArrayList<Float>();
 		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/uuuu");
@@ -303,6 +355,13 @@ public class DataAnalysis {
 		 return totalCases;
 	 }
 	 
+	 /**
+	  * get the arraylist of the total deaths of the specific country and dates
+	  * @param country
+	  * @param startDate
+	  * @param endDate
+	  * @return the arraylist of the total deaths of the specific country and dates
+	  */
 	 public static ArrayList<Float> retrieveTotalDeathList(String country, String startDate, String endDate) {
 		 ArrayList<Float> totalDeaths = new ArrayList<Float>();
 		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/uuuu");
@@ -320,6 +379,13 @@ public class DataAnalysis {
 		 return totalDeaths;
 	 }
 	 
+	 /**
+	  * get the arraylist of Rate of Vaccination of the specific country and dates
+	  * @param country
+	  * @param startDate
+	  * @param endDate
+	  * @return the arraylist of Rate of Vaccination of the specific country and dates
+	  */
 	 public static ArrayList<Float> retrieveRateOfVaccinationList(String country, String startDate, String endDate) {
 		 ArrayList<Float> rate = new ArrayList<Float>();
 		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/uuuu");
@@ -347,6 +413,10 @@ public class DataAnalysis {
 	 }
 	 
 	 
+	 /**
+	  * set the Country class and Case class
+	  * @param dataset
+	  */
 	 public static void setClass(String dataset) {
 		 
 		 for (CSVRecord rec : getFileParser(dataset)) {

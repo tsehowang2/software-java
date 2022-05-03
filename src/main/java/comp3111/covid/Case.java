@@ -1,5 +1,10 @@
 package comp3111.covid;
 
+/**
+ * Class Case
+ * @author chleungba, tsehowang2
+ *
+ */
 public class Case {
 
 	private String iso_code;
