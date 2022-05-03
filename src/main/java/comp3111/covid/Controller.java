@@ -161,7 +161,7 @@ public class Controller {
      * import the CSV file
      * @param event
      */
-    void doImportCSV(ActionEvent event) {
+    public void doImportCSV(ActionEvent event) {
     	String iDataset = textfieldDataset.getText();
     	DataAnalysis.setClass(iDataset);
     	
@@ -218,7 +218,7 @@ public class Controller {
 		}
 	}
     
-    private 
+    //private 
 
     /**
      * A1 task
@@ -228,9 +228,19 @@ public class Controller {
     void generateTableA1(ActionEvent event) {
     	//textAreaConsole.clear();
     	//textAreaConsole.appendText(null);
+
     	
     	String date;
-    	if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
+    	int info1;
+    	float info2;
+    	String use1;
+    	String use2;
+		ObservableList<TableResult> countryView = FXCollections.observableArrayList();
+
+    	if (event == null)
+    		return;
+    
+    	else if (dateEntry.getText() == null || dateEntry.getText().trim().isEmpty()) {
     		textAreaConsole.appendText("\nPlease Enter a Date");
     		return;
     	}
@@ -243,16 +253,12 @@ public class Controller {
         	//dateEntry.clear();
     	}
     	
-		ObservableList<TableResult> countryView = FXCollections.observableArrayList();
 
     	//textAreaConsole.appendText("\n");
     	//textAreaConsole.appendText("Number of Confirmed COVID-19 Cases as of " + date + "\n");
     	//textAreaConsole.appendText( "Country - Total Cases - Total Cases (per 1M)" + "\n");
     	
-    	int info1;
-    	float info2;
-    	String use1;
-    	String use2;
+
     	for (Integer i : countryEntry.getSelectionModel().getSelectedIndices()) {
     		info1 = DataAnalysis.retrieveTotalCases(countryList.get(i), date);
     		info2 = DataAnalysis.retrieveTotalCasesPer1M(countryList.get(i), date);

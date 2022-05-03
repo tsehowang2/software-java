@@ -30,14 +30,31 @@ public class DataAnalysis {
 		 DateTimeFormatter f = DateTimeFormatter.ofPattern ( "M/d/uuuu" );
 		 try {
 		     LocalDate ld = LocalDate.parse ( input , f );
-		     System.out.println ( "ld: " + ld );
+		     if (input.charAt(0) == '2') {
+		    	 if (input.charAt(2) == '2' &&  input.charAt(3) == '9') {
+		    		 int year = Integer.parseInt(input.substring(input.length() - 4));
+		    		 System.out.println(year);
+		    	     if (((year % 4 == 0) && (year % 100 != 0)) || (year%400 == 0))
+		    	    	 return true;
+		    	     else
+		    	    	 return false;
+		    	 }
+		    	 if (input.charAt(2) == '3' &&  input.charAt(3) == '0') {
+	    	    	  return false;
+		    	 }
+		    	 if (input.charAt(2) == '3' &&  input.charAt(3) == '1') {
+		    		 return false;
+		    	 }
+		     }
+		     if (input.charAt(0) == '4' || input.charAt(0) == '6' || input.charAt(0) == '9' || (input.charAt(0) == '1' && input.charAt(0) == '1')) {
+		    	 if (input.charAt(2) == '3' &&  input.charAt(3) == '1') {
+		    		 return false;
+		    	 }
+		     }
 		     return true;
-		 } catch ( DateTimeParseException e ) {
-			 
-		     System.out.println ( "ERROR1234: " + e );
-		 }
+
+		 } catch (DateTimeParseException e) {}
 		 return false;
-		 //testforterry
 	 }
 	 
 	public static CSVParser getFileParser(String dataset) {

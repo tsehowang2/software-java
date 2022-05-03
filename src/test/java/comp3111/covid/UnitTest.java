@@ -395,5 +395,51 @@ public class UnitTest {
 		Controller controller = new Controller();
 		controller.generateTableA1(event);
 	}
+	
+	@Test
+	public void checkisValidDatewithValidDate1() {
+		String date = "2/21/2021";
+		assertEquals(true,DataAnalysis.isValidDate(date));	
+	}
+	public void checkisValidDatewithValidDate2() {
+		String date = "2/29/2020";
+		assertEquals(true,DataAnalysis.isValidDate(date));	
+	}
+	
+	@Test
+	public void checkisValidDatewithInvalidDate1() {
+		String date = "2/29/2021";
+		assertEquals(false,DataAnalysis.isValidDate(date));	
+	}
+	
+	@Test
+	public void checkisValidDatewithInvalidDate2() {
+		String date = "2/30/2021";
+		assertEquals(false,DataAnalysis.isValidDate(date));	
+	}
+	
+	@Test
+	public void checkisValidDatewithInvalidDate3() {
+		String date = "2/31/2021";
+		assertEquals(false,DataAnalysis.isValidDate(date));	
+	}
+	
+	@Test
+	public void checkisValidDatewithInvalidDate4() {
+		String date = "4/31/2021";
+		assertEquals(false,DataAnalysis.isValidDate(date));	
+	}
+	
+	@Test
+	public void checkisValidDatewithInvalidDate5() {
+		String date = "abcde";
+		assertEquals(false,DataAnalysis.isValidDate(date));	
+	}
+	
+	@Test
+	public void checkisValidDatewithInvalidDate6() {
+		String date = "2/29/2100";
+		assertEquals(false,DataAnalysis.isValidDate(date));	
+	}
 
 }
